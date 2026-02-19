@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://qkakwpq50jg1"]
+
+[ext_resource type="Texture2D" uid="uid://cmsrwle4pb0pb" path="res://Assets/Kitchen_Background.png" id="1_crmrm"]
+
+[node name="KitchenBackground" type="Node2D" unique_id=1774034733]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1136591777]
+texture = ExtResource("1_crmrm")
+centered = false

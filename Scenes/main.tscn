@@ -1,3 +1,7 @@
 [gd_scene format=3 uid="uid://r24e183kv57v"]
 
+[ext_resource type="PackedScene" uid="uid://qkakwpq50jg1" path="res://Scenes/kitchen_background.tscn" id="1_jjgbg"]
+
 [node name="Main" type="Node2D" unique_id=2090123510]
+
+[node name="KitchenBackground" parent="." unique_id=1774034733 instance=ExtResource("1_jjgbg")]
