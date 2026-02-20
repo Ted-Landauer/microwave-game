@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://r24e183kv57v"]
 
-[ext_resource type="Script" uid="uid://ceyobsdc213t" path="res://Scenes/main.gd" id="1_h1bgf"]
+[ext_resource type="Script" uid="uid://ceyobsdc213t" path="res://Scripts/main.gd" id="1_h1bgf"]
 [ext_resource type="PackedScene" uid="uid://qkakwpq50jg1" path="res://Scenes/kitchen_background.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://bp8v51m1wqcyq" path="res://Scenes/microwave.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://dw28047bcqlkw" path="res://Scenes/egg.tscn" id="3_6bp64"]
@@ -11,7 +11,7 @@
 [ext_resource type="Theme" uid="uid://b1i51vduagitt" path="res://Assets/ShoppingCart.tres" id="8_344ge"]
 [ext_resource type="Texture2D" uid="uid://dnxig5a46hhdd" path="res://Assets/CartButton.png" id="9_ynf5e"]
 [ext_resource type="Texture2D" uid="uid://dppqfuv73bb6c" path="res://Assets/Groceries/Egg.png" id="10_jkdf5"]
-[ext_resource type="Script" uid="uid://bxretkpjon750" path="res://Scenes/shopping_button.gd" id="10_k12tt"]
+[ext_resource type="Script" uid="uid://bxretkpjon750" path="res://Scripts/shopping_button.gd" id="10_k12tt"]
 [ext_resource type="Texture2D" uid="uid://cbcpgkxa71smb" path="res://Assets/Groceries/Potato.png" id="11_wsu2k"]
 [ext_resource type="Texture2D" uid="uid://b213i7v3s3bgn" path="res://Assets/Groceries/JamJar.png" id="12_k12tt"]
 [ext_resource type="Texture2D" uid="uid://d0pnkcestae5n" path="res://Assets/Groceries/MilkJug.png" id="13_h1bgf"]
