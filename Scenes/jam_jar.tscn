@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cydyqf7xaktah"]
+
+[ext_resource type="Texture2D" uid="uid://b213i7v3s3bgn" path="res://Assets/Groceries/JamJar.png" id="1_qw6ia"]
+
+[node name="jamJar" type="Node2D" unique_id=856810450]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=923167577]
+scale = Vector2(0.37885463, 0.3788546)
+texture = ExtResource("1_qw6ia")
+centered = false

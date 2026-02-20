@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://qfyc7a2xwlpf"]
+
+[ext_resource type="Texture2D" uid="uid://d0pnkcestae5n" path="res://Assets/Groceries/MilkJug.png" id="1_h8ir5"]
+
+[node name="milkJug" type="Node2D" unique_id=919773476]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1096324427]
+scale = Vector2(0.40524194, 0.40524194)
+texture = ExtResource("1_h8ir5")
+centered = false

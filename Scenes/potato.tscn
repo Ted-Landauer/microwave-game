@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://drxl0k60bau2m"]
+
+[ext_resource type="Texture2D" uid="uid://cbcpgkxa71smb" path="res://Assets/Groceries/Potato.png" id="1_mqj5c"]
+
+[node name="potato" type="Node2D" unique_id=2139141228]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=391771814]
+scale = Vector2(0.41641337, 0.41641337)
+texture = ExtResource("1_mqj5c")
+centered = false

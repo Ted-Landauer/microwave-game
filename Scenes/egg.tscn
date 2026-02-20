@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dw28047bcqlkw"]
+
+[ext_resource type="Texture2D" uid="uid://dppqfuv73bb6c" path="res://Assets/Groceries/Egg.png" id="1_jdgtd"]
+
+[node name="egg" type="Node2D" unique_id=1218648268]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=235640522]
+scale = Vector2(0.46969697, 0.46969697)
+texture = ExtResource("1_jdgtd")
+centered = false

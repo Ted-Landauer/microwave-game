@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dlxdgs7vg5f6x"]
+
+[ext_resource type="Texture2D" uid="uid://cbnedcuorsejw" path="res://Assets/Groceries/Pumpkin.png" id="1_4thn5"]
+
+[node name="pumpkin" type="Node2D" unique_id=930275885]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1338043262]
+scale = Vector2(0.55431306, 0.5543131)
+texture = ExtResource("1_4thn5")
+centered = false

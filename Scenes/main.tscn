@@ -1,7 +1,276 @@
 [gd_scene format=3 uid="uid://r24e183kv57v"]
 
 [ext_resource type="PackedScene" uid="uid://qkakwpq50jg1" path="res://Scenes/kitchen_background.tscn" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://bp8v51m1wqcyq" path="res://Scenes/microwave.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://dw28047bcqlkw" path="res://Scenes/egg.tscn" id="3_6bp64"]
+[ext_resource type="PackedScene" uid="uid://cydyqf7xaktah" path="res://Scenes/jam_jar.tscn" id="4_344ge"]
+[ext_resource type="PackedScene" uid="uid://qfyc7a2xwlpf" path="res://Scenes/milk_jug.tscn" id="5_ynf5e"]
+[ext_resource type="PackedScene" uid="uid://drxl0k60bau2m" path="res://Scenes/potato.tscn" id="6_hptm8"]
+[ext_resource type="PackedScene" uid="uid://dlxdgs7vg5f6x" path="res://Scenes/pumpkin.tscn" id="7_d1ilt"]
+[ext_resource type="Theme" uid="uid://b1i51vduagitt" path="res://Assets/ShoppingCart.tres" id="8_344ge"]
+[ext_resource type="Texture2D" uid="uid://dnxig5a46hhdd" path="res://Assets/CartButton.png" id="9_ynf5e"]
+[ext_resource type="Texture2D" uid="uid://dppqfuv73bb6c" path="res://Assets/Groceries/Egg.png" id="10_jkdf5"]
+[ext_resource type="Texture2D" uid="uid://cbcpgkxa71smb" path="res://Assets/Groceries/Potato.png" id="11_wsu2k"]
+[ext_resource type="Texture2D" uid="uid://b213i7v3s3bgn" path="res://Assets/Groceries/JamJar.png" id="12_k12tt"]
+[ext_resource type="Texture2D" uid="uid://d0pnkcestae5n" path="res://Assets/Groceries/MilkJug.png" id="13_h1bgf"]
+[ext_resource type="Texture2D" uid="uid://cbnedcuorsejw" path="res://Assets/Groceries/Pumpkin.png" id="14_b3802"]
+[ext_resource type="Theme" uid="uid://dd7n65w1r7dks" path="res://Assets/BuyButton.tres" id="15_wsu2k"]
 
 [node name="Main" type="Node2D" unique_id=2090123510]
 
 [node name="KitchenBackground" parent="." unique_id=1774034733 instance=ExtResource("1_jjgbg")]
+metadata/_edit_lock_ = true
+
+[node name="Microwave" parent="." unique_id=1686776994 instance=ExtResource("2_bo1nx")]
+position = Vector2(-22, -64)
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=402555768]
+anchor_mode = 0
+
+[node name="Groceries" type="Node2D" parent="." unique_id=1814565868]
+metadata/_edit_lock_ = true
+
+[node name="egg" parent="Groceries" unique_id=1218648268 instance=ExtResource("3_6bp64")]
+position = Vector2(1253, 676)
+metadata/_edit_lock_ = true
+
+[node name="jamJar" parent="Groceries" unique_id=856810450 instance=ExtResource("4_344ge")]
+position = Vector2(1686, 592)
+metadata/_edit_lock_ = true
+
+[node name="milkJug" parent="Groceries" unique_id=919773476 instance=ExtResource("5_ynf5e")]
+position = Vector2(1192, 380)
+metadata/_edit_lock_ = true
+
+[node name="potato" parent="Groceries" unique_id=2139141228 instance=ExtResource("6_hptm8")]
+position = Vector2(1369, 620)
+metadata/_edit_lock_ = true
+
+[node name="pumpkin" parent="Groceries" unique_id=930275885 instance=ExtResource("7_d1ilt")]
+position = Vector2(1402, 241)
+metadata/_edit_lock_ = true
+
+[node name="ShoppingButton" type="MenuButton" parent="." unique_id=1136240642]
+visible = false
+offset_left = 146.0
+offset_top = -46.0
+offset_right = 290.0
+offset_bottom = 48.0
+theme = ExtResource("8_344ge")
+icon = ExtResource("9_ynf5e")
+item_count = 1
+popup/item_0/id = 0
+
+[node name="Button" type="Button" parent="." unique_id=59608718]
+offset_left = 1626.0
+offset_top = 67.0
+offset_right = 1716.0
+offset_bottom = 141.0
+theme = ExtResource("8_344ge")
+
+[node name="UpgradeMenu" type="CanvasLayer" parent="Button" unique_id=1336909197]
+
+[node name="ColorRect" type="ColorRect" parent="Button/UpgradeMenu" unique_id=1579544893]
+anchors_preset = -1
+anchor_right = -0.06982422
+anchor_bottom = 0.045898438
+offset_left = 1427.0
+offset_top = 68.0
+offset_right = 2091.0
+offset_bottom = 745.0
+color = Color(0.7042253, 0.41236958, 3.657937e-06, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Egg" type="Sprite2D" parent="Button/UpgradeMenu/ColorRect" unique_id=1518687112]
+position = Vector2(72.00005, 218)
+scale = Vector2(0.36363718, 0.36363718)
+texture = ExtResource("10_jkdf5")
+
+[node name="Potato" type="Sprite2D" parent="Button/UpgradeMenu/ColorRect" unique_id=35885677]
+position = Vector2(78.00006, 308)
+scale = Vector2(0.14164817, 0.14164817)
+texture = ExtResource("11_wsu2k")
+
+[node name="JamJar" type="Sprite2D" parent="Button/UpgradeMenu/ColorRect" unique_id=751351568]
+position = Vector2(76.99999, 393.00003)
+scale = Vector2(0.13120732, 0.13120732)
+texture = ExtResource("12_k12tt")
+
+[node name="MilkJug" type="Sprite2D" parent="Button/UpgradeMenu/ColorRect" unique_id=314452893]
+position = Vector2(79.99998, 508)
+scale = Vector2(0.14974342, 0.14974342)
+texture = ExtResource("13_h1bgf")
+
+[node name="Pumpkin" type="Sprite2D" parent="Button/UpgradeMenu/ColorRect" unique_id=1779096145]
+position = Vector2(80, 625.00006)
+scale = Vector2(0.14772737, 0.14772737)
+texture = ExtResource("14_b3802")
+
+[node name="Labels" type="Node" parent="Button/UpgradeMenu/ColorRect" unique_id=1231581456]
+
+[node name="Separator" type="Label" parent="Button/UpgradeMenu/ColorRect/Labels" unique_id=47861847]
+offset_left = 1575.0
+offset_top = 269.0
+offset_right = 1584.0
+offset_bottom = 314.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = ":"
+horizontal_alignment = 1
+
+[node name="EggCost" type="Label" parent="Button/UpgradeMenu/ColorRect/Labels" unique_id=147881777]
+offset_left = 1631.0
+offset_top = 271.0
+offset_right = 1730.0
+offset_bottom = 316.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "10"
+horizontal_alignment = 1
+
+[node name="Funds" type="Label" parent="Button/UpgradeMenu/ColorRect/Labels" unique_id=1381519146]
+offset_left = 1478.0
+offset_top = 136.0
+offset_right = 1577.0
+offset_bottom = 181.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Funds:"
+horizontal_alignment = 1
+
+[node name="FundsValue" type="Label" parent="Button/UpgradeMenu/ColorRect/Labels" unique_id=1352669543]
+offset_left = 1592.0
+offset_top = 138.0
+offset_right = 1691.0
+offset_bottom = 183.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "$500"
+horizontal_alignment = 1
+
+[node name="Separator2" type="Label" parent="Button/UpgradeMenu/ColorRect/Labels" unique_id=2058775123]
+offset_left = 1576.0
+offset_top = 346.0
+offset_right = 1585.0
+offset_bottom = 391.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = ":"
+horizontal_alignment = 1
+
+[node name="PotatoCost" type="Label" parent="Button/UpgradeMenu/ColorRect/Labels" unique_id=524864337]
+offset_left = 1626.0
+offset_top = 353.0
+offset_right = 1736.0
+offset_bottom = 398.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "15"
+horizontal_alignment = 1
+
+[node name="Separator3" type="Label" parent="Button/UpgradeMenu/ColorRect/Labels" unique_id=352509522]
+offset_left = 1576.0
+offset_top = 435.0
+offset_right = 1585.0
+offset_bottom = 480.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = ":"
+horizontal_alignment = 1
+
+[node name="JamJarCost" type="Label" parent="Button/UpgradeMenu/ColorRect/Labels" unique_id=2100309027]
+offset_left = 1639.0
+offset_top = 435.0
+offset_right = 1729.0
+offset_bottom = 480.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "20"
+horizontal_alignment = 1
+
+[node name="Separator4" type="Label" parent="Button/UpgradeMenu/ColorRect/Labels" unique_id=1220331467]
+offset_left = 1576.0
+offset_top = 553.0
+offset_right = 1585.0
+offset_bottom = 598.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = ":"
+horizontal_alignment = 1
+
+[node name="MilkJugCost" type="Label" parent="Button/UpgradeMenu/ColorRect/Labels" unique_id=1183829102]
+offset_left = 1624.0
+offset_top = 553.0
+offset_right = 1745.0
+offset_bottom = 598.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "25"
+horizontal_alignment = 1
+
+[node name="Separator5" type="Label" parent="Button/UpgradeMenu/ColorRect/Labels" unique_id=2124207285]
+offset_left = 1576.0
+offset_top = 679.0
+offset_right = 1585.0
+offset_bottom = 724.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = ":"
+horizontal_alignment = 1
+
+[node name="PumpkinCost" type="Label" parent="Button/UpgradeMenu/ColorRect/Labels" unique_id=854577497]
+offset_left = 1630.0
+offset_top = 675.0
+offset_right = 1735.0
+offset_bottom = 720.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "30"
+horizontal_alignment = 1
+
+[node name="BuyEgg" type="Button" parent="Button/UpgradeMenu/ColorRect" unique_id=407557475]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0403071
+anchor_top = 0.13535912
+anchor_right = 0.0403071
+anchor_bottom = 0.13535912
+offset_left = 310.0
+offset_top = 110.0
+offset_right = 390.58823
+offset_bottom = 160.0
+theme = ExtResource("15_wsu2k")
+metadata/_edit_use_anchors_ = true
+
+[node name="BuyPotato" type="Button" parent="Button/UpgradeMenu/ColorRect" unique_id=573227710]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 294.0
+offset_right = 411.75293
+offset_bottom = 341.0
+theme = ExtResource("15_wsu2k")
+
+[node name="BuyJamJar" type="Button" parent="Button/UpgradeMenu/ColorRect" unique_id=1273506523]
+layout_mode = 0
+offset_left = 343.0
+offset_top = 391.0
+offset_right = 409.08234
+offset_bottom = 432.0
+theme = ExtResource("15_wsu2k")
+
+[node name="BuyMilk" type="Button" parent="Button/UpgradeMenu/ColorRect" unique_id=2101916898]
+layout_mode = 0
+offset_left = 348.0
+offset_top = 507.0
+offset_right = 422.14117
+offset_bottom = 553.0
+theme = ExtResource("15_wsu2k")
+
+[node name="BuyPumpkin" type="Button" parent="Button/UpgradeMenu/ColorRect" unique_id=13295627]
+layout_mode = 0
+offset_left = 348.0
+offset_top = 614.0
+offset_right = 426.97647
+offset_bottom = 663.0
+theme = ExtResource("15_wsu2k")
