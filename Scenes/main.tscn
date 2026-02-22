@@ -206,7 +206,7 @@ offset_right = 1546.0
 offset_bottom = 189.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
-text = "$500"
+text = "$0"
 horizontal_alignment = 1
 
 [node name="Separator2" type="Label" parent="ShoppingButton/UpgradeMenu/ColorRect/Labels" unique_id=2058775123]
@@ -342,6 +342,27 @@ offset_top = 614.0
 offset_right = 426.97647
 offset_bottom = 663.0
 theme = ExtResource("15_wsu2k")
+
+[node name="ViewershipFunds" type="Node2D" parent="." unique_id=1887796936]
+
+[node name="viewers" type="Label" parent="ViewershipFunds" unique_id=581146940]
+offset_left = 75.0
+offset_top = 790.0
+offset_right = 205.0
+offset_bottom = 835.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Viewers:"
+
+[node name="viewerNumbers" type="Label" parent="ViewershipFunds" unique_id=743443669]
+offset_left = 193.0
+offset_top = 790.0
+offset_right = 278.0
+offset_bottom = 835.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="ShoppingButton" to="." method="_on_shopping_button_pressed"]
 [connection signal="pressed" from="ShoppingButton/UpgradeMenu/ColorRect/BuyEgg" to="." method="_on_buy_egg_pressed"]
