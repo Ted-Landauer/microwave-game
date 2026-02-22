@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b7m71bc2n8ffp"]
+
+[ext_resource type="Texture2D" uid="uid://udxlehx84ey3" path="res://Assets/Lower_Bar.png" id="1_kxa28"]
+
+[node name="InfoNumbers" type="Node2D" unique_id=537984924]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1418702249]
+texture = ExtResource("1_kxa28")
+centered = false

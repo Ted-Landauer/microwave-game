@@ -1,18 +1,48 @@
 extends Node2D
 
-# Initialize the overall funds value and the starting funds value
+# Initialize the funds and viewership numbers
 var funds: int = 0
 var startingFunds: int = 300
 
+var viewerNumbers: int = 0
+var startingViewerNumbers: int = 10
+
+var viewershipDeclineBuffer = true
+var revenueMod: float = .01
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$ShoppingButton/UpgradeMenu.propagate_call("set_visible", [false])
-	$ShoppingButton/UpgradeMenu.visible = false
+	$InfoNumbers/ShoppingButton/UpgradeMenu.propagate_call("set_visible", [false])
+	$InfoNumbers/ShoppingButton/UpgradeMenu.visible = false
 	
 	updateFunds(startingFunds, "+")
+	updateViewship(startingViewerNumbers, "+")
+
+func calculateRevenue(view: int, modifier: float):
+	var perSecGain: float
+	
+	perSecGain = view * modifier
+	
+	print("per second gain")
+	print(perSecGain)
+	
+	return ceili(perSecGain)
 
 
 
+# Update the viewership numbers
+func updateViewship(viewerChange: int, direction: String):
+	
+	if direction == "+":
+		viewerNumbers += viewerChange
+	elif direction == "-":
+		viewerNumbers -= viewerChange
+	
+	$InfoNumbers/viewerNumbers.text = str(viewerNumbers)
+
+
+
+# Update the player's funds
 func updateFunds(moneyValue: int, direction: String):
 	
 	if direction == "+":
@@ -20,7 +50,7 @@ func updateFunds(moneyValue: int, direction: String):
 	elif direction == "-":
 		funds -= moneyValue
 	
-	$ShoppingButton/UpgradeMenu/ColorRect/Labels/FundsValue.text = "$" + str(funds)
+	$InfoNumbers/FundsValue.text = "$" + str(funds)
 
 
 
@@ -38,9 +68,26 @@ func extractInt(numberString: String):
 
 
 
+
+#if viewershipDeclineBuffer == true:
+#		updateFunds(calculateRevenue(viewerNumbers, revenueMod), "+")
+
+# Used for running the money and viewer calc every second
+var t: float = 0.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	# Increase t to make 
+	t += delta
+	if (viewershipDeclineBuffer == true and t >= 1.0):
+		updateFunds(calculateRevenue(viewerNumbers, revenueMod), "+")
+		t = 0.0
+	elif viewershipDeclineBuffer == false and t >= 1.0 and viewerNumbers != 0:
+		updateViewship(1, "-")
+		t = 0.0
+		
+		
+	
+	
 
 
 func _input(event: InputEvent) -> void:
@@ -48,21 +95,21 @@ func _input(event: InputEvent) -> void:
 	
 	if event is InputEventKey and event.is_pressed():
 		if event.keycode == KEY_ESCAPE:
-			$ShoppingButton/UpgradeMenu.propagate_call("set_visible", [false])
-			$ShoppingButton/UpgradeMenu.visible = false
+			$InfoNumbers/ShoppingButton/UpgradeMenu.propagate_call("set_visible", [false])
+			$InfoNumbers/ShoppingButton/UpgradeMenu.visible = false
 
 
 func _on_shopping_button_pressed() -> void:
-	if $ShoppingButton/UpgradeMenu.visible != true:
-		$ShoppingButton/UpgradeMenu.propagate_call("set_visible", [true])
-		$ShoppingButton/UpgradeMenu.visible = true
+	if $InfoNumbers/ShoppingButton/UpgradeMenu.visible != true:
+		$InfoNumbers/ShoppingButton/UpgradeMenu.propagate_call("set_visible", [true])
+		$InfoNumbers/ShoppingButton/UpgradeMenu.visible = true
 		
 
 
 
 func _on_buy_egg_pressed() -> void:
 	var eggsBought = extractInt($Groceries/egg/eggCount.text)
-	var eggsCost = extractInt($ShoppingButton/UpgradeMenu/ColorRect/Labels/EggCost.text)
+	var eggsCost = extractInt($InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/Labels/EggCost.text)
 	eggsBought += 1
 	$Groceries/egg/eggCount.text = str(eggsBought)
 	
@@ -73,7 +120,7 @@ func _on_buy_egg_pressed() -> void:
 
 func _on_buy_potato_pressed() -> void:
 	var potatoBought = extractInt($Groceries/potato/potatoCount.text)
-	var potatoCost = extractInt($ShoppingButton/UpgradeMenu/ColorRect/Labels/PotatoCost.text)
+	var potatoCost = extractInt($InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/Labels/PotatoCost.text)
 	
 	potatoBought += 1
 	$Groceries/potato/potatoCount.text = str(potatoBought)
@@ -85,7 +132,7 @@ func _on_buy_potato_pressed() -> void:
 
 func _on_buy_jam_jar_pressed() -> void:
 	var jamBought = extractInt($Groceries/jamJar/jamCount.text)
-	var jamCost = extractInt($ShoppingButton/UpgradeMenu/ColorRect/Labels/JamJarCost.text)
+	var jamCost = extractInt($InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/Labels/JamJarCost.text)
 	
 	jamBought += 1
 	$Groceries/jamJar/jamCount.text = str(jamBought)
@@ -97,7 +144,7 @@ func _on_buy_jam_jar_pressed() -> void:
 
 func _on_buy_milk_pressed() -> void:
 	var milkBought = extractInt($Groceries/milkJug/milkCount.text)
-	var milkCost = extractInt($ShoppingButton/UpgradeMenu/ColorRect/Labels/MilkJugCost.text)
+	var milkCost = extractInt($InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/Labels/MilkJugCost.text)
 	
 	milkBought += 1
 	$Groceries/milkJug/milkCount.text = str(milkBought)
@@ -109,7 +156,7 @@ func _on_buy_milk_pressed() -> void:
 
 func _on_buy_pumpkin_pressed() -> void:
 	var pumpkinBought = extractInt($Groceries/pumpkin/pumpkinCount.text)
-	var pumpkinCost = extractInt($ShoppingButton/UpgradeMenu/ColorRect/Labels/PumpkinCost.text)
+	var pumpkinCost = extractInt($InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/Labels/PumpkinCost.text)
 	
 	pumpkinBought += 1
 	$Groceries/pumpkin/pumpkinCount.text = str(pumpkinBought)
