@@ -2,22 +2,89 @@ extends Node2D
 
 # Initialize the funds and viewership numbers
 var funds: int = 0
-var startingFunds: int = 300
+const STARTINGFUNDS: int = 300
 
 var viewerNumbers: int = 0
-var startingViewerNumbers: int = 10
+const STARTINGVIEWERNUMBERS: int = 10
 
-var viewershipDeclineBuffer = true
+var viewershipDeclineBufferState: bool = true
+var viewershipDeclineBuffer: int = 10
 var revenueMod: float = .01
+
+const GROCPATH: String = "res://Scenes/Groceries"
+var groceries: Dictionary = {}
+
+var occupied: bool = false
+
+#var ""
+
+# Load the resources in a directory into a dictionary for future use
+func preloadResources(path: String, collection: Dictionary):
+	
+	# Open the requested directory
+	var grocDir = DirAccess.open(path)
+	
+	# Check that we actually got something or print a statement for temp error handling
+	if grocDir:
+		
+		# Open a stream to read in the contents of the directory and get the next value
+		grocDir.list_dir_begin()
+		var fileName = grocDir.get_next()
+		
+		# Loop over every item in the open directory
+		while fileName != "":
+			
+			# Check if we found a directory in our parsing or if we found a scene
+			if grocDir.current_is_dir():
+				print("Found directory: " + fileName)
+				
+			elif fileName.get_extension() == "tscn":
+				# Build the path to the scene we want to load
+				var fullPath = path + "/" + fileName
+				
+				# Get the name of the resource to use a dictionary key
+				var resourceName = fileName.get_basename()
+				
+				# Build our dictionary of loaded resources
+				collection[resourceName] = load(fullPath).instantiate()
+			
+			# Step forward in the loop
+			fileName = grocDir.get_next()
+		
+		# Close the stream for saftey's sake
+		grocDir.list_dir_end()
+	
+	else:
+		print("An error was encountered when opening the requested path")
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	preloadResources(GROCPATH, groceries)
+	
 	$InfoNumbers/ShoppingButton/UpgradeMenu.propagate_call("set_visible", [false])
 	$InfoNumbers/ShoppingButton/UpgradeMenu.visible = false
 	
-	updateFunds(startingFunds, "+")
-	updateViewship(startingViewerNumbers, "+")
+	updateFunds(STARTINGFUNDS, "+")
+	updateViewship(STARTINGVIEWERNUMBERS, "+")
+	
+	$Microwave/microwaveStart/viewershipBuffer.one_shot = true
+	$Microwave/microwaveStart/microwaveTimer.one_shot = true
 
+func changeInventory(food: String, direction: String):
+	var foodReference = get_node("Groceries/" + food + "/" + food + "Count")
+	var foodBought = extractInt(foodReference.text)
+	
+	if direction == "+" and foodBought >= 0:
+		foodBought += 1
+	elif direction == "-" and foodBought > 0:
+		foodBought -= 1
+	
+	foodReference.text = str(foodBought)
+
+
+# Return the value of money gained per second
 func calculateRevenue(view: int, modifier: float):
 	var perSecGain: float
 	
@@ -68,98 +135,104 @@ func extractInt(numberString: String):
 
 
 
-
-#if viewershipDeclineBuffer == true:
-#		updateFunds(calculateRevenue(viewerNumbers, revenueMod), "+")
-
-# Used for running the money and viewer calc every second
+# Used for running the money and viewer calc every second in process below
 var t: float = 0.0
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Increase t to make 
 	t += delta
-	if (viewershipDeclineBuffer == true and t >= 1.0):
+	if (viewershipDeclineBufferState == true and t >= 1.0):
 		updateFunds(calculateRevenue(viewerNumbers, revenueMod), "+")
 		t = 0.0
-	elif viewershipDeclineBuffer == false and t >= 1.0 and viewerNumbers != 0:
+	elif viewershipDeclineBufferState == false and t >= 1.0 and viewerNumbers != 0:
 		updateViewship(1, "-")
 		t = 0.0
 		
-		
-	
-	
 
 
+# Escape function for closing the shopping menu
 func _input(event: InputEvent) -> void:
-	#var ParentShop = find_node("Shop")
-	
 	if event is InputEventKey and event.is_pressed():
 		if event.keycode == KEY_ESCAPE:
 			$InfoNumbers/ShoppingButton/UpgradeMenu.propagate_call("set_visible", [false])
-			$InfoNumbers/ShoppingButton/UpgradeMenu.visible = false
+			#$InfoNumbers/ShoppingButton/UpgradeMenu.visible = false
 
 
+# Function to open the grrocery shopping menu
 func _on_shopping_button_pressed() -> void:
-	if $InfoNumbers/ShoppingButton/UpgradeMenu.visible != true:
+	if $InfoNumbers/ShoppingButton/UpgradeMenu.visible == false:
 		$InfoNumbers/ShoppingButton/UpgradeMenu.propagate_call("set_visible", [true])
-		$InfoNumbers/ShoppingButton/UpgradeMenu.visible = true
-		
-
+		#$InfoNumbers/ShoppingButton/UpgradeMenu.visible = true
+	elif $InfoNumbers/ShoppingButton/UpgradeMenu.visible == true:
+		$InfoNumbers/ShoppingButton/UpgradeMenu.propagate_call("set_visible", [false])
+		#$InfoNumbers/ShoppingButton/UpgradeMenu.visible = false
 
 
 func _on_buy_egg_pressed() -> void:
-	var eggsBought = extractInt($Groceries/egg/eggCount.text)
 	var eggsCost = extractInt($InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/Labels/EggCost.text)
-	eggsBought += 1
-	$Groceries/egg/eggCount.text = str(eggsBought)
 	
+	changeInventory("egg", "+")
 	updateFunds(eggsCost, "-")
-	
-
-
 
 func _on_buy_potato_pressed() -> void:
-	var potatoBought = extractInt($Groceries/potato/potatoCount.text)
 	var potatoCost = extractInt($InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/Labels/PotatoCost.text)
 	
-	potatoBought += 1
-	$Groceries/potato/potatoCount.text = str(potatoBought)
-	
+	changeInventory("potato", "+")
 	updateFunds(potatoCost, "-")
-	
-
-
 
 func _on_buy_jam_jar_pressed() -> void:
-	var jamBought = extractInt($Groceries/jamJar/jamCount.text)
 	var jamCost = extractInt($InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/Labels/JamJarCost.text)
 	
-	jamBought += 1
-	$Groceries/jamJar/jamCount.text = str(jamBought)
-	
+	changeInventory("jam", "+")
 	updateFunds(jamCost, "-")
-	
-
-
 
 func _on_buy_milk_pressed() -> void:
-	var milkBought = extractInt($Groceries/milkJug/milkCount.text)
 	var milkCost = extractInt($InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/Labels/MilkJugCost.text)
 	
-	milkBought += 1
-	$Groceries/milkJug/milkCount.text = str(milkBought)
-	
+	changeInventory("milk", "+")
 	updateFunds(milkCost, "-")
-	
-
-
 
 func _on_buy_pumpkin_pressed() -> void:
-	var pumpkinBought = extractInt($Groceries/pumpkin/pumpkinCount.text)
 	var pumpkinCost = extractInt($InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/Labels/PumpkinCost.text)
 	
-	pumpkinBought += 1
-	$Groceries/pumpkin/pumpkinCount.text = str(pumpkinBought)
-	
+	changeInventory("pumpkin", "+")
 	updateFunds(pumpkinCost, "-")
+
+
+
+func _on_microwave_start_pressed() -> void:
+	$Microwave/microwaveStart.disabled = true
+	$Microwave/microwaveStart.toggle_mode = true
+	
+	$Microwave/microwaveStart/microwaveTimer.start(10)
+	print("pausing viewership decline")
+	viewershipDeclineBufferState = true
+
+func _on_microwave_timer_timeout() -> void:
+	print("timer stopped")
+	$Microwave/microwaveStart.disabled = false
+	$Microwave/microwaveStart.toggle_mode = false
+	
+	print("about to lose viewers")
+	$Microwave/microwaveStart/viewershipBuffer.start(viewershipDeclineBuffer)
+
+func _on_viewership_buffer_timeout() -> void:
+	print("losing viewers")
+	viewershipDeclineBufferState = false
+
+func addToMicrowave(item: String):
+	if occupied == false:
+		var newItem = groceries[item]
+		
+		print("this is the item: " + item)
+		
+		newItem.position.x = 700
+		newItem.position.y = 640
+		newItem.z_index = 1
+		add_child(newItem)
+		print("added to microwave")
+		
+		changeInventory(item.get_slice("_", 0), "-")
+		occupied = true
 	

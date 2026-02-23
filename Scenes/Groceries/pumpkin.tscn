@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dlxdgs7vg5f6x"]
+
+[ext_resource type="Texture2D" uid="uid://cbnedcuorsejw" path="res://Assets/Groceries/Pumpkin.png" id="1_4thn5"]
+[ext_resource type="Script" uid="uid://b3sdmfd4ji7pi" path="res://Scripts/pumpkin.gd" id="1_r7w47"]
+
+[node name="pumpkin" type="Node2D" unique_id=930275885]
+script = ExtResource("1_r7w47")
+
+[node name="pumpkinSprite" type="Sprite2D" parent="." unique_id=1338043262]
+position = Vector2(-167.99998, -344)
+scale = Vector2(0.55431306, 0.5543131)
+texture = ExtResource("1_4thn5")
+centered = false
+
+[node name="pumpkinControl" type="Control" parent="pumpkinSprite" unique_id=33938301]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 9.02018
+offset_top = 187.61958
+offset_right = 613.37177
+offset_bottom = 597.13544
+
+[connection signal="mouse_entered" from="pumpkinSprite/pumpkinControl" to="." method="_on_pumpkin_control_mouse_entered"]
+[connection signal="mouse_exited" from="pumpkinSprite/pumpkinControl" to="." method="_on_pumpkin_control_mouse_exited"]

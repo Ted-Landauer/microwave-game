@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dw28047bcqlkw"]
+
+[ext_resource type="Script" uid="uid://jl6jg280lw0p" path="res://Scripts/egg.gd" id="1_26c35"]
+[ext_resource type="Texture2D" uid="uid://dppqfuv73bb6c" path="res://Assets/Groceries/Egg.png" id="1_jdgtd"]
+
+[node name="egg" type="Node2D" unique_id=1218648268]
+script = ExtResource("1_26c35")
+
+[node name="eggSprite" type="Sprite2D" parent="." unique_id=235640522]
+position = Vector2(-31.999998, -79.99999)
+scale = Vector2(0.46969697, 0.46969697)
+texture = ExtResource("1_jdgtd")
+centered = false
+
+[node name="eggControl" type="Control" parent="eggSprite" unique_id=1959761464]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 17.032259
+offset_top = 19.161291
+offset_right = 117.09677
+offset_bottom = 161.80643
+
+[connection signal="mouse_entered" from="eggSprite/eggControl" to="." method="_on_egg_control_mouse_entered"]
+[connection signal="mouse_exited" from="eggSprite/eggControl" to="." method="_on_egg_control_mouse_exited"]

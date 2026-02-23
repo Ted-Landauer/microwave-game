@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cydyqf7xaktah"]
+
+[ext_resource type="Script" uid="uid://22vao7tkwpfr" path="res://Scripts/jam_jar.gd" id="1_82vb1"]
+[ext_resource type="Texture2D" uid="uid://b213i7v3s3bgn" path="res://Assets/Groceries/JamJar.png" id="1_qw6ia"]
+
+[node name="jamJar" type="Node2D" unique_id=856810450]
+script = ExtResource("1_82vb1")
+
+[node name="jamSprite" type="Sprite2D" parent="." unique_id=923167577]
+position = Vector2(-80, -192)
+scale = Vector2(0.37885463, 0.3788546)
+texture = ExtResource("1_qw6ia")
+centered = false
+
+[node name="jamJarControl" type="Control" parent="jamSprite" unique_id=342416339]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 31.674417
+offset_top = 29.034883
+offset_right = 430.2442
+offset_bottom = 493.59308
+
+[connection signal="mouse_entered" from="jamSprite/jamJarControl" to="." method="_on_jam_jar_control_mouse_entered"]
+[connection signal="mouse_exited" from="jamSprite/jamJarControl" to="." method="_on_jam_jar_control_mouse_exited"]

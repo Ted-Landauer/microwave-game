@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://drxl0k60bau2m"]
+
+[ext_resource type="Script" uid="uid://cpfg3goebgc2g" path="res://Scripts/potato.gd" id="1_e4miq"]
+[ext_resource type="Texture2D" uid="uid://cbcpgkxa71smb" path="res://Assets/Groceries/Potato.png" id="1_mqj5c"]
+
+[node name="potato" type="Node2D" unique_id=2139141228]
+script = ExtResource("1_e4miq")
+
+[node name="potatoSprite" type="Sprite2D" parent="." unique_id=391771814]
+position = Vector2(-128, -136)
+scale = Vector2(0.41641337, 0.41641337)
+texture = ExtResource("1_mqj5c")
+centered = false
+
+[node name="potatoControl" type="Control" parent="potatoSprite" unique_id=728583526]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 16.810219
+offset_top = 36.0219
+offset_right = 588.35767
+offset_bottom = 319.39417
+
+[connection signal="mouse_entered" from="potatoSprite/potatoControl" to="." method="_on_potato_control_mouse_entered"]
+[connection signal="mouse_exited" from="potatoSprite/potatoControl" to="." method="_on_potato_control_mouse_exited"]

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://qfyc7a2xwlpf"]
+
+[ext_resource type="Texture2D" uid="uid://d0pnkcestae5n" path="res://Assets/Groceries/MilkJug.png" id="1_h8ir5"]
+[ext_resource type="Script" uid="uid://duj41a1t0fo4q" path="res://Scripts/milk_jug.gd" id="1_r1roa"]
+
+[node name="milkJug" type="Node2D" unique_id=919773476]
+script = ExtResource("1_r1roa")
+
+[node name="milkSprite" type="Sprite2D" parent="." unique_id=1096324427]
+position = Vector2(-96, -240)
+scale = Vector2(0.40524194, 0.40524194)
+texture = ExtResource("1_h8ir5")
+centered = false
+
+[node name="milkJugControl" type="Control" parent="milkSprite" unique_id=1554787372]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 32.0796
+offset_top = 118.44776
+offset_right = 476.2587
+offset_bottom = 565.09454
+
+[connection signal="mouse_entered" from="milkSprite/milkJugControl" to="." method="_on_milk_jug_control_mouse_entered"]
+[connection signal="mouse_exited" from="milkSprite/milkJugControl" to="." method="_on_milk_jug_control_mouse_exited"]
