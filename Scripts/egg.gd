@@ -1,15 +1,17 @@
 extends Node2D
-var clickable = false
-var eggLimit
+var clickable: bool = false
+var eggLimit: int
 var microwaveItem
 var microwaveItemRef
+var occupied: bool = false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	eggLimit = randi_range(5, 15)
-	print("Egg limit is: ")
-	print(eggLimit)
+	pass
+	#eggLimitSet = randi_range(5, 15)
+	#print("Egg limit is: ")
+	#print(eggLimitSet)
 	
 
 
@@ -19,8 +21,33 @@ func _process(delta: float) -> void:
 	
 
 func foodLimit():
-	if $"../..".totalSeconds < eggLimit:
-		print("EGG LIMIT")
+	var time = $"../..".totalSecondsToPass
+	var limit = microwaveItemRef.eggLimit
+	var temp
+	
+	if time < limit:
+		temp = limit + time
+		$"../..".updateViewship(temp , "+")
+		
+		print("time: " + str(time))
+		print("limit: "+ str(limit))
+		print("UNDER EGG LIMIT")
+	elif time > limit:
+		temp = (2 * limit) + time
+		$"../..".updateViewship(temp , "+")
+		
+		print("time: " + str(time))
+		print("limit: "+ str(limit))
+		print("OVER EGG LIMIT")
+	elif time == limit:
+		temp = (2 * limit) + (2 * time)
+		$"../..".updateViewship(temp , "+")
+		
+		print("time: " + str(time))
+		print("limit: "+ str(limit))
+		print("PERFECTLY COOKED")
+		
+	occupied = false
 
 
 func _on_egg_control_mouse_entered() -> void:
@@ -34,7 +61,12 @@ func _on_egg_control_mouse_exited() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == MOUSE_BUTTON_LEFT and clickable == true:
-			if $"../..".extractInt($eggCount.text) > 0:
+			if $"../..".extractInt($eggCount.text) > 0 and occupied == false:
 				microwaveItem = "egg"
 				microwaveItemRef = $"../..".addToMicrowave("egg")
+				microwaveItemRef.eggLimit = randi_range(1, 5)
+				occupied = microwaveItemRef.occupied
+				
+				print("microwave item ref values:")
+				print(microwaveItemRef.eggLimit)
 				

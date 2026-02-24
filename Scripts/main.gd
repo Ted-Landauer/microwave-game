@@ -19,6 +19,7 @@ var lowCostMicroOwned: bool = true
 var midCostMicroOwned: bool = false
 var highCostMicroOwned: bool = false
 var totalSeconds: int = 0
+var totalSecondsToPass: int = 0
 var countdownActive = false
 
 var microwavedItem: String
@@ -70,15 +71,20 @@ func countdownMicrowaveTimer():
 	var sec = int(maxTimeArr[1])
 	var strSec = ""
 	
-	if sec == 0:
+	if sec == 0 and min > 0:
 		strSec = "59"
 		min -= 1
+		sec = 59
+		
 	else:
 		sec -= 1
+		strSec = str(sec)
+		
 		if sec < 10:
 			strSec = "%02d" % sec
-				
-		$Microwave/microwaveDisplay.text = str(min) + ":" + strSec
+			
+		
+	$Microwave/microwaveDisplay.text = str(min) + ":" + strSec
 
 
 
@@ -186,21 +192,23 @@ func addToMicrowave(item: String):
 		
 		changeInventory(item.get_slice("_", 0), "-")
 		occupied = true
+		newItem.occupied = occupied
 		
 		return newItem
 
-func toggleButtons(toggle: bool):
-	$Microwave/microwaveStart.disabled = toggle
-	$Microwave/microwaveStart.toggle_mode = toggle
+func toggleButtons(toggleTime: bool, toggleStart: bool = false):
+	if toggleStart == true:
+		$Microwave/microwaveStart.disabled = toggleTime
+		$Microwave/microwaveStart.toggle_mode = toggleTime
 	
-	$Microwave/thirtySeconds.disabled = toggle
-	$Microwave/thirtySeconds.toggle_mode = toggle
+	$Microwave/tenSeconds.disabled = toggleTime
+	$Microwave/tenSeconds.toggle_mode = toggleTime
 	
-	$Microwave/tenSeconds.disabled = toggle
-	$Microwave/tenSeconds.toggle_mode = toggle
+	$Microwave/fiveSeconds.disabled = toggleTime
+	$Microwave/fiveSeconds.toggle_mode = toggleTime
 	
-	$Microwave/fiveSeconds.disabled = toggle
-	$Microwave/fiveSeconds.toggle_mode = toggle
+	$Microwave/oneSecond.disabled = toggleTime
+	$Microwave/oneSecond.toggle_mode = toggleTime
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:	
@@ -215,14 +223,16 @@ func _ready() -> void:
 	$Microwave/microwaveStart/viewershipBuffer.one_shot = true
 	$Microwave/microwaveStart/microwaveTimer.one_shot = true
 	
-	$Microwave/LowControlPanel.visible = false
-	$Microwave/thirtySeconds.visible = true
+	#toggleButtons()
 	
-	$Microwave/MidControlPanel.visible = false
+	$Microwave/LowControlPanel.visible = false
 	$Microwave/tenSeconds.visible = true
 	
-	$Microwave/HighControlPanel.visible = true
+	$Microwave/MidControlPanel.visible = false
 	$Microwave/fiveSeconds.visible = true
+	
+	$Microwave/HighControlPanel.visible = true
+	$Microwave/oneSecond.visible = true
 	
 
 
@@ -295,37 +305,49 @@ func _on_buy_pumpkin_pressed() -> void:
 	updateFunds(pumpkinCost, "-")
 
 func _on_microwave_start_pressed() -> void:
-	toggleButtons(true)
+	toggleButtons(true, true)
 	
 	$Microwave/microwaveStart/microwaveTimer.start(totalSeconds)
 	print("pausing viewership decline")
 	viewershipDeclineBufferState = true
 	countdownActive = true
+	totalSecondsToPass = totalSeconds
 	
 
 func _on_microwave_timer_timeout() -> void:
 	print("timer stopped")
-	toggleButtons(false)
+	toggleButtons(false, true)
 	
 	print("about to lose viewers")
 	$Microwave/microwaveStart/viewershipBuffer.start(viewershipDeclineBuffer)
+	$Microwave/microwaveDisplay.text = "0:00"
 	countdownActive = false
 	occupied = false
 	
 	match microwavedItem:
 		"egg":
+			$Groceries/egg.foodLimit()
+			
 			remove_child($Groceries/egg.microwaveItemRef)
 			print("removed egg")
-		"jam":
-			remove_child($Groceries/jam_jar.microwaveItemRef)
+		"jam_jar":
+			$Groceries/jam.foodLimit()
+			
+			remove_child($Groceries/jam.microwaveItemRef)
 			print("removed jam")
-		"milk":
-			remove_child($Groceries/milk_jug.microwaveItemRef)
+		"milk_jug":
+			$Groceries/milk.foodLimit()
+			
+			remove_child($Groceries/milk.microwaveItemRef)
 			print("removed milk")
 		"potato":
+			$Groceries/potato.foodLimit()
+			
 			remove_child($Groceries/potato.microwaveItemRef)
 			print("removed potato")
 		"pumpkin":
+			$Groceries/pumpkin.foodLimit()
+			
 			remove_child($Groceries/pumpkin.microwaveItemRef)
 			print("removed pumpkin")
 		
@@ -334,24 +356,12 @@ func _on_viewership_buffer_timeout() -> void:
 	print("losing viewers")
 	viewershipDeclineBufferState = false
 
-func _on_thirty_seconds_pressed() -> void:
+func _on_one_second_pressed() -> void:
 	var minSecArray = extractInt($Microwave/microwaveDisplay.text)
 	var min = int(minSecArray[0])
 	var sec = int(minSecArray[1])
 	
-	sec += 30
-	if sec >= 60:
-		min += 1
-		sec = sec - 60
-	
-	updateMicrowaveDisplay(min, sec)
-
-func _on_ten_seconds_pressed() -> void:
-	var minSecArray = extractInt($Microwave/microwaveDisplay.text)
-	var min = int(minSecArray[0])
-	var sec = int(minSecArray[1])
-	
-	sec += 10
+	sec += 1
 	if sec >= 60:
 		min += 1
 		sec = sec - 60
@@ -364,6 +374,18 @@ func _on_five_seconds_pressed() -> void:
 	var sec = int(minSecArray[1])
 	
 	sec += 5
+	if sec >= 60:
+		min += 1
+		sec = sec - 60
+	
+	updateMicrowaveDisplay(min, sec)
+
+func _on_ten_seconds_pressed() -> void:
+	var minSecArray = extractInt($Microwave/microwaveDisplay.text)
+	var min = int(minSecArray[0])
+	var sec = int(minSecArray[1])
+	
+	sec += 10
 	if sec >= 60:
 		min += 1
 		sec = sec - 60

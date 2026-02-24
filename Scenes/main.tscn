@@ -72,25 +72,25 @@ text = "0:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="fiveSeconds" type="Button" parent="Microwave" unique_id=1436112767]
+[node name="oneSecond" type="Button" parent="Microwave" unique_id=1436112767]
 offset_left = 1017.0
 offset_top = 446.0
 offset_right = 1092.0
 offset_bottom = 506.0
-text = "+5 Sec"
+text = "+1 Sec"
 
-[node name="thirtySeconds" type="Button" parent="Microwave" unique_id=1294848360]
-offset_left = 1009.0
-offset_top = 267.0
-offset_right = 1086.0
-offset_bottom = 324.0
-text = "+30 Sec"
-
-[node name="tenSeconds" type="Button" parent="Microwave" unique_id=1443803365]
+[node name="fiveSeconds" type="Button" parent="Microwave" unique_id=1443803365]
 offset_left = 1014.0
 offset_top = 355.0
 offset_right = 1088.0
 offset_bottom = 413.0
+text = "+5 Sec"
+
+[node name="tenSeconds" type="Button" parent="Microwave" unique_id=1294848360]
+offset_left = 1009.0
+offset_top = 267.0
+offset_right = 1086.0
+offset_bottom = 324.0
 text = "+10 Sec"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=402555768]
@@ -452,8 +452,8 @@ theme = ExtResource("15_wsu2k")
 [connection signal="pressed" from="Microwave/microwaveStart" to="." method="_on_microwave_start_pressed"]
 [connection signal="timeout" from="Microwave/microwaveStart/microwaveTimer" to="." method="_on_microwave_timer_timeout"]
 [connection signal="timeout" from="Microwave/microwaveStart/viewershipBuffer" to="." method="_on_viewership_buffer_timeout"]
+[connection signal="pressed" from="Microwave/oneSecond" to="." method="_on_one_second_pressed"]
 [connection signal="pressed" from="Microwave/fiveSeconds" to="." method="_on_five_seconds_pressed"]
-[connection signal="pressed" from="Microwave/thirtySeconds" to="." method="_on_thirty_seconds_pressed"]
 [connection signal="pressed" from="Microwave/tenSeconds" to="." method="_on_ten_seconds_pressed"]
 [connection signal="pressed" from="InfoNumbers/ShoppingButton" to="." method="_on_shopping_button_pressed"]
 [connection signal="pressed" from="InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/BuyEgg" to="." method="_on_buy_egg_pressed"]
