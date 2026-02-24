@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://ba1mjajevgmyv"]
+
+[ext_resource type="Texture2D" uid="uid://cok23xl3bpfhb" path="res://Assets/Controls/Controls_1.png" id="1_qlbc3"]
+
+[node name="LowControlPanel" type="Node2D" unique_id=1267437803]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1543492903]
+texture = ExtResource("1_qlbc3")
+centered = false

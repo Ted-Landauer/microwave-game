@@ -5,7 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://bp8v51m1wqcyq" path="res://Scenes/microwave.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://dw28047bcqlkw" path="res://Scenes/Groceries/egg.tscn" id="3_6bp64"]
 [ext_resource type="PackedScene" uid="uid://cydyqf7xaktah" path="res://Scenes/Groceries/jam_jar.tscn" id="4_344ge"]
+[ext_resource type="PackedScene" uid="uid://djyf5k6y2arfc" path="res://Scenes/high_control_panel.tscn" id="4_pdsj5"]
+[ext_resource type="PackedScene" uid="uid://ba1mjajevgmyv" path="res://Scenes/low_control_panel.tscn" id="5_ee4r6"]
 [ext_resource type="PackedScene" uid="uid://qfyc7a2xwlpf" path="res://Scenes/Groceries/milk_jug.tscn" id="5_ynf5e"]
+[ext_resource type="PackedScene" uid="uid://dtpv56ju8dpmk" path="res://Scenes/mid_control_panel.tscn" id="6_gt3je"]
 [ext_resource type="PackedScene" uid="uid://drxl0k60bau2m" path="res://Scenes/Groceries/potato.tscn" id="6_hptm8"]
 [ext_resource type="PackedScene" uid="uid://dlxdgs7vg5f6x" path="res://Scenes/Groceries/pumpkin.tscn" id="7_d1ilt"]
 [ext_resource type="Theme" uid="uid://b1i51vduagitt" path="res://Assets/ShoppingCart.tres" id="8_344ge"]
@@ -40,8 +43,55 @@ theme_override_font_sizes/font_size = 32
 text = "START"
 
 [node name="microwaveTimer" type="Timer" parent="Microwave/microwaveStart" unique_id=2110800967]
+one_shot = true
 
 [node name="viewershipBuffer" type="Timer" parent="Microwave/microwaveStart" unique_id=1866975876]
+
+[node name="HighControlPanel" parent="Microwave" unique_id=1048642307 instance=ExtResource("4_pdsj5")]
+position = Vector2(977, 127)
+metadata/_edit_lock_ = true
+
+[node name="LowControlPanel" parent="Microwave" unique_id=1267437803 instance=ExtResource("5_ee4r6")]
+visible = false
+position = Vector2(977, 127)
+metadata/_edit_lock_ = true
+
+[node name="MidControlPanel" parent="Microwave" unique_id=51181263 instance=ExtResource("6_gt3je")]
+visible = false
+position = Vector2(977, 127)
+metadata/_edit_lock_ = true
+
+[node name="microwaveDisplay" type="Label" parent="Microwave" unique_id=272088817]
+offset_left = 984.0
+offset_top = 132.0
+offset_right = 1102.0
+offset_bottom = 227.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "0:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="fiveSeconds" type="Button" parent="Microwave" unique_id=1436112767]
+offset_left = 1017.0
+offset_top = 446.0
+offset_right = 1092.0
+offset_bottom = 506.0
+text = "+5 Sec"
+
+[node name="thirtySeconds" type="Button" parent="Microwave" unique_id=1294848360]
+offset_left = 1009.0
+offset_top = 267.0
+offset_right = 1086.0
+offset_bottom = 324.0
+text = "+30 Sec"
+
+[node name="tenSeconds" type="Button" parent="Microwave" unique_id=1443803365]
+offset_left = 1014.0
+offset_top = 355.0
+offset_right = 1088.0
+offset_bottom = 413.0
+text = "+10 Sec"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=402555768]
 anchor_mode = 0
@@ -402,6 +452,9 @@ theme = ExtResource("15_wsu2k")
 [connection signal="pressed" from="Microwave/microwaveStart" to="." method="_on_microwave_start_pressed"]
 [connection signal="timeout" from="Microwave/microwaveStart/microwaveTimer" to="." method="_on_microwave_timer_timeout"]
 [connection signal="timeout" from="Microwave/microwaveStart/viewershipBuffer" to="." method="_on_viewership_buffer_timeout"]
+[connection signal="pressed" from="Microwave/fiveSeconds" to="." method="_on_five_seconds_pressed"]
+[connection signal="pressed" from="Microwave/thirtySeconds" to="." method="_on_thirty_seconds_pressed"]
+[connection signal="pressed" from="Microwave/tenSeconds" to="." method="_on_ten_seconds_pressed"]
 [connection signal="pressed" from="InfoNumbers/ShoppingButton" to="." method="_on_shopping_button_pressed"]
 [connection signal="pressed" from="InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/BuyEgg" to="." method="_on_buy_egg_pressed"]
 [connection signal="pressed" from="InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/BuyPotato" to="." method="_on_buy_potato_pressed"]

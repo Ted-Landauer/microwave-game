@@ -15,8 +15,15 @@ const GROCPATH: String = "res://Scenes/Groceries"
 var groceries: Dictionary = {}
 
 var occupied: bool = false
+var lowCostMicroOwned: bool = true
+var midCostMicroOwned: bool = false
+var highCostMicroOwned: bool = false
+var totalSeconds: int = 0
+var countdownActive = false
 
-#var ""
+var microwavedItem: String
+
+
 
 # Load the resources in a directory into a dictionary for future use
 func preloadResources(path: String, collection: Dictionary):
@@ -57,20 +64,34 @@ func preloadResources(path: String, collection: Dictionary):
 	else:
 		print("An error was encountered when opening the requested path")
 
+func countdownMicrowaveTimer():
+	var maxTimeArr = extractInt($Microwave/microwaveDisplay.text)
+	var min = int(maxTimeArr[0])
+	var sec = int(maxTimeArr[1])
+	var strSec = ""
+	
+	if sec == 0:
+		strSec = "59"
+		min -= 1
+	else:
+		sec -= 1
+		if sec < 10:
+			strSec = "%02d" % sec
+				
+		$Microwave/microwaveDisplay.text = str(min) + ":" + strSec
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	preloadResources(GROCPATH, groceries)
+
+func updateMicrowaveDisplay(min: int, sec: int):
+	var strSec = str(sec)
+	totalSeconds = (min * 60) + sec
 	
-	$InfoNumbers/ShoppingButton/UpgradeMenu.propagate_call("set_visible", [false])
-	$InfoNumbers/ShoppingButton/UpgradeMenu.visible = false
+	if sec < 10:
+		strSec = "%02d" % sec
 	
-	updateFunds(STARTINGFUNDS, "+")
-	updateViewship(STARTINGVIEWERNUMBERS, "+")
-	
-	$Microwave/microwaveStart/viewershipBuffer.one_shot = true
-	$Microwave/microwaveStart/microwaveTimer.one_shot = true
+	$Microwave/microwaveDisplay.text = str(min) + ":" + strSec
+
+
 
 func changeInventory(food: String, direction: String):
 	var foodReference = get_node("Groceries/" + food + "/" + food + "Count")
@@ -82,6 +103,7 @@ func changeInventory(food: String, direction: String):
 		foodBought -= 1
 	
 	foodReference.text = str(foodBought)
+
 
 
 # Return the value of money gained per second
@@ -115,7 +137,10 @@ func updateFunds(moneyValue: int, direction: String):
 	if direction == "+":
 		funds += moneyValue
 	elif direction == "-":
-		funds -= moneyValue
+		if funds - moneyValue < 0:
+			print("Out of money")
+		else:
+			funds -= moneyValue
 	
 	$InfoNumbers/FundsValue.text = "$" + str(funds)
 
@@ -128,46 +153,116 @@ func extractInt(numberString: String):
 	# Check if we've passed the funds value and strip of the NAN character
 	if numberString[0] == "$":
 		numberInt = int(numberString.rstrip("$"))
+		return numberInt
+	elif numberString.contains(":"):
+		var tempHold = numberString.split(":")
+		var tempMin = tempHold[0]
+		var tempSec = tempHold[1]
+		
+		#numberInt = int(tempHold[])
+		return tempHold
 	
 	numberInt = int(numberString)
 	
 	return numberInt
 
+func addToMicrowave(item: String):
+	print("add test")
+	if occupied == false:
+		var newItem = groceries[item]
+		
+		print("this is the item: " + item)
+		
+		newItem.position.x = 700
+		newItem.position.y = 640
+		newItem.z_index = 1
+		add_child(newItem)
+		print("added to microwave")
+		
+		microwavedItem = item
+		print("the microwaved item: ")
+		print(microwavedItem)
+		print(typeof(microwavedItem))
+		
+		changeInventory(item.get_slice("_", 0), "-")
+		occupied = true
+		
+		return newItem
+
+func toggleButtons(toggle: bool):
+	$Microwave/microwaveStart.disabled = toggle
+	$Microwave/microwaveStart.toggle_mode = toggle
+	
+	$Microwave/thirtySeconds.disabled = toggle
+	$Microwave/thirtySeconds.toggle_mode = toggle
+	
+	$Microwave/tenSeconds.disabled = toggle
+	$Microwave/tenSeconds.toggle_mode = toggle
+	
+	$Microwave/fiveSeconds.disabled = toggle
+	$Microwave/fiveSeconds.toggle_mode = toggle
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:	
+	preloadResources(GROCPATH, groceries)
+	
+	$InfoNumbers/ShoppingButton/UpgradeMenu.propagate_call("set_visible", [false])
+	$InfoNumbers/ShoppingButton/UpgradeMenu.visible = false
+	
+	updateFunds(STARTINGFUNDS, "+")
+	updateViewship(STARTINGVIEWERNUMBERS, "+")
+	
+	$Microwave/microwaveStart/viewershipBuffer.one_shot = true
+	$Microwave/microwaveStart/microwaveTimer.one_shot = true
+	
+	$Microwave/LowControlPanel.visible = false
+	$Microwave/thirtySeconds.visible = true
+	
+	$Microwave/MidControlPanel.visible = false
+	$Microwave/tenSeconds.visible = true
+	
+	$Microwave/HighControlPanel.visible = true
+	$Microwave/fiveSeconds.visible = true
+	
 
 
 # Used for running the money and viewer calc every second in process below
-var t: float = 0.0
+var mu: float = 0.0
+var vd: float = 0.0
+var cd: float = 0.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	# Increase t to make 
-	t += delta
-	if (viewershipDeclineBufferState == true and t >= 1.0):
+	
+	mu += delta
+	if viewershipDeclineBufferState == true and mu >= 1.0:
 		updateFunds(calculateRevenue(viewerNumbers, revenueMod), "+")
-		t = 0.0
-	elif viewershipDeclineBufferState == false and t >= 1.0 and viewerNumbers != 0:
+		mu = 0.0
+	
+	vd += delta
+	if viewershipDeclineBufferState == false and vd >= 1.0 and viewerNumbers != 0:
 		updateViewship(1, "-")
-		t = 0.0
-		
-
+		vd = 0.0
+	
+	cd += delta
+	if countdownActive == true and cd >= 1.0:
+		countdownMicrowaveTimer()
+		cd = 0.0
 
 # Escape function for closing the shopping menu
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed():
 		if event.keycode == KEY_ESCAPE:
 			$InfoNumbers/ShoppingButton/UpgradeMenu.propagate_call("set_visible", [false])
-			#$InfoNumbers/ShoppingButton/UpgradeMenu.visible = false
-
 
 # Function to open the grrocery shopping menu
 func _on_shopping_button_pressed() -> void:
 	if $InfoNumbers/ShoppingButton/UpgradeMenu.visible == false:
 		$InfoNumbers/ShoppingButton/UpgradeMenu.propagate_call("set_visible", [true])
-		#$InfoNumbers/ShoppingButton/UpgradeMenu.visible = true
+		
 	elif $InfoNumbers/ShoppingButton/UpgradeMenu.visible == true:
 		$InfoNumbers/ShoppingButton/UpgradeMenu.propagate_call("set_visible", [false])
 		#$InfoNumbers/ShoppingButton/UpgradeMenu.visible = false
-
 
 func _on_buy_egg_pressed() -> void:
 	var eggsCost = extractInt($InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/Labels/EggCost.text)
@@ -199,40 +294,78 @@ func _on_buy_pumpkin_pressed() -> void:
 	changeInventory("pumpkin", "+")
 	updateFunds(pumpkinCost, "-")
 
-
-
 func _on_microwave_start_pressed() -> void:
-	$Microwave/microwaveStart.disabled = true
-	$Microwave/microwaveStart.toggle_mode = true
+	toggleButtons(true)
 	
-	$Microwave/microwaveStart/microwaveTimer.start(10)
+	$Microwave/microwaveStart/microwaveTimer.start(totalSeconds)
 	print("pausing viewership decline")
 	viewershipDeclineBufferState = true
+	countdownActive = true
+	
 
 func _on_microwave_timer_timeout() -> void:
 	print("timer stopped")
-	$Microwave/microwaveStart.disabled = false
-	$Microwave/microwaveStart.toggle_mode = false
+	toggleButtons(false)
 	
 	print("about to lose viewers")
 	$Microwave/microwaveStart/viewershipBuffer.start(viewershipDeclineBuffer)
+	countdownActive = false
+	occupied = false
+	
+	match microwavedItem:
+		"egg":
+			remove_child($Groceries/egg.microwaveItemRef)
+			print("removed egg")
+		"jam":
+			remove_child($Groceries/jam_jar.microwaveItemRef)
+			print("removed jam")
+		"milk":
+			remove_child($Groceries/milk_jug.microwaveItemRef)
+			print("removed milk")
+		"potato":
+			remove_child($Groceries/potato.microwaveItemRef)
+			print("removed potato")
+		"pumpkin":
+			remove_child($Groceries/pumpkin.microwaveItemRef)
+			print("removed pumpkin")
+		
 
 func _on_viewership_buffer_timeout() -> void:
 	print("losing viewers")
 	viewershipDeclineBufferState = false
 
-func addToMicrowave(item: String):
-	if occupied == false:
-		var newItem = groceries[item]
-		
-		print("this is the item: " + item)
-		
-		newItem.position.x = 700
-		newItem.position.y = 640
-		newItem.z_index = 1
-		add_child(newItem)
-		print("added to microwave")
-		
-		changeInventory(item.get_slice("_", 0), "-")
-		occupied = true
+func _on_thirty_seconds_pressed() -> void:
+	var minSecArray = extractInt($Microwave/microwaveDisplay.text)
+	var min = int(minSecArray[0])
+	var sec = int(minSecArray[1])
 	
+	sec += 30
+	if sec >= 60:
+		min += 1
+		sec = sec - 60
+	
+	updateMicrowaveDisplay(min, sec)
+
+func _on_ten_seconds_pressed() -> void:
+	var minSecArray = extractInt($Microwave/microwaveDisplay.text)
+	var min = int(minSecArray[0])
+	var sec = int(minSecArray[1])
+	
+	sec += 10
+	if sec >= 60:
+		min += 1
+		sec = sec - 60
+	
+	updateMicrowaveDisplay(min, sec)
+
+func _on_five_seconds_pressed() -> void:
+	var minSecArray = extractInt($Microwave/microwaveDisplay.text)
+	var min = int(minSecArray[0])
+	var sec = int(minSecArray[1])
+	
+	sec += 5
+	if sec >= 60:
+		min += 1
+		sec = sec - 60
+	
+	updateMicrowaveDisplay(min, sec)

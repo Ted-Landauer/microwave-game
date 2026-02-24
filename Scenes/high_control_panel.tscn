@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://djyf5k6y2arfc"]
+
+[ext_resource type="Texture2D" uid="uid://dmchxa4tlwfrg" path="res://Assets/Controls/Controls_3.png" id="1_ayetc"]
+
+[node name="HighControlPanel" type="Node2D" unique_id=1048642307]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=204346774]
+texture = ExtResource("1_ayetc")
+centered = false
