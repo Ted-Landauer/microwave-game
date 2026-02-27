@@ -36,6 +36,8 @@ func foodLimit():
 		print("time: " + str(time))
 		print("limit: "+ str(limit))
 		print("OVER PUMPKIN LIMIT")
+		$"../..".swapMicrowaves("destroyed", "pumpkin")
+		
 	elif time == limit:
 		temp = (2 * limit) + (2 * time)
 		$"../..".updateViewship(temp , "+")
@@ -43,6 +45,7 @@ func foodLimit():
 		print("time: " + str(time))
 		print("limit: "+ str(limit))
 		print("PERFECTLY COOKED")
+		$"../..".swapMicrowaves("opened", "pumpkin")
 		
 	occupied = false
 

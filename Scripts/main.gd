@@ -24,6 +24,8 @@ var countdownActive = false
 
 var microwavedItem: String
 
+var resetScene: bool = false
+
 
 
 # Load the resources in a directory into a dictionary for future use
@@ -96,6 +98,67 @@ func updateMicrowaveDisplay(min: int, sec: int):
 		strSec = "%02d" % sec
 	
 	$Microwave/microwaveDisplay.text = str(min) + ":" + strSec
+
+func swapMicrowaves(state: String, food: String = ""):
+	
+	match state:
+		"destroyed":
+			$ExplodedFood.visible = true
+			$Microwave.visible = false
+			$MicrowaveExploded.visible = true
+			resetScene = true
+			
+			match food:
+				"egg":
+					$ExplodedFood/Overtime/Egg.visible = true
+				"potato":
+					$ExplodedFood/Overtime/Potato.visible = true
+				"jam":
+					$ExplodedFood/Overtime/Jam.visible = true
+				"milk":
+					$ExplodedFood/Overtime/Milk.visible = true
+				"pumpkin":
+					$ExplodedFood/Overtime/Pumpkin.visible = true
+		
+		"upgraded":
+			pass
+			
+		"opened":
+			print("in the opened microwave")
+			$ExplodedFood.visible = true
+			$Microwave.visible = false
+			$MicrowaveOpen.visible = true
+			resetScene = true
+			
+			match food:
+				"egg":
+					$ExplodedFood/Perfect/Egg.visible = true
+				"potato":
+					$ExplodedFood/Perfect/Potato.visible = true
+				"jam":
+					$ExplodedFood/Perfect/Jam.visible = true
+				"milk":
+					$ExplodedFood/Perfect/Milk.visible = true
+				"pumpkin":
+					$ExplodedFood/Perfect/Pumpkin.visible = true
+			
+		"reset":
+			$Microwave.visible = true
+			$MicrowaveExploded.visible = false
+			$MicrowaveOpen.visible = false
+			$ExplodedFood.visible = false
+			
+			$ExplodedFood/Perfect/Egg.visible = false
+			$ExplodedFood/Perfect/Potato.visible = false
+			$ExplodedFood/Perfect/Jam.visible = false
+			$ExplodedFood/Perfect/Milk.visible = false
+			$ExplodedFood/Perfect/Pumpkin.visible = false
+			
+			$ExplodedFood/Overtime/Egg.visible = false
+			$ExplodedFood/Overtime/Potato.visible = false
+			$ExplodedFood/Overtime/Jam.visible = false
+			$ExplodedFood/Overtime/Milk.visible = false
+			$ExplodedFood/Overtime/Pumpkin.visible = false
 
 
 
@@ -214,8 +277,8 @@ func toggleButtons(toggleTime: bool, toggleStart: bool = false):
 func _ready() -> void:	
 	preloadResources(GROCPATH, groceries)
 	
-	$InfoNumbers/ShoppingButton/UpgradeMenu.propagate_call("set_visible", [false])
-	$InfoNumbers/ShoppingButton/UpgradeMenu.visible = false
+	$InfoNumbers/ShoppingButton/GroceryMenu.propagate_call("set_visible", [false])
+	$InfoNumbers/ShoppingButton/GroceryMenu.visible = false
 	
 	updateFunds(STARTINGFUNDS, "+")
 	updateViewship(STARTINGVIEWERNUMBERS, "+")
@@ -233,16 +296,25 @@ func _ready() -> void:
 	
 	$Microwave/HighControlPanel.visible = true
 	$Microwave/oneSecond.visible = true
-	
+
 
 
 # Used for running the money and viewer calc every second in process below
 var mu: float = 0.0
 var vd: float = 0.0
 var cd: float = 0.0
+var reset: float = 0.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
+	if resetScene == true:
+		
+		reset += delta
+		if reset > 5.0:
+			swapMicrowaves("reset")
+			reset = 0.0
+			resetScene == false
 	
 	mu += delta
 	if viewershipDeclineBufferState == true and mu >= 1.0:
@@ -263,43 +335,51 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed():
 		if event.keycode == KEY_ESCAPE:
-			$InfoNumbers/ShoppingButton/UpgradeMenu.propagate_call("set_visible", [false])
+			$InfoNumbers/ShoppingButton/GroceryMenu.propagate_call("set_visible", [false])
 
-# Function to open the grrocery shopping menu
+# Functions to open the grocery shopping and Upgrades menus
 func _on_shopping_button_pressed() -> void:
-	if $InfoNumbers/ShoppingButton/UpgradeMenu.visible == false:
-		$InfoNumbers/ShoppingButton/UpgradeMenu.propagate_call("set_visible", [true])
+	if $InfoNumbers/ShoppingButton/GroceryMenu.visible == false:
+		$InfoNumbers/ShoppingButton/GroceryMenu.propagate_call("set_visible", [true])
 		
-	elif $InfoNumbers/ShoppingButton/UpgradeMenu.visible == true:
-		$InfoNumbers/ShoppingButton/UpgradeMenu.propagate_call("set_visible", [false])
-		#$InfoNumbers/ShoppingButton/UpgradeMenu.visible = false
+	elif $InfoNumbers/ShoppingButton/GroceryMenu.visible == true:
+		$InfoNumbers/ShoppingButton/GroceryMenu.propagate_call("set_visible", [false])
+
+func _on_upgrades_button_pressed() -> void:
+	if $InfoNumbers/UpgradesButton/UpgradeMenu.visible == false:
+		$InfoNumbers/UpgradesButton/UpgradeMenu.propagate_call("set_visible", [true])
+		
+	elif $InfoNumbers/UpgradesButton/UpgradeMenu.visible == true:
+		$InfoNumbers/UpgradesButton/UpgradeMenu.propagate_call("set_visible", [false])
+
+
 
 func _on_buy_egg_pressed() -> void:
-	var eggsCost = extractInt($InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/Labels/EggCost.text)
+	var eggsCost = extractInt($InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels/EggCost.text)
 	
 	changeInventory("egg", "+")
 	updateFunds(eggsCost, "-")
 
 func _on_buy_potato_pressed() -> void:
-	var potatoCost = extractInt($InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/Labels/PotatoCost.text)
+	var potatoCost = extractInt($InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels/PotatoCost.text)
 	
 	changeInventory("potato", "+")
 	updateFunds(potatoCost, "-")
 
 func _on_buy_jam_jar_pressed() -> void:
-	var jamCost = extractInt($InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/Labels/JamJarCost.text)
+	var jamCost = extractInt($InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels/JamJarCost.text)
 	
 	changeInventory("jam", "+")
 	updateFunds(jamCost, "-")
 
 func _on_buy_milk_pressed() -> void:
-	var milkCost = extractInt($InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/Labels/MilkJugCost.text)
+	var milkCost = extractInt($InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels/MilkJugCost.text)
 	
 	changeInventory("milk", "+")
 	updateFunds(milkCost, "-")
 
 func _on_buy_pumpkin_pressed() -> void:
-	var pumpkinCost = extractInt($InfoNumbers/ShoppingButton/UpgradeMenu/ColorRect/Labels/PumpkinCost.text)
+	var pumpkinCost = extractInt($InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels/PumpkinCost.text)
 	
 	changeInventory("pumpkin", "+")
 	updateFunds(pumpkinCost, "-")
@@ -312,7 +392,6 @@ func _on_microwave_start_pressed() -> void:
 	viewershipDeclineBufferState = true
 	countdownActive = true
 	totalSecondsToPass = totalSeconds
-	
 
 func _on_microwave_timer_timeout() -> void:
 	print("timer stopped")
@@ -350,7 +429,6 @@ func _on_microwave_timer_timeout() -> void:
 			
 			remove_child($Groceries/pumpkin.microwaveItemRef)
 			print("removed pumpkin")
-		
 
 func _on_viewership_buffer_timeout() -> void:
 	print("losing viewers")

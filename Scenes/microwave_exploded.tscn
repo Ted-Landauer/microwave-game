@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bjplhdnbdipjp"]
+
+[ext_resource type="Texture2D" uid="uid://be6fge6st6vb2" path="res://Assets/Microwave_Exploded.png" id="1_ktyrc"]
+
+[node name="MicrowaveExploded" type="Node2D" unique_id=201596221]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=952589253]
+texture = ExtResource("1_ktyrc")
+centered = false

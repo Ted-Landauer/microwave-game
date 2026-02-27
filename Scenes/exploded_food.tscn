@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://c1yfpnn3foays"]
+
+[ext_resource type="Texture2D" uid="uid://bfl6tegpjoafn" path="res://Assets/Exploded_Microwave_Food/Exploded_Egg.png" id="1_47t4k"]
+[ext_resource type="Texture2D" uid="uid://xjukvfqk4b5u" path="res://Assets/Exploded_Microwave_Food/Exploded_Potato.png" id="2_ccvqc"]
+[ext_resource type="Texture2D" uid="uid://bitk26qqa7533" path="res://Assets/Exploded_Microwave_Food/Exploded_Jam.png" id="3_tcq4r"]
+[ext_resource type="Texture2D" uid="uid://dua8br2rspru" path="res://Assets/Exploded_Microwave_Food/Exploded_Milk.png" id="4_s5cmn"]
+[ext_resource type="Texture2D" uid="uid://cjo3eh14adaq5" path="res://Assets/Exploded_Microwave_Food/Exploded_Pumpkin.png" id="5_a5iei"]
+[ext_resource type="Texture2D" uid="uid://b8f4afyx7087n" path="res://Assets/NonExploded_Microwave_Food/Perfect_Egg.png" id="6_gngc1"]
+[ext_resource type="Texture2D" uid="uid://mwinfujdv54x" path="res://Assets/NonExploded_Microwave_Food/Perfect_Potato.png" id="7_acpy8"]
+[ext_resource type="Texture2D" uid="uid://4p8peg71p1g8" path="res://Assets/NonExploded_Microwave_Food/Perfect_Jam.png" id="8_y8mgy"]
+[ext_resource type="Texture2D" uid="uid://dsgoc653071ue" path="res://Assets/NonExploded_Microwave_Food/Perfect_Milk.png" id="9_vegie"]
+[ext_resource type="Texture2D" uid="uid://dlqk46wv2ra2j" path="res://Assets/NonExploded_Microwave_Food/Perfect_Pumpkin.png" id="10_0cyca"]
+
+[node name="ExplodedFood" type="Node2D" unique_id=1328493489]
+
+[node name="Overtime" type="Node2D" parent="." unique_id=160369928]
+
+[node name="Egg" type="Sprite2D" parent="Overtime" unique_id=1398199286]
+visible = false
+texture = ExtResource("1_47t4k")
+centered = false
+
+[node name="Potato" type="Sprite2D" parent="Overtime" unique_id=1411751459]
+visible = false
+texture = ExtResource("2_ccvqc")
+centered = false
+
+[node name="Jam" type="Sprite2D" parent="Overtime" unique_id=1368827504]
+visible = false
+texture = ExtResource("3_tcq4r")
+centered = false
+
+[node name="Milk" type="Sprite2D" parent="Overtime" unique_id=1482314252]
+visible = false
+texture = ExtResource("4_s5cmn")
+centered = false
+
+[node name="Pumpkin" type="Sprite2D" parent="Overtime" unique_id=1762226044]
+visible = false
+texture = ExtResource("5_a5iei")
+centered = false
+
+[node name="Perfect" type="Node2D" parent="." unique_id=1947417115]
+
+[node name="Egg" type="Sprite2D" parent="Perfect" unique_id=205125224]
+visible = false
+texture = ExtResource("6_gngc1")
+centered = false
+
+[node name="Potato" type="Sprite2D" parent="Perfect" unique_id=609143644]
+visible = false
+texture = ExtResource("7_acpy8")
+centered = false
+
+[node name="Jam" type="Sprite2D" parent="Perfect" unique_id=606926901]
+visible = false
+texture = ExtResource("8_y8mgy")
+centered = false
+
+[node name="Milk" type="Sprite2D" parent="Perfect" unique_id=1002037625]
+visible = false
+texture = ExtResource("9_vegie")
+centered = false
+
+[node name="Pumpkin" type="Sprite2D" parent="Perfect" unique_id=1944526182]
+visible = false
+texture = ExtResource("10_0cyca")
+centered = false
