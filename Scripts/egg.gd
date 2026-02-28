@@ -32,6 +32,9 @@ func foodLimit():
 		print("time: " + str(time))
 		print("limit: "+ str(limit))
 		print("UNDER EGG LIMIT")
+		$"../..".menuTriggers(true, "You've undercooked the egg. Viewers gained: " + str(temp))
+		$"../..".resetScene = true
+		
 	elif time > limit:
 		temp = (2 * limit) + time
 		$"../..".updateViewship(temp , "+")
@@ -39,7 +42,9 @@ func foodLimit():
 		print("time: " + str(time))
 		print("limit: "+ str(limit))
 		print("OVER EGG LIMIT")
+		$"../..".brokenMicrowave = true
 		$"../..".swapMicrowaves("destroyed", "egg")
+		$"../..".menuTriggers(true, "You cooked the egg too hard. Time to buy a new microwave! Viewers gained: " + str(temp))
 		
 	elif time == limit:
 		temp = (2 * limit) + (2 * time)
@@ -49,6 +54,7 @@ func foodLimit():
 		print("limit: "+ str(limit))
 		print("PERFECTLY COOKED")
 		$"../..".swapMicrowaves("opened", "egg")
+		$"../..".menuTriggers(true, "You exploded the egg perfectly! Viewers gained: " + str(temp))
 		
 	occupied = false
 

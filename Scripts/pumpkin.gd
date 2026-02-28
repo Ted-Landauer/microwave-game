@@ -29,6 +29,9 @@ func foodLimit():
 		print("time: " + str(time))
 		print("limit: "+ str(limit))
 		print("UNDER PUMPKIN LIMIT")
+		$"../..".menuTriggers(true, "You've undercooked the pumpkin. Viewers gained: " + str(temp))
+		$"../..".resetScene = true
+		
 	elif time > limit:
 		temp = (2 * limit) + time
 		$"../..".updateViewship(temp , "+")
@@ -37,6 +40,8 @@ func foodLimit():
 		print("limit: "+ str(limit))
 		print("OVER PUMPKIN LIMIT")
 		$"../..".swapMicrowaves("destroyed", "pumpkin")
+		$"../..".menuTriggers(true, "You cooked the pumpkin too hard. Time to buy a new microwave! Viewers gained: " + str(temp))
+		$"../..".brokenMicrowave = true
 		
 	elif time == limit:
 		temp = (2 * limit) + (2 * time)
@@ -46,6 +51,7 @@ func foodLimit():
 		print("limit: "+ str(limit))
 		print("PERFECTLY COOKED")
 		$"../..".swapMicrowaves("opened", "pumpkin")
+		$"../..".menuTriggers(true, "You exploded the pumpkin perfectly! Viewers gained: " + str(temp))
 		
 	occupied = false
 

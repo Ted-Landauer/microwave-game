@@ -25,6 +25,7 @@ var countdownActive = false
 var microwavedItem: String
 
 var resetScene: bool = false
+var brokenMicrowave = false
 
 
 
@@ -87,8 +88,6 @@ func countdownMicrowaveTimer():
 			
 		
 	$Microwave/microwaveDisplay.text = str(min) + ":" + strSec
-
-
 
 func updateMicrowaveDisplay(min: int, sec: int):
 	var strSec = str(sec)
@@ -159,8 +158,8 @@ func swapMicrowaves(state: String, food: String = ""):
 			$ExplodedFood/Overtime/Jam.visible = false
 			$ExplodedFood/Overtime/Milk.visible = false
 			$ExplodedFood/Overtime/Pumpkin.visible = false
-
-
+			
+			menuTriggers(false)
 
 func changeInventory(food: String, direction: String):
 	var foodReference = get_node("Groceries/" + food + "/" + food + "Count")
@@ -173,8 +172,6 @@ func changeInventory(food: String, direction: String):
 	
 	foodReference.text = str(foodBought)
 
-
-
 # Return the value of money gained per second
 func calculateRevenue(view: int, modifier: float):
 	var perSecGain: float
@@ -186,8 +183,6 @@ func calculateRevenue(view: int, modifier: float):
 	
 	return ceili(perSecGain)
 
-
-
 # Update the viewership numbers
 func updateViewship(viewerChange: int, direction: String):
 	
@@ -198,8 +193,6 @@ func updateViewship(viewerChange: int, direction: String):
 	
 	$InfoNumbers/viewerNumbers.text = str(viewerNumbers)
 
-
-
 # Update the player's funds
 func updateFunds(moneyValue: int, direction: String):
 	
@@ -208,12 +201,14 @@ func updateFunds(moneyValue: int, direction: String):
 	elif direction == "-":
 		if funds - moneyValue < 0:
 			print("Out of money")
+			cantAfford(true, "Not enough money")
+			await get_tree().create_timer(2.0).timeout
+			cantAfford(false)
+			
 		else:
 			funds -= moneyValue
-	
+		
 	$InfoNumbers/FundsValue.text = "$" + str(funds)
-
-
 
 # Custom toInt method
 func extractInt(numberString: String):
@@ -273,6 +268,32 @@ func toggleButtons(toggleTime: bool, toggleStart: bool = false):
 	$Microwave/oneSecond.disabled = toggleTime
 	$Microwave/oneSecond.toggle_mode = toggleTime
 
+func menuTriggers(active: bool, message: String = ""):
+	var microwaveOutput = $Popups/TileMapLayer/microwaveResult
+	
+	(microwaveOutput.get_parent()).visible = active
+	microwaveOutput.visible = active
+	microwaveOutput.text = message
+
+func gameOver():
+	pass
+
+func cantAfford(active: bool, message: String = ""):
+	var costOutput = $Popups/TileMapLayer/costInfo
+	
+	(costOutput.get_parent()).visible = active
+	costOutput.visible = active
+	costOutput.text = message
+
+func buyMicrowave():
+	pass
+
+func buyUpgrades():
+	if brokenMicrowave == true:
+		pass
+
+#---------------------------------------------------------------------
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:	
 	preloadResources(GROCPATH, groceries)
@@ -283,11 +304,6 @@ func _ready() -> void:
 	updateFunds(STARTINGFUNDS, "+")
 	updateViewship(STARTINGVIEWERNUMBERS, "+")
 	
-	$Microwave/microwaveStart/viewershipBuffer.one_shot = true
-	$Microwave/microwaveStart/microwaveTimer.one_shot = true
-	
-	#toggleButtons()
-	
 	$Microwave/LowControlPanel.visible = false
 	$Microwave/tenSeconds.visible = true
 	
@@ -296,8 +312,6 @@ func _ready() -> void:
 	
 	$Microwave/HighControlPanel.visible = true
 	$Microwave/oneSecond.visible = true
-
-
 
 # Used for running the money and viewer calc every second in process below
 var mu: float = 0.0
@@ -352,8 +366,6 @@ func _on_upgrades_button_pressed() -> void:
 	elif $InfoNumbers/UpgradesButton/UpgradeMenu.visible == true:
 		$InfoNumbers/UpgradesButton/UpgradeMenu.propagate_call("set_visible", [false])
 
-
-
 func _on_buy_egg_pressed() -> void:
 	var eggsCost = extractInt($InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels/EggCost.text)
 	
@@ -388,10 +400,13 @@ func _on_microwave_start_pressed() -> void:
 	toggleButtons(true, true)
 	
 	$Microwave/microwaveStart/microwaveTimer.start(totalSeconds)
+	print("the total seconds: " + str(totalSeconds))
 	print("pausing viewership decline")
 	viewershipDeclineBufferState = true
 	countdownActive = true
 	totalSecondsToPass = totalSeconds
+	if $Microwave/microwaveStart/viewershipBuffer.is_stopped() == false:
+		$Microwave/microwaveStart/viewershipBuffer.stop()
 
 func _on_microwave_timer_timeout() -> void:
 	print("timer stopped")
