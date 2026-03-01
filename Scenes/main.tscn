@@ -22,7 +22,9 @@
 [ext_resource type="PackedScene" uid="uid://b7m71bc2n8ffp" path="res://Scenes/info_numbers.tscn" id="18_b3802"]
 [ext_resource type="FontFile" uid="uid://cthv8eic7ochk" path="res://Assets/Fonts/Cake Mania.ttf" id="20_7k868"]
 [ext_resource type="Texture2D" uid="uid://dnalqc546iku7" path="res://Assets/menuTiles.png" id="20_cbgmd"]
+[ext_resource type="PackedScene" uid="uid://c4ownr3r1pxaw" path="res://Scenes/revenue_gain_upgrade.tscn" id="26_1w6v2"]
 [ext_resource type="Theme" uid="uid://b4dids3oqafv6" path="res://Assets/UpgradeButton.tres" id="27_1w6v2"]
+[ext_resource type="PackedScene" uid="uid://dysbsg38h8c2f" path="res://Scenes/viewers_buffer_upgrade.tscn" id="27_ueoa1"]
 [ext_resource type="PackedScene" uid="uid://q7ndv2ck4ca6" path="res://Scenes/microwave_2.tscn" id="30_hpc6h"]
 [ext_resource type="PackedScene" uid="uid://cgxoqixwmpql0" path="res://Scenes/microwave_3.tscn" id="31_kltya"]
 
@@ -1090,6 +1092,542 @@ texture_region_size = Vector2i(64, 64)
 tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetAtlasSource_6vcvc")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7k868"]
+texture = ExtResource("20_cbgmd")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+15:0/0 = 0
+16:0/0 = 0
+17:0/0 = 0
+18:0/0 = 0
+19:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+14:1/0 = 0
+15:1/0 = 0
+16:1/0 = 0
+17:1/0 = 0
+18:1/0 = 0
+19:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+14:2/0 = 0
+15:2/0 = 0
+16:2/0 = 0
+17:2/0 = 0
+18:2/0 = 0
+19:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+14:3/0 = 0
+15:3/0 = 0
+16:3/0 = 0
+17:3/0 = 0
+18:3/0 = 0
+19:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+9:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+9:8/0 = 0
+10:8/0 = 0
+11:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+7:9/0 = 0
+8:9/0 = 0
+9:9/0 = 0
+10:9/0 = 0
+11:9/0 = 0
+0:10/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+3:10/0 = 0
+4:10/0 = 0
+5:10/0 = 0
+6:10/0 = 0
+7:10/0 = 0
+8:10/0 = 0
+9:10/0 = 0
+10:10/0 = 0
+11:10/0 = 0
+0:11/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+3:11/0 = 0
+4:11/0 = 0
+5:11/0 = 0
+6:11/0 = 0
+7:11/0 = 0
+8:11/0 = 0
+9:11/0 = 0
+10:11/0 = 0
+11:11/0 = 0
+0:12/0 = 0
+1:12/0 = 0
+2:12/0 = 0
+3:12/0 = 0
+4:12/0 = 0
+5:12/0 = 0
+6:12/0 = 0
+7:12/0 = 0
+8:12/0 = 0
+9:12/0 = 0
+10:12/0 = 0
+11:12/0 = 0
+12:12/0 = 0
+13:12/0 = 0
+14:12/0 = 0
+15:12/0 = 0
+16:12/0 = 0
+17:12/0 = 0
+18:12/0 = 0
+19:12/0 = 0
+0:13/0 = 0
+1:13/0 = 0
+2:13/0 = 0
+3:13/0 = 0
+4:13/0 = 0
+5:13/0 = 0
+6:13/0 = 0
+7:13/0 = 0
+8:13/0 = 0
+9:13/0 = 0
+10:13/0 = 0
+11:13/0 = 0
+12:13/0 = 0
+13:13/0 = 0
+14:13/0 = 0
+15:13/0 = 0
+16:13/0 = 0
+17:13/0 = 0
+18:13/0 = 0
+19:13/0 = 0
+0:14/0 = 0
+1:14/0 = 0
+2:14/0 = 0
+3:14/0 = 0
+4:14/0 = 0
+5:14/0 = 0
+6:14/0 = 0
+7:14/0 = 0
+8:14/0 = 0
+9:14/0 = 0
+10:14/0 = 0
+11:14/0 = 0
+12:14/0 = 0
+13:14/0 = 0
+14:14/0 = 0
+15:14/0 = 0
+16:14/0 = 0
+17:14/0 = 0
+18:14/0 = 0
+19:14/0 = 0
+0:15/0 = 0
+1:15/0 = 0
+2:15/0 = 0
+3:15/0 = 0
+4:15/0 = 0
+5:15/0 = 0
+6:15/0 = 0
+7:15/0 = 0
+8:15/0 = 0
+9:15/0 = 0
+10:15/0 = 0
+11:15/0 = 0
+12:15/0 = 0
+13:15/0 = 0
+14:15/0 = 0
+15:15/0 = 0
+16:15/0 = 0
+17:15/0 = 0
+18:15/0 = 0
+19:15/0 = 0
+0:16/0 = 0
+1:16/0 = 0
+2:16/0 = 0
+3:16/0 = 0
+4:16/0 = 0
+5:16/0 = 0
+6:16/0 = 0
+7:16/0 = 0
+8:16/0 = 0
+9:16/0 = 0
+10:16/0 = 0
+11:16/0 = 0
+0:17/0 = 0
+1:17/0 = 0
+2:17/0 = 0
+3:17/0 = 0
+4:17/0 = 0
+5:17/0 = 0
+6:17/0 = 0
+7:17/0 = 0
+8:17/0 = 0
+9:17/0 = 0
+10:17/0 = 0
+11:17/0 = 0
+0:18/0 = 0
+1:18/0 = 0
+2:18/0 = 0
+3:18/0 = 0
+4:18/0 = 0
+5:18/0 = 0
+6:18/0 = 0
+7:18/0 = 0
+8:18/0 = 0
+9:18/0 = 0
+10:18/0 = 0
+11:18/0 = 0
+0:19/0 = 0
+1:19/0 = 0
+2:19/0 = 0
+3:19/0 = 0
+4:19/0 = 0
+5:19/0 = 0
+6:19/0 = 0
+7:19/0 = 0
+8:19/0 = 0
+9:19/0 = 0
+10:19/0 = 0
+11:19/0 = 0
+0:20/0 = 0
+1:20/0 = 0
+2:20/0 = 0
+3:20/0 = 0
+4:20/0 = 0
+5:20/0 = 0
+6:20/0 = 0
+7:20/0 = 0
+8:20/0 = 0
+9:20/0 = 0
+10:20/0 = 0
+11:20/0 = 0
+0:21/0 = 0
+1:21/0 = 0
+2:21/0 = 0
+3:21/0 = 0
+4:21/0 = 0
+5:21/0 = 0
+6:21/0 = 0
+7:21/0 = 0
+8:21/0 = 0
+9:21/0 = 0
+10:21/0 = 0
+11:21/0 = 0
+0:22/0 = 0
+1:22/0 = 0
+2:22/0 = 0
+3:22/0 = 0
+4:22/0 = 0
+5:22/0 = 0
+6:22/0 = 0
+7:22/0 = 0
+8:22/0 = 0
+9:22/0 = 0
+10:22/0 = 0
+11:22/0 = 0
+0:23/0 = 0
+1:23/0 = 0
+2:23/0 = 0
+3:23/0 = 0
+4:23/0 = 0
+5:23/0 = 0
+6:23/0 = 0
+7:23/0 = 0
+8:23/0 = 0
+9:23/0 = 0
+10:23/0 = 0
+11:23/0 = 0
+0:24/0 = 0
+1:24/0 = 0
+2:24/0 = 0
+3:24/0 = 0
+4:24/0 = 0
+5:24/0 = 0
+6:24/0 = 0
+7:24/0 = 0
+8:24/0 = 0
+9:24/0 = 0
+10:24/0 = 0
+11:24/0 = 0
+12:24/0 = 0
+13:24/0 = 0
+14:24/0 = 0
+15:24/0 = 0
+16:24/0 = 0
+17:24/0 = 0
+18:24/0 = 0
+19:24/0 = 0
+0:25/0 = 0
+1:25/0 = 0
+2:25/0 = 0
+3:25/0 = 0
+4:25/0 = 0
+5:25/0 = 0
+6:25/0 = 0
+7:25/0 = 0
+8:25/0 = 0
+9:25/0 = 0
+10:25/0 = 0
+11:25/0 = 0
+12:25/0 = 0
+13:25/0 = 0
+14:25/0 = 0
+15:25/0 = 0
+16:25/0 = 0
+17:25/0 = 0
+18:25/0 = 0
+19:25/0 = 0
+0:26/0 = 0
+1:26/0 = 0
+2:26/0 = 0
+3:26/0 = 0
+4:26/0 = 0
+5:26/0 = 0
+6:26/0 = 0
+7:26/0 = 0
+8:26/0 = 0
+9:26/0 = 0
+10:26/0 = 0
+11:26/0 = 0
+12:26/0 = 0
+13:26/0 = 0
+14:26/0 = 0
+15:26/0 = 0
+16:26/0 = 0
+17:26/0 = 0
+18:26/0 = 0
+19:26/0 = 0
+0:27/0 = 0
+1:27/0 = 0
+2:27/0 = 0
+3:27/0 = 0
+4:27/0 = 0
+5:27/0 = 0
+6:27/0 = 0
+7:27/0 = 0
+8:27/0 = 0
+9:27/0 = 0
+10:27/0 = 0
+11:27/0 = 0
+12:27/0 = 0
+13:27/0 = 0
+14:27/0 = 0
+15:27/0 = 0
+16:27/0 = 0
+17:27/0 = 0
+18:27/0 = 0
+19:27/0 = 0
+0:28/0 = 0
+1:28/0 = 0
+2:28/0 = 0
+3:28/0 = 0
+4:28/0 = 0
+5:28/0 = 0
+6:28/0 = 0
+7:28/0 = 0
+8:28/0 = 0
+9:28/0 = 0
+10:28/0 = 0
+11:28/0 = 0
+0:29/0 = 0
+1:29/0 = 0
+2:29/0 = 0
+3:29/0 = 0
+4:29/0 = 0
+5:29/0 = 0
+6:29/0 = 0
+7:29/0 = 0
+8:29/0 = 0
+9:29/0 = 0
+10:29/0 = 0
+11:29/0 = 0
+0:30/0 = 0
+1:30/0 = 0
+2:30/0 = 0
+3:30/0 = 0
+4:30/0 = 0
+5:30/0 = 0
+6:30/0 = 0
+7:30/0 = 0
+8:30/0 = 0
+9:30/0 = 0
+10:30/0 = 0
+11:30/0 = 0
+0:31/0 = 0
+1:31/0 = 0
+2:31/0 = 0
+3:31/0 = 0
+4:31/0 = 0
+5:31/0 = 0
+6:31/0 = 0
+7:31/0 = 0
+8:31/0 = 0
+9:31/0 = 0
+10:31/0 = 0
+11:31/0 = 0
+0:32/0 = 0
+1:32/0 = 0
+2:32/0 = 0
+3:32/0 = 0
+4:32/0 = 0
+5:32/0 = 0
+6:32/0 = 0
+7:32/0 = 0
+8:32/0 = 0
+9:32/0 = 0
+10:32/0 = 0
+11:32/0 = 0
+0:33/0 = 0
+1:33/0 = 0
+2:33/0 = 0
+3:33/0 = 0
+4:33/0 = 0
+5:33/0 = 0
+6:33/0 = 0
+7:33/0 = 0
+8:33/0 = 0
+9:33/0 = 0
+10:33/0 = 0
+11:33/0 = 0
+0:34/0 = 0
+1:34/0 = 0
+2:34/0 = 0
+3:34/0 = 0
+4:34/0 = 0
+5:34/0 = 0
+6:34/0 = 0
+7:34/0 = 0
+8:34/0 = 0
+9:34/0 = 0
+10:34/0 = 0
+11:34/0 = 0
+0:35/0 = 0
+1:35/0 = 0
+2:35/0 = 0
+3:35/0 = 0
+4:35/0 = 0
+5:35/0 = 0
+6:35/0 = 0
+7:35/0 = 0
+8:35/0 = 0
+9:35/0 = 0
+10:35/0 = 0
+11:35/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_hpc6h"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_7k868")
+
 [node name="Main" type="Node2D" unique_id=2090123510]
 script = ExtResource("1_h1bgf")
 
@@ -1380,10 +1918,10 @@ texture = ExtResource("14_b3802")
 
 [node name="Separator" type="Label" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels" unique_id=47861847]
 visible = false
-offset_left = 1518.0
-offset_top = 129.0
-offset_right = 1585.0
-offset_bottom = 194.0
+offset_left = 1504.0
+offset_top = 136.0
+offset_right = 1576.0
+offset_bottom = 208.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
@@ -1392,10 +1930,10 @@ horizontal_alignment = 1
 
 [node name="EggCost" type="Label" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels" unique_id=147881777]
 visible = false
-offset_left = 1594.0
-offset_top = 134.0
-offset_right = 1639.0
-offset_bottom = 199.0
+offset_left = 1592.0
+offset_top = 136.0
+offset_right = 1656.0
+offset_bottom = 208.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
@@ -1404,10 +1942,10 @@ horizontal_alignment = 1
 
 [node name="Separator2" type="Label" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels" unique_id=2058775123]
 visible = false
-offset_left = 1518.0
-offset_top = 244.0
-offset_right = 1585.0
-offset_bottom = 309.0
+offset_left = 1504.0
+offset_top = 256.0
+offset_right = 1576.0
+offset_bottom = 328.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
@@ -1416,10 +1954,10 @@ horizontal_alignment = 1
 
 [node name="PotatoCost" type="Label" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels" unique_id=524864337]
 visible = false
-offset_left = 1594.0
-offset_top = 244.0
-offset_right = 1639.0
-offset_bottom = 309.0
+offset_left = 1592.0
+offset_top = 256.0
+offset_right = 1656.0
+offset_bottom = 328.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
@@ -1428,10 +1966,10 @@ horizontal_alignment = 1
 
 [node name="Separator3" type="Label" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels" unique_id=352509522]
 visible = false
-offset_left = 1518.0
-offset_top = 365.0
-offset_right = 1585.0
-offset_bottom = 430.0
+offset_left = 1504.0
+offset_top = 368.0
+offset_right = 1576.0
+offset_bottom = 440.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
@@ -1442,8 +1980,8 @@ horizontal_alignment = 1
 visible = false
 offset_left = 1592.0
 offset_top = 368.0
-offset_right = 1652.0
-offset_bottom = 433.0
+offset_right = 1656.0
+offset_bottom = 440.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
@@ -1452,10 +1990,10 @@ horizontal_alignment = 1
 
 [node name="Separator4" type="Label" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels" unique_id=1220331467]
 visible = false
-offset_left = 1518.0
-offset_top = 493.0
-offset_right = 1585.0
-offset_bottom = 558.0
+offset_left = 1504.0
+offset_top = 496.0
+offset_right = 1576.0
+offset_bottom = 568.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
@@ -1467,7 +2005,7 @@ visible = false
 offset_left = 1592.0
 offset_top = 496.0
 offset_right = 1656.0
-offset_bottom = 561.0
+offset_bottom = 568.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
@@ -1476,10 +2014,10 @@ horizontal_alignment = 1
 
 [node name="Separator5" type="Label" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels" unique_id=2124207285]
 visible = false
-offset_left = 1518.0
-offset_top = 653.0
-offset_right = 1585.0
-offset_bottom = 718.0
+offset_left = 1504.0
+offset_top = 664.0
+offset_right = 1576.0
+offset_bottom = 736.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
@@ -1489,9 +2027,9 @@ horizontal_alignment = 1
 [node name="PumpkinCost" type="Label" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels" unique_id=854577497]
 visible = false
 offset_left = 1592.0
-offset_top = 653.0
-offset_right = 1651.0
-offset_bottom = 718.0
+offset_top = 664.0
+offset_right = 1656.0
+offset_bottom = 736.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
@@ -1517,10 +2055,10 @@ anchor_left = 0.0403071
 anchor_top = 0.13535912
 anchor_right = 0.0403071
 anchor_bottom = 0.13535912
-offset_left = 1712.0
-offset_top = 144.0
-offset_right = 1840.9412
-offset_bottom = 224.0
+offset_left = 1728.0
+offset_top = 136.0
+offset_right = 1856.0
+offset_bottom = 200.0
 theme = ExtResource("15_wsu2k")
 
 [node name="BuyPotato" type="Button" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground" unique_id=573227710]
@@ -1529,10 +2067,10 @@ anchors_preset = -1
 anchor_top = -0.113259666
 anchor_right = 0.019418832
 anchor_bottom = -0.10220995
-offset_left = 1712.0
-offset_top = 273.0
-offset_right = 1839.3293
-offset_bottom = 352.0
+offset_left = 1728.0
+offset_top = 256.0
+offset_right = 1856.0
+offset_bottom = 320.0
 theme = ExtResource("15_wsu2k")
 metadata/_edit_use_anchors_ = true
 
@@ -1542,27 +2080,27 @@ anchors_preset = -1
 anchor_top = -0.12707183
 anchor_right = 0.009709369
 anchor_bottom = -0.12154696
-offset_left = 1716.0
-offset_top = 383.0
-offset_right = 1844.9412
-offset_bottom = 463.0
+offset_left = 1728.0
+offset_top = 368.0
+offset_right = 1856.0
+offset_bottom = 432.0
 theme = ExtResource("15_wsu2k")
 metadata/_edit_use_anchors_ = true
 
 [node name="BuyMilk" type="Button" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground" unique_id=2101916898]
 visible = false
-offset_left = 1716.0
-offset_top = 511.0
-offset_right = 1851.3882
-offset_bottom = 595.0
+offset_left = 1728.0
+offset_top = 496.0
+offset_right = 1856.0
+offset_bottom = 560.0
 theme = ExtResource("15_wsu2k")
 
 [node name="BuyPumpkin" type="Button" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground" unique_id=13295627]
 visible = false
-offset_left = 1716.0
-offset_top = 673.0
-offset_right = 1849.7764
-offset_bottom = 756.0
+offset_left = 1728.0
+offset_top = 664.0
+offset_right = 1856.0
+offset_bottom = 728.0
 theme = ExtResource("15_wsu2k")
 
 [node name="UpgradesButton" type="Button" parent="InfoNumbers" unique_id=577963222]
@@ -1588,7 +2126,7 @@ visible = false
 visibility_layer = 2
 z_index = 2
 z_as_relative = false
-position = Vector2(1320, 128)
+position = Vector2(1312, 128)
 scale = Vector2(0.1, 0.1)
 
 [node name="MicrowaveBackground2" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=1895241387 instance=ExtResource("7_3pmx8")]
@@ -1596,7 +2134,7 @@ visible = false
 visibility_layer = 2
 z_index = 2
 z_as_relative = false
-position = Vector2(1320, 320)
+position = Vector2(1312, 368)
 scale = Vector2(0.1, 0.1)
 
 [node name="MicrowaveBackground3" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=907001119 instance=ExtResource("7_3pmx8")]
@@ -1604,7 +2142,7 @@ visible = false
 visibility_layer = 2
 z_index = 2
 z_as_relative = false
-position = Vector2(1320, 224)
+position = Vector2(1312, 248.00003)
 scale = Vector2(0.1, 0.1)
 
 [node name="Microwave" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=828639960 instance=ExtResource("2_bo1nx")]
@@ -1612,22 +2150,32 @@ visible = false
 visibility_layer = 2
 z_index = 2
 z_as_relative = false
-position = Vector2(1320, 128)
+position = Vector2(1312, 128)
 scale = Vector2(0.1, 0.1)
 
 [node name="Microwave2" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=657795127 instance=ExtResource("30_hpc6h")]
 visible = false
 visibility_layer = 2
 z_index = 2
-position = Vector2(1320, 223.99997)
+position = Vector2(1312, 248)
 scale = Vector2(0.1, 0.1)
 
 [node name="Microwave3" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=920087891 instance=ExtResource("31_kltya")]
 visible = false
 visibility_layer = 2
 z_index = 2
-position = Vector2(1320, 320)
+position = Vector2(1312, 368)
 scale = Vector2(0.1, 0.1)
+
+[node name="RevenueGainUpgrade" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=1015335463 instance=ExtResource("26_1w6v2")]
+visible = false
+z_index = 2
+position = Vector2(1344, 520)
+
+[node name="ViewersBufferUpgrade" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=1194589129 instance=ExtResource("27_ueoa1")]
+visible = false
+z_index = 2
+position = Vector2(1344, 680)
 
 [node name="Labels" type="Node" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=2056430755]
 
@@ -1635,10 +2183,10 @@ scale = Vector2(0.1, 0.1)
 visible = false
 visibility_layer = 2
 z_index = 2
-offset_left = 1456.0
-offset_top = 144.0
-offset_right = 1465.0
-offset_bottom = 189.0
+offset_left = 1440.0
+offset_top = 136.0
+offset_right = 1507.0
+offset_bottom = 201.0
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
 text = ": $"
@@ -1649,10 +2197,10 @@ vertical_alignment = 1
 visible = false
 visibility_layer = 2
 z_index = 2
-offset_left = 1456.0
-offset_top = 240.0
-offset_right = 1465.0
-offset_bottom = 285.0
+offset_left = 1440.0
+offset_top = 256.0
+offset_right = 1507.0
+offset_bottom = 321.0
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
 text = ": $"
@@ -1663,10 +2211,10 @@ vertical_alignment = 1
 visible = false
 visibility_layer = 2
 z_index = 2
-offset_left = 1456.0
-offset_top = 336.0
-offset_right = 1465.0
-offset_bottom = 381.0
+offset_left = 1440.0
+offset_top = 376.0
+offset_right = 1507.0
+offset_bottom = 441.0
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
 text = ": $"
@@ -1677,10 +2225,10 @@ vertical_alignment = 1
 visible = false
 visibility_layer = 2
 z_index = 2
-offset_left = 1481.0
-offset_top = 448.0
-offset_right = 1548.0
-offset_bottom = 513.0
+offset_left = 1440.0
+offset_top = 528.0
+offset_right = 1507.0
+offset_bottom = 593.0
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
 text = ": $"
@@ -1691,10 +2239,10 @@ vertical_alignment = 1
 visible = false
 visibility_layer = 2
 z_index = 2
-offset_left = 1481.0
-offset_top = 576.0
-offset_right = 1548.0
-offset_bottom = 641.0
+offset_left = 1440.0
+offset_top = 688.0
+offset_right = 1507.0
+offset_bottom = 753.0
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
 text = ": $"
@@ -1719,10 +2267,10 @@ vertical_alignment = 1
 visible = false
 visibility_layer = 2
 z_index = 2
-offset_left = 1536.0
-offset_top = 141.0
-offset_right = 1613.0
-offset_bottom = 206.0
+offset_left = 1520.0
+offset_top = 136.0
+offset_right = 1597.0
+offset_bottom = 201.0
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
 text = "100"
@@ -1733,10 +2281,10 @@ vertical_alignment = 1
 visible = false
 visibility_layer = 2
 z_index = 2
-offset_left = 1536.0
-offset_top = 240.0
-offset_right = 1628.0
-offset_bottom = 305.0
+offset_left = 1520.0
+offset_top = 256.0
+offset_right = 1612.0
+offset_bottom = 321.0
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
 text = "200"
@@ -1747,10 +2295,10 @@ vertical_alignment = 1
 visible = false
 visibility_layer = 2
 z_index = 2
-offset_left = 1536.0
-offset_top = 336.0
-offset_right = 1627.0
-offset_bottom = 401.0
+offset_left = 1520.0
+offset_top = 376.0
+offset_right = 1611.0
+offset_bottom = 441.0
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
 text = "300"
@@ -1761,10 +2309,10 @@ vertical_alignment = 1
 visible = false
 visibility_layer = 2
 z_index = 2
-offset_left = 1576.0
-offset_top = 448.0
-offset_right = 1667.0
-offset_bottom = 513.0
+offset_left = 1528.0
+offset_top = 528.0
+offset_right = 1619.0
+offset_bottom = 593.0
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
 text = "10"
@@ -1775,15 +2323,57 @@ vertical_alignment = 1
 visible = false
 visibility_layer = 2
 z_index = 2
-offset_left = 1576.0
-offset_top = 576.0
-offset_right = 1667.0
-offset_bottom = 641.0
+offset_left = 1528.0
+offset_top = 688.0
+offset_right = 1619.0
+offset_bottom = 753.0
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
 text = "20"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="revenueUpgradeLabel" type="Label" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels" unique_id=1145805246]
+visible = false
+offset_left = 1320.0
+offset_top = 464.0
+offset_right = 1458.0
+offset_bottom = 518.0
+text = "Increase money 
+gained per viewer"
+
+[node name="viewBufferUpgradeLabel" type="Label" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels" unique_id=822780537]
+visible = false
+offset_left = 1320.0
+offset_top = 624.0
+offset_right = 1493.0
+offset_bottom = 678.0
+text = "Increase time before
+ viewership decline"
+
+[node name="lvl1Label" type="Label" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels" unique_id=1940684468]
+visible = false
+offset_left = 1320.0
+offset_top = 104.0
+offset_right = 1462.0
+offset_bottom = 127.0
+text = "Level 1 Microwave"
+
+[node name="lvl2Label" type="Label" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels" unique_id=717873614]
+visible = false
+offset_left = 1320.0
+offset_top = 224.0
+offset_right = 1462.0
+offset_bottom = 247.0
+text = "Level 2 Microwave"
+
+[node name="lvl3Label" type="Label" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels" unique_id=501597172]
+visible = false
+offset_left = 1320.0
+offset_top = 344.0
+offset_right = 1462.0
+offset_bottom = 367.0
+text = "Level 3 Microwave"
 
 [node name="BuyLow" type="Button" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=955356679]
 visible = false
@@ -1799,40 +2389,40 @@ theme = ExtResource("15_wsu2k")
 visible = false
 visibility_layer = 2
 z_index = 2
-offset_left = 1668.0
-offset_top = 230.0
-offset_right = 1796.0
-offset_bottom = 292.0
+offset_left = 1664.0
+offset_top = 256.0
+offset_right = 1792.0
+offset_bottom = 320.0
 theme = ExtResource("15_wsu2k")
 
 [node name="BuyHigh" type="Button" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=1700495991]
 visible = false
 visibility_layer = 2
 z_index = 2
-offset_left = 1680.0
-offset_top = 333.0
-offset_right = 1808.0
-offset_bottom = 397.0
+offset_left = 1664.0
+offset_top = 376.0
+offset_right = 1792.0
+offset_bottom = 440.0
 theme = ExtResource("15_wsu2k")
 
 [node name="BuyViewerBuffer" type="Button" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=2089808284]
 visible = false
 visibility_layer = 2
 z_index = 2
-offset_left = 1344.0
-offset_top = 576.0
-offset_right = 1472.0
-offset_bottom = 639.0
+offset_left = 1664.0
+offset_top = 688.0
+offset_right = 1792.0
+offset_bottom = 752.0
 theme = ExtResource("15_wsu2k")
 
 [node name="BuyMoneyGain" type="Button" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=310266791]
 visible = false
 visibility_layer = 2
 z_index = 2
-offset_left = 1344.0
-offset_top = 448.0
-offset_right = 1472.0
-offset_bottom = 512.0
+offset_left = 1664.0
+offset_top = 528.0
+offset_right = 1792.0
+offset_bottom = 592.0
 theme = ExtResource("15_wsu2k")
 
 [node name="Popups" type="CanvasLayer" parent="." unique_id=1920987474]
@@ -1840,7 +2430,7 @@ layer = 0
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Popups" unique_id=1506387560]
 visible = false
-tile_map_data = PackedByteArray("AAAJAAQAAAAAAAAAAAAKAAQAAAADAAYAAAALAAQAAAADAAYAAAAMAAQAAAADAAYAAAANAAQAAAABAAYAAAAOAAQAAAABAAYAAAAPAAQAAAABAAYAAAAQAAQAAAABAAYAAAARAAQAAAABAAYAAAASAAQAAAABAAYAAAATAAQAAAAEAAYAAAATAAUAAAABAAcAAAAJAAUAAAAAAAcAAAAKAAUAAAABAAcAAAALAAUAAAABAAcAAAAMAAUAAAABAAcAAAANAAUAAAABAAcAAAAOAAUAAAABAAcAAAAPAAUAAAABAAcAAAAQAAUAAAABAAcAAAARAAUAAAABAAcAAAASAAUAAAABAAcAAAAUAAUAAAABAAcAAAAWAAUAAAACAAcAAAAVAAUAAAABAAcAAAAWAAQAAAACAAAAAAAVAAQAAAAEAAYAAAAUAAQAAAAEAAYAAAAJAAYAAAAAAAIAAAAKAAYAAAABAAgAAAALAAYAAAABAAgAAAAMAAYAAAABAAgAAAANAAYAAAABAAgAAAAOAAYAAAABAAgAAAAPAAYAAAABAAgAAAAQAAYAAAABAAgAAAARAAYAAAABAAgAAAASAAYAAAABAAgAAAATAAYAAAABAAgAAAAUAAYAAAABAAgAAAAVAAYAAAABAAgAAAAWAAYAAAACAAIAAAA=")
+tile_map_data = PackedByteArray("AAAJAAQAAAAAAAYAAAAKAAQAAAADAAYAAAALAAQAAAADAAYAAAAMAAQAAAADAAYAAAANAAQAAAABAAYAAAAOAAQAAAABAAYAAAAPAAQAAAABAAYAAAAQAAQAAAABAAYAAAARAAQAAAABAAYAAAASAAQAAAABAAYAAAATAAQAAAAEAAYAAAATAAUAAAABAAcAAAAJAAUAAAAAAAcAAAAKAAUAAAABAAcAAAALAAUAAAABAAcAAAAMAAUAAAABAAcAAAANAAUAAAABAAcAAAAOAAUAAAABAAcAAAAPAAUAAAABAAcAAAAQAAUAAAABAAcAAAARAAUAAAABAAcAAAASAAUAAAABAAcAAAAUAAUAAAABAAcAAAAWAAUAAAACAAcAAAAVAAUAAAABAAcAAAAWAAQAAAACAAYAAAAVAAQAAAAEAAYAAAAUAAQAAAAEAAYAAAAJAAYAAAAAAAgAAAAKAAYAAAABAAgAAAALAAYAAAABAAgAAAAMAAYAAAABAAgAAAANAAYAAAABAAgAAAAOAAYAAAABAAgAAAAPAAYAAAABAAgAAAAQAAYAAAABAAgAAAARAAYAAAABAAgAAAASAAYAAAABAAgAAAATAAYAAAABAAgAAAAUAAYAAAABAAgAAAAVAAYAAAABAAgAAAAWAAYAAAACAAgAAAA=")
 tile_set = SubResource("TileSet_7k868")
 
 [node name="microwaveResult" type="Label" parent="Popups/TileMapLayer" unique_id=907718352]
@@ -1849,6 +2439,7 @@ offset_left = 608.0
 offset_top = 288.0
 offset_right = 1440.0
 offset_bottom = 415.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
@@ -1861,11 +2452,169 @@ offset_left = 608.0
 offset_top = 288.0
 offset_right = 1440.0
 offset_bottom = 415.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="TutorialPopup" type="TileMapLayer" parent="Popups" unique_id=1276943344]
+visible = false
+tile_map_data = PackedByteArray("AAADAAwAAAAAAAcAAAAcAAwAAAACAAcAAAAbAAwAAAABAAcAAAAaAAwAAAABAAcAAAAZAAwAAAABAAcAAAAYAAwAAAABAAcAAAAXAAwAAAABAAcAAAAWAAwAAAABAAcAAAAVAAwAAAABAAcAAAAUAAwAAAABAAcAAAATAAwAAAABAAcAAAASAAwAAAABAAcAAAARAAwAAAABAAcAAAAQAAwAAAABAAcAAAAPAAwAAAABAAcAAAAOAAwAAAABAAcAAAANAAwAAAABAAcAAAAMAAwAAAABAAcAAAALAAwAAAABAAcAAAAKAAwAAAABAAcAAAAJAAwAAAABAAcAAAAIAAwAAAABAAcAAAAHAAwAAAABAAcAAAAGAAwAAAABAAcAAAAFAAwAAAABAAcAAAAEAAwAAAABAAcAAAADAAsAAAAAAAcAAAADAAoAAAAAAAcAAAADAAkAAAAAAAcAAAADAAgAAAAAAAcAAAADAAcAAAAAAAcAAAADAAYAAAAAAAcAAAADAAUAAAAAAAcAAAADAAQAAAAAAAcAAAAcAAQAAAACAAcAAAAcAAUAAAACAAcAAAAcAAYAAAACAAcAAAAcAAcAAAACAAcAAAAcAAgAAAACAAcAAAAcAAkAAAACAAcAAAAcAAoAAAACAAcAAAAcAAsAAAACAAcAAAAOAAgAAAABAAcAAAAOAAcAAAABAAcAAAAOAAYAAAABAAcAAAAOAAUAAAABAAcAAAAOAAQAAAABAAcAAAANAAQAAAABAAcAAAAMAAQAAAABAAcAAAALAAQAAAABAAcAAAAKAAQAAAABAAcAAAAJAAQAAAABAAcAAAAIAAQAAAABAAcAAAAHAAQAAAABAAcAAAAGAAQAAAABAAcAAAAFAAQAAAABAAcAAAAEAAQAAAABAAcAAAAEAAUAAAABAAcAAAAEAAYAAAABAAcAAAAEAAcAAAABAAcAAAAEAAgAAAABAAcAAAAEAAkAAAABAAcAAAAEAAoAAAABAAcAAAAEAAsAAAABAAcAAAAFAAsAAAABAAcAAAAFAAoAAAABAAcAAAAFAAkAAAABAAcAAAAFAAgAAAABAAcAAAAFAAcAAAABAAcAAAAFAAYAAAABAAcAAAAFAAUAAAABAAcAAAAGAAUAAAABAAcAAAAGAAYAAAABAAcAAAAGAAcAAAABAAcAAAAGAAgAAAABAAcAAAAGAAkAAAABAAcAAAAGAAoAAAABAAcAAAAGAAsAAAABAAcAAAAHAAsAAAABAAcAAAAHAAoAAAABAAcAAAAHAAkAAAABAAcAAAAHAAgAAAABAAcAAAAHAAcAAAABAAcAAAAHAAYAAAABAAcAAAAHAAUAAAABAAcAAAAIAAUAAAABAAcAAAAIAAYAAAABAAcAAAAIAAcAAAABAAcAAAAIAAgAAAABAAcAAAAIAAkAAAABAAcAAAAIAAoAAAABAAcAAAAIAAsAAAABAAcAAAAJAAsAAAABAAcAAAAJAAoAAAABAAcAAAAJAAkAAAABAAcAAAAJAAgAAAABAAcAAAAJAAcAAAABAAcAAAAJAAYAAAABAAcAAAAJAAUAAAABAAcAAAAKAAUAAAABAAcAAAAKAAYAAAABAAcAAAAKAAcAAAABAAcAAAAKAAgAAAABAAcAAAAKAAkAAAABAAcAAAAKAAoAAAABAAcAAAAKAAsAAAABAAcAAAALAAsAAAABAAcAAAALAAoAAAABAAcAAAALAAkAAAABAAcAAAALAAgAAAABAAcAAAALAAcAAAABAAcAAAALAAYAAAABAAcAAAALAAUAAAABAAcAAAAMAAUAAAABAAcAAAAMAAYAAAABAAcAAAAMAAcAAAABAAcAAAAMAAgAAAABAAcAAAAMAAkAAAABAAcAAAAMAAoAAAABAAcAAAAMAAsAAAABAAcAAAANAAsAAAABAAcAAAANAAoAAAABAAcAAAANAAkAAAABAAcAAAANAAgAAAABAAcAAAANAAcAAAABAAcAAAANAAYAAAABAAcAAAANAAUAAAABAAcAAAAOAAkAAAABAAcAAAAOAAoAAAABAAcAAAAOAAsAAAABAAcAAAAPAAsAAAABAAcAAAAPAAoAAAABAAcAAAAPAAkAAAABAAcAAAAPAAgAAAABAAcAAAAPAAcAAAABAAcAAAAPAAYAAAABAAcAAAAPAAUAAAABAAcAAAAPAAQAAAABAAcAAAAQAAQAAAABAAcAAAAQAAUAAAABAAcAAAAQAAYAAAABAAcAAAAQAAcAAAABAAcAAAAQAAgAAAABAAcAAAAQAAkAAAABAAcAAAAQAAoAAAABAAcAAAAQAAsAAAABAAcAAAARAAsAAAABAAcAAAARAAoAAAABAAcAAAARAAkAAAABAAcAAAARAAgAAAABAAcAAAARAAcAAAABAAcAAAARAAYAAAABAAcAAAARAAUAAAABAAcAAAARAAQAAAABAAcAAAASAAQAAAABAAcAAAASAAUAAAABAAcAAAASAAYAAAABAAcAAAASAAcAAAABAAcAAAASAAgAAAABAAcAAAASAAkAAAABAAcAAAASAAoAAAABAAcAAAASAAsAAAABAAcAAAATAAsAAAABAAcAAAATAAoAAAABAAcAAAATAAkAAAABAAcAAAATAAgAAAABAAcAAAATAAcAAAABAAcAAAATAAYAAAABAAcAAAATAAUAAAABAAcAAAATAAQAAAABAAcAAAAUAAQAAAABAAcAAAAUAAUAAAABAAcAAAAUAAYAAAABAAcAAAAUAAcAAAABAAcAAAAUAAgAAAABAAcAAAAUAAkAAAABAAcAAAAUAAoAAAABAAcAAAAUAAsAAAABAAcAAAAVAAsAAAABAAcAAAAVAAoAAAABAAcAAAAVAAkAAAABAAcAAAAVAAgAAAABAAcAAAAVAAcAAAABAAcAAAAVAAYAAAABAAcAAAAVAAUAAAABAAcAAAAVAAQAAAABAAcAAAAWAAQAAAABAAcAAAAWAAUAAAABAAcAAAAWAAYAAAABAAcAAAAWAAcAAAABAAcAAAAWAAgAAAABAAcAAAAWAAkAAAABAAcAAAAWAAoAAAABAAcAAAAWAAsAAAABAAcAAAAXAAsAAAABAAcAAAAXAAoAAAABAAcAAAAXAAkAAAABAAcAAAAXAAgAAAABAAcAAAAXAAcAAAABAAcAAAAXAAYAAAABAAcAAAAXAAUAAAABAAcAAAAXAAQAAAABAAcAAAAYAAQAAAABAAcAAAAYAAUAAAABAAcAAAAYAAYAAAABAAcAAAAYAAcAAAABAAcAAAAYAAgAAAABAAcAAAAYAAkAAAABAAcAAAAYAAoAAAABAAcAAAAYAAsAAAABAAcAAAAZAAsAAAABAAcAAAAZAAoAAAABAAcAAAAZAAkAAAABAAcAAAAZAAgAAAABAAcAAAAZAAcAAAABAAcAAAAZAAYAAAABAAcAAAAZAAUAAAABAAcAAAAZAAQAAAABAAcAAAAaAAQAAAABAAcAAAAaAAUAAAABAAcAAAAaAAYAAAABAAcAAAAaAAcAAAABAAcAAAAaAAgAAAABAAcAAAAaAAkAAAABAAcAAAAaAAoAAAABAAcAAAAaAAsAAAABAAcAAAAbAAsAAAABAAcAAAAbAAoAAAABAAcAAAAbAAkAAAABAAcAAAAbAAgAAAABAAcAAAAbAAcAAAABAAcAAAAbAAYAAAABAAcAAAAbAAUAAAABAAcAAAAbAAQAAAABAAcAAAALAAEAAAADAAYAAAAUAAEAAAAEAAYAAAAMAAEAAAADAAYAAAANAAEAAAADAAYAAAAOAAEAAAABAAYAAAAPAAEAAAABAAYAAAAQAAEAAAABAAYAAAARAAEAAAABAAYAAAASAAEAAAAEAAYAAAATAAEAAAAEAAYAAAAMAAIAAAABAAQAAAANAAIAAAABAAQAAAAOAAIAAAABAAQAAAAPAAIAAAABAAQAAAAQAAIAAAABAAQAAAARAAIAAAABAAQAAAASAAIAAAABAAQAAAATAAIAAAABAAQAAAAUAAIAAAABAAQAAAALAAIAAAABAAQAAAAKAAEAAAABAAYAAAAKAAIAAAABAAQAAAAVAAIAAAABAAQAAAAVAAEAAAABAAYAAAAKAAMAAAABAAQAAAAVAAMAAAABAAQAAAAUAAMAAAABAAQAAAATAAMAAAABAAQAAAASAAMAAAABAAQAAAARAAMAAAABAAQAAAAQAAMAAAABAAQAAAAPAAMAAAABAAQAAAAOAAMAAAABAAQAAAANAAMAAAABAAQAAAAMAAMAAAABAAQAAAALAAMAAAABAAQAAAAcAA0AAAACAAcAAAADAA0AAAAAAAcAAAAEAA0AAAABAAcAAAAFAA0AAAABAAcAAAAGAA0AAAABAAcAAAAHAA0AAAABAAcAAAAHAA4AAAABAAgAAAAIAA4AAAABAAgAAAAJAA4AAAABAAgAAAAKAA4AAAABAAgAAAALAA4AAAABAAgAAAAMAA4AAAABAAgAAAANAA4AAAABAAgAAAAOAA4AAAABAAgAAAAPAA4AAAABAAgAAAAGAA4AAAABAAgAAAAFAA4AAAABAAgAAAAEAA4AAAABAAgAAAAQAA4AAAABAAgAAAARAA4AAAABAAgAAAASAA4AAAABAAgAAAATAA4AAAABAAgAAAAUAA4AAAABAAgAAAAVAA4AAAABAAgAAAAWAA4AAAABAAgAAAAXAA4AAAABAAgAAAAYAA4AAAABAAgAAAAZAA4AAAABAAgAAAAaAA4AAAABAAgAAAAbAA4AAAABAAgAAAAcAA4AAAACAAgAAAADAA4AAAAAAAgAAAAbAA0AAAABAAcAAAAaAA0AAAABAAcAAAAZAA0AAAABAAcAAAAYAA0AAAABAAcAAAAXAA0AAAABAAcAAAAWAA0AAAABAAcAAAAVAA0AAAABAAcAAAAUAA0AAAABAAcAAAATAA0AAAABAAcAAAASAA0AAAABAAcAAAARAA0AAAABAAcAAAAQAA0AAAABAAcAAAAPAA0AAAABAAcAAAAOAA0AAAABAAcAAAANAA0AAAABAAcAAAAMAA0AAAABAAcAAAALAA0AAAABAAcAAAAKAA0AAAABAAcAAAAJAA0AAAABAAcAAAAIAA0AAAABAAcAAAADAAEAAAAAAAYAAAAcAAEAAAACAAYAAAAcAAMAAAACAAcAAAAcAAIAAAACAAcAAAADAAMAAAAAAAcAAAADAAIAAAAAAAcAAAAEAAEAAAABAAYAAAAJAAEAAAABAAYAAAAWAAEAAAABAAYAAAAXAAEAAAABAAYAAAAYAAEAAAABAAYAAAAZAAEAAAABAAYAAAAaAAEAAAABAAYAAAAbAAEAAAABAAYAAAAYAAIAAAABAAcAAAAXAAIAAAABAAcAAAAWAAIAAAABAAcAAAAWAAMAAAABAAcAAAAXAAMAAAABAAcAAAAYAAMAAAABAAcAAAAZAAMAAAABAAcAAAAZAAIAAAABAAcAAAAaAAIAAAABAAcAAAAaAAMAAAABAAcAAAAbAAMAAAABAAcAAAAbAAIAAAABAAcAAAAHAAIAAAABAAcAAAAGAAIAAAABAAcAAAAFAAIAAAABAAcAAAAEAAIAAAABAAcAAAAEAAMAAAABAAcAAAAFAAMAAAABAAcAAAAGAAMAAAABAAcAAAAHAAMAAAABAAcAAAAIAAMAAAABAAcAAAAIAAIAAAABAAcAAAAJAAIAAAABAAcAAAAJAAMAAAABAAcAAAAIAAEAAAABAAYAAAAHAAEAAAABAAYAAAAGAAEAAAABAAYAAAAFAAEAAAABAAYAAAA=")
+tile_set = SubResource("TileSet_hpc6h")
+
+[node name="title" type="Label" parent="Popups/TutorialPopup" unique_id=1524605142]
+offset_left = 640.0
+offset_top = 130.0
+offset_right = 1408.0
+offset_bottom = 258.0
+theme_override_colors/font_color = Color(0.97, 0.82417667, 0.1746, 1)
+theme_override_fonts/font = ExtResource("20_7k868")
+theme_override_font_sizes/font_size = 96
+text = "Chicken with Eggs"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="description" type="Label" parent="Popups/TutorialPopup" unique_id=1481977212]
+offset_left = 224.0
+offset_top = 280.0
+offset_right = 1824.0
+offset_bottom = 408.0
+theme_override_colors/font_color = Color(1, 0.90588236, 0.47843137, 1)
+theme_override_constants/line_spacing = -15
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 64
+text = "You are an up and coming Content Creator, and you make videos 
+where you microwave different foods."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="descriptionA" type="Label" parent="Popups/TutorialPopup" unique_id=767296149]
+offset_left = 256.0
+offset_top = 415.0
+offset_right = 768.0
+offset_bottom = 478.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 48
+text = "1. Buy food from the shop "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="descriptionB" type="Label" parent="Popups/TutorialPopup" unique_id=867309475]
+offset_left = 256.0
+offset_top = 512.0
+offset_right = 768.0
+offset_bottom = 639.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 48
+text = "2. Add it to the microwave
+ and set the time"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="descriptionC" type="Label" parent="Popups/TutorialPopup" unique_id=1624276068]
+offset_left = 256.0
+offset_top = 632.0
+offset_right = 832.0
+offset_bottom = 825.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 48
+text = "3. Gain more viewers depending 
+on how close you are to 
+perfectly cooking the food"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="descriptionD" type="Label" parent="Popups/TutorialPopup" unique_id=1878179889]
+offset_left = 832.0
+offset_top = 415.0
+offset_right = 1466.0
+offset_bottom = 639.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 48
+text = "4. Buy upgrades to your microwave, 
+the amount of money you get 
+per viewer, and how long you 
+have before viewership declines"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="Popups/TutorialPopup" unique_id=527793725]
+offset_left = 896.0
+offset_top = 703.0
+offset_right = 1712.0
+offset_bottom = 896.0
+color = Color(1, 0.90588236, 0.47843137, 1)
+
+[node name="descriptionE" type="Label" parent="Popups/TutorialPopup" unique_id=1001034135]
+offset_left = 1168.0
+offset_top = 708.0
+offset_right = 1424.0
+offset_bottom = 772.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 64
+text = "Watch Out!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="descriptionF" type="Label" parent="Popups/TutorialPopup" unique_id=1296252038]
+offset_left = 896.0
+offset_top = 767.0
+offset_right = 1712.0
+offset_bottom = 896.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 48
+text = "If you wait too long between microwaving
+ things, you'll start to lose viewers!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="descriptionG" type="Label" parent="Popups/TutorialPopup" unique_id=186740482]
+offset_left = 232.0
+offset_top = 888.0
+offset_right = 512.0
+offset_bottom = 921.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 32
+text = "press \"T\" to close info "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="egg" parent="Popups/TutorialPopup" unique_id=1789283053 instance=ExtResource("3_6bp64")]
+position = Vector2(1535.9999, 256)
+rotation = 0.2617994
+scale = Vector2(1.5, 1.5)
+
+[node name="egg2" parent="Popups/TutorialPopup" unique_id=731676325 instance=ExtResource("3_6bp64")]
+position = Vector2(512, 256)
+rotation = -0.2617994
+scale = Vector2(1.5, 1.5)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1091676307]
+offset_left = 1280.0
+offset_top = 32.0
+offset_right = 1856.0
+offset_bottom = 160.0
+color = Color(0, 0, 0, 0.49803922)
+
+[node name="Label" type="Label" parent="ColorRect" unique_id=852298074]
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 128.0
+theme_override_colors/font_color = Color(0.46564168, 0.71, 0.46149996, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 60
+text = "Press \"T\" for game info"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="MicrowaveOptions/microwaveStart" to="." method="_on_microwave_start_pressed"]
 [connection signal="timeout" from="MicrowaveOptions/microwaveStart/microwaveTimer" to="." method="_on_microwave_timer_timeout"]

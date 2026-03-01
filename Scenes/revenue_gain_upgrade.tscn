@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c4ownr3r1pxaw"]
+
+[ext_resource type="Texture2D" uid="uid://bpo4c1ycr8frk" path="res://Assets/MoneyButton.png" id="1_yi1qk"]
+
+[node name="RevenueGainUpgrade" type="Node2D" unique_id=1015335463]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=792226381]
+texture = ExtResource("1_yi1qk")
+centered = false

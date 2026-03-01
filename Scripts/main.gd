@@ -2,7 +2,7 @@ extends Node2D
 
 # Initialize the funds and viewership numbers
 var funds: int = 0
-const STARTINGFUNDS: int = 1300
+const STARTINGFUNDS: int = 100000
 
 var viewerNumbers: int = 0
 const STARTINGVIEWERNUMBERS: int = 10
@@ -25,10 +25,13 @@ var countdownActive = false
 var microwavedItem: String
 
 var resetScene: bool = false
-var brokenMicrowave = false
-var microwaveOwned = "LOW"
+var brokenMicrowave: bool = false
+var microwaveOwned: String = "LOW"
+var previousMicrowaveOwned: String
 
 var canAfford: bool = true
+
+var escape: bool = false
 
 
 
@@ -106,6 +109,7 @@ func swapMicrowaves(state: String, food: String = ""):
 	match state:
 		"destroyed":
 			brokenMicrowave = true
+			previousMicrowaveOwned = microwaveOwned
 			
 			if microwaveOwned == "LOW":
 				$MicrowaveOptions/Low/Microwave/Closed.visible = false
@@ -128,6 +132,7 @@ func swapMicrowaves(state: String, food: String = ""):
 			$MicrowaveOptions/tenSeconds.visible = false
 			$MicrowaveOptions/fiveSeconds.visible = false
 			$MicrowaveOptions/oneSecond.visible = false
+			$MicrowaveOptions/microwaveStart.visible = false
 			
 			match food:
 				"egg":
@@ -149,26 +154,27 @@ func swapMicrowaves(state: String, food: String = ""):
 				$MicrowaveOptions/Low/Microwave/Closed.visible = false
 				$MicrowaveOptions/MicrowaveBackground/lowBackground.visible = false
 				$MicrowaveOptions/Low/Microwave/Opened.visible = true
+				$MicrowaveOptions/tenSeconds.visible = false
 				
 			elif microwaveOwned == "MID":
 				$MicrowaveOptions/Mid/Microwave2/Closed.visible = false
 				$MicrowaveOptions/MicrowaveBackground/midBackground.visible = false
 				$MicrowaveOptions/Mid/Microwave2/Opened.visible = true
+				$MicrowaveOptions/tenSeconds.visible = false
+				$MicrowaveOptions/fiveSeconds.visible = false
 				
 			elif microwaveOwned == "HIGH":
 				$MicrowaveOptions/High/Microwave3/Closed.visible = false
 				$MicrowaveOptions/MicrowaveBackground/highBackground.visible = false
 				$MicrowaveOptions/High/Microwave3/Opened.visible = true
-			
-			
+				$MicrowaveOptions/tenSeconds.visible = false
+				$MicrowaveOptions/fiveSeconds.visible = false
+				$MicrowaveOptions/oneSecond.visible = false
 			
 			$MicrowaveOptions/microwaveDisplay.visible = false
+			$MicrowaveOptions/microwaveStart.visible = false
 			$ExplodedFood.visible = true
 			resetScene = true
-			
-			$MicrowaveOptions/tenSeconds.visible = false
-			$MicrowaveOptions/fiveSeconds.visible = false
-			$MicrowaveOptions/oneSecond.visible = false
 			
 			match food:
 				"egg":
@@ -189,19 +195,33 @@ func swapMicrowaves(state: String, food: String = ""):
 				$MicrowaveOptions/Low/Microwave/Broken.visible = false
 				$MicrowaveOptions/Low/Microwave/Opened.visible = false
 				$MicrowaveOptions/tenSeconds.visible = true
+				
+				print("value of previous owned is empty: " + str(previousMicrowaveOwned.is_empty()))
+				
+				if previousMicrowaveOwned.is_empty() == false:
+					print("checked the if")
+					print("value of previous owned 2 is empty: " + str(previousMicrowaveOwned.is_empty()))
+				
+				# bug in this section of the logic
+				##if you have a destroyed microwave, and try to upgrade or downgrade, the previous
+				## level of microwave that you have and that is destroyed, isn't hidden
+				
 			elif microwaveOwned == "MID":
 				$MicrowaveOptions/Mid/Microwave2/Closed.visible = true
 				$MicrowaveOptions/MicrowaveBackground/midBackground.visible = true
 				$MicrowaveOptions/Mid/Microwave2/Broken.visible = false
 				$MicrowaveOptions/Mid/Microwave2/Opened.visible = false
+				$MicrowaveOptions/tenSeconds.visible = true
 				$MicrowaveOptions/fiveSeconds.visible = true
+				
 			elif microwaveOwned == "HIGH":
 				$MicrowaveOptions/High/Microwave3/Closed.visible = true
 				$MicrowaveOptions/MicrowaveBackground/highBackground.visible = true
 				$MicrowaveOptions/High/Microwave3/Broken.visible = false
 				$MicrowaveOptions/High/Microwave3/Opened.visible = false
+				$MicrowaveOptions/tenSeconds.visible = true
+				$MicrowaveOptions/fiveSeconds.visible = true
 				$MicrowaveOptions/oneSecond.visible = true
-				
 				
 			$ExplodedFood.visible = false
 			
@@ -218,6 +238,7 @@ func swapMicrowaves(state: String, food: String = ""):
 			$ExplodedFood/Overtime/Pumpkin.visible = false
 			
 			$MicrowaveOptions/microwaveDisplay.visible = true
+			$MicrowaveOptions/microwaveStart.visible = true
 			
 			menuTriggers(false)
 
@@ -462,6 +483,19 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed():
 		if event.keycode == KEY_ESCAPE:
 			$InfoNumbers/ShoppingButton/GroceryMenu.propagate_call("set_visible", [false])
+		
+		if event.keycode == KEY_T:
+			if escape == false:
+				print("t pressed")
+				escape = true
+				$Popups/TutorialPopup.visible = true
+				
+				if $MicrowaveOptions/microwaveStart/viewershipBuffer.is_stopped() == false:
+					$MicrowaveOptions/microwaveStart/viewershipBuffer.stop()
+				
+			elif escape == true:
+				escape = false
+				$Popups/TutorialPopup.visible = false
 
 # Functions to open the grocery shopping and Upgrades menus
 func _on_shopping_button_pressed() -> void:
@@ -615,8 +649,9 @@ func _on_buy_low_pressed() -> void:
 		updateFunds(cost, "-")
 		
 		if canAfford == true:
-			microwaveOwned = "LOW"
 			swapMicrowaves("reset")
+			microwaveOwned = "LOW"
+			buyUpgrades(microwaveOwned)
 		
 	else:
 		print("nothing low broken")
@@ -644,8 +679,9 @@ func _on_buy_mid_pressed() -> void:
 		updateFunds(cost, "-")
 		
 		if canAfford == true:
-			microwaveOwned = "MID"
 			swapMicrowaves("reset")
+			microwaveOwned = "MID"
+			buyUpgrades(microwaveOwned)
 		
 	else:
 		print("nothing mid broken")
@@ -676,8 +712,9 @@ func _on_buy_high_pressed() -> void:
 		updateFunds(cost, "-")
 		
 		if canAfford == true:
-			microwaveOwned = "HIGH"
 			swapMicrowaves("reset")
+			microwaveOwned = "HIGH"
+			buyUpgrades(microwaveOwned)
 		
 	else:
 		print("nothing high broken")

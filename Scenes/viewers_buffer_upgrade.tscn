@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dysbsg38h8c2f"]
+
+[ext_resource type="Texture2D" uid="uid://b4d1q3rth10cu" path="res://Assets/BufferButton.png" id="1_6otns"]
+
+[node name="ViewersBufferUpgrade" type="Node2D" unique_id=1194589129]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=518731923]
+texture = ExtResource("1_6otns")
+centered = false
