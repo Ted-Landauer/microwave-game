@@ -30,7 +30,9 @@ func foodLimit():
 		print("limit: "+ str(limit))
 		print("UNDER JAM LIMIT")
 		$"../..".menuTriggers(true, "You've undercooked the jam. Viewers gained: " + str(temp))
-		$"../..".resetScene = true
+		await get_tree().create_timer(3.0).timeout
+		$"../..".menuTriggers(false)
+		#$"../..".resetScene = true
 		
 	elif time > limit:
 		temp = (2 * limit) + time
@@ -52,6 +54,9 @@ func foodLimit():
 		print("PERFECTLY COOKED")
 		$"../..".swapMicrowaves("opened", "jam")
 		$"../..".menuTriggers(true, "You exploded the jam perfectly! Viewers gained: " + str(temp))
+		await get_tree().create_timer(3.0).timeout
+		$"../..".menuTriggers(false)
+		$"../..".swapMicrowaves("reset")
 		
 	occupied = false
 

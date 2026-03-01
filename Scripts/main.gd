@@ -2,7 +2,7 @@ extends Node2D
 
 # Initialize the funds and viewership numbers
 var funds: int = 0
-const STARTINGFUNDS: int = 300
+const STARTINGFUNDS: int = 1300
 
 var viewerNumbers: int = 0
 const STARTINGVIEWERNUMBERS: int = 10
@@ -26,6 +26,9 @@ var microwavedItem: String
 
 var resetScene: bool = false
 var brokenMicrowave = false
+var microwaveOwned = "LOW"
+
+var canAfford: bool = true
 
 
 
@@ -69,7 +72,7 @@ func preloadResources(path: String, collection: Dictionary):
 		print("An error was encountered when opening the requested path")
 
 func countdownMicrowaveTimer():
-	var maxTimeArr = extractInt($Microwave/microwaveDisplay.text)
+	var maxTimeArr = extractInt($MicrowaveOptions/microwaveDisplay.text)
 	var min = int(maxTimeArr[0])
 	var sec = int(maxTimeArr[1])
 	var strSec = ""
@@ -87,7 +90,7 @@ func countdownMicrowaveTimer():
 			strSec = "%02d" % sec
 			
 		
-	$Microwave/microwaveDisplay.text = str(min) + ":" + strSec
+	$MicrowaveOptions/microwaveDisplay.text = str(min) + ":" + strSec
 
 func updateMicrowaveDisplay(min: int, sec: int):
 	var strSec = str(sec)
@@ -96,16 +99,35 @@ func updateMicrowaveDisplay(min: int, sec: int):
 	if sec < 10:
 		strSec = "%02d" % sec
 	
-	$Microwave/microwaveDisplay.text = str(min) + ":" + strSec
+	$MicrowaveOptions/microwaveDisplay.text = str(min) + ":" + strSec
 
 func swapMicrowaves(state: String, food: String = ""):
 	
 	match state:
 		"destroyed":
+			brokenMicrowave = true
+			
+			if microwaveOwned == "LOW":
+				$MicrowaveOptions/Low/Microwave/Closed.visible = false
+				$MicrowaveOptions/MicrowaveBackground/lowBackground.visible = false
+				$MicrowaveOptions/Low/Microwave/Broken.visible = true
+				
+			elif microwaveOwned == "MID":
+				$MicrowaveOptions/Mid/Microwave2/Closed.visible = false
+				$MicrowaveOptions/MicrowaveBackground/midBackground.visible = false
+				$MicrowaveOptions/Mid/Microwave2/Broken.visible = true
+				
+			elif microwaveOwned == "HIGH":
+				$MicrowaveOptions/High/Microwave3/Closed.visible = false
+				$MicrowaveOptions/MicrowaveBackground/highBackground.visible = false
+				$MicrowaveOptions/High/Microwave3/Broken.visible = true
+				
+			#resetScene = true
 			$ExplodedFood.visible = true
-			$Microwave.visible = false
-			$MicrowaveExploded.visible = true
-			resetScene = true
+			$MicrowaveOptions/microwaveDisplay.visible = false
+			$MicrowaveOptions/tenSeconds.visible = false
+			$MicrowaveOptions/fiveSeconds.visible = false
+			$MicrowaveOptions/oneSecond.visible = false
 			
 			match food:
 				"egg":
@@ -118,16 +140,35 @@ func swapMicrowaves(state: String, food: String = ""):
 					$ExplodedFood/Overtime/Milk.visible = true
 				"pumpkin":
 					$ExplodedFood/Overtime/Pumpkin.visible = true
-		
+			
 		"upgraded":
 			pass
 			
 		"opened":
-			print("in the opened microwave")
+			if microwaveOwned == "LOW":
+				$MicrowaveOptions/Low/Microwave/Closed.visible = false
+				$MicrowaveOptions/MicrowaveBackground/lowBackground.visible = false
+				$MicrowaveOptions/Low/Microwave/Opened.visible = true
+				
+			elif microwaveOwned == "MID":
+				$MicrowaveOptions/Mid/Microwave2/Closed.visible = false
+				$MicrowaveOptions/MicrowaveBackground/midBackground.visible = false
+				$MicrowaveOptions/Mid/Microwave2/Opened.visible = true
+				
+			elif microwaveOwned == "HIGH":
+				$MicrowaveOptions/High/Microwave3/Closed.visible = false
+				$MicrowaveOptions/MicrowaveBackground/highBackground.visible = false
+				$MicrowaveOptions/High/Microwave3/Opened.visible = true
+			
+			
+			
+			$MicrowaveOptions/microwaveDisplay.visible = false
 			$ExplodedFood.visible = true
-			$Microwave.visible = false
-			$MicrowaveOpen.visible = true
 			resetScene = true
+			
+			$MicrowaveOptions/tenSeconds.visible = false
+			$MicrowaveOptions/fiveSeconds.visible = false
+			$MicrowaveOptions/oneSecond.visible = false
 			
 			match food:
 				"egg":
@@ -142,9 +183,26 @@ func swapMicrowaves(state: String, food: String = ""):
 					$ExplodedFood/Perfect/Pumpkin.visible = true
 			
 		"reset":
-			$Microwave.visible = true
-			$MicrowaveExploded.visible = false
-			$MicrowaveOpen.visible = false
+			if microwaveOwned == "LOW":
+				$MicrowaveOptions/Low/Microwave/Closed.visible = true
+				$MicrowaveOptions/MicrowaveBackground/lowBackground.visible = true
+				$MicrowaveOptions/Low/Microwave/Broken.visible = false
+				$MicrowaveOptions/Low/Microwave/Opened.visible = false
+				$MicrowaveOptions/tenSeconds.visible = true
+			elif microwaveOwned == "MID":
+				$MicrowaveOptions/Mid/Microwave2/Closed.visible = true
+				$MicrowaveOptions/MicrowaveBackground/midBackground.visible = true
+				$MicrowaveOptions/Mid/Microwave2/Broken.visible = false
+				$MicrowaveOptions/Mid/Microwave2/Opened.visible = false
+				$MicrowaveOptions/fiveSeconds.visible = true
+			elif microwaveOwned == "HIGH":
+				$MicrowaveOptions/High/Microwave3/Closed.visible = true
+				$MicrowaveOptions/MicrowaveBackground/highBackground.visible = true
+				$MicrowaveOptions/High/Microwave3/Broken.visible = false
+				$MicrowaveOptions/High/Microwave3/Opened.visible = false
+				$MicrowaveOptions/oneSecond.visible = true
+				
+				
 			$ExplodedFood.visible = false
 			
 			$ExplodedFood/Perfect/Egg.visible = false
@@ -158,6 +216,8 @@ func swapMicrowaves(state: String, food: String = ""):
 			$ExplodedFood/Overtime/Jam.visible = false
 			$ExplodedFood/Overtime/Milk.visible = false
 			$ExplodedFood/Overtime/Pumpkin.visible = false
+			
+			$MicrowaveOptions/microwaveDisplay.visible = true
 			
 			menuTriggers(false)
 
@@ -178,8 +238,8 @@ func calculateRevenue(view: int, modifier: float):
 	
 	perSecGain = view * modifier
 	
-	print("per second gain")
-	print(perSecGain)
+	#print("per second gain")
+	#print(perSecGain)
 	
 	return ceili(perSecGain)
 
@@ -198,15 +258,21 @@ func updateFunds(moneyValue: int, direction: String):
 	
 	if direction == "+":
 		funds += moneyValue
+		canAfford = true
+		
 	elif direction == "-":
 		if funds - moneyValue < 0:
+			canAfford = false
 			print("Out of money")
 			cantAfford(true, "Not enough money")
 			await get_tree().create_timer(2.0).timeout
 			cantAfford(false)
 			
+			
 		else:
 			funds -= moneyValue
+			canAfford = true
+			
 		
 	$InfoNumbers/FundsValue.text = "$" + str(funds)
 
@@ -256,17 +322,17 @@ func addToMicrowave(item: String):
 
 func toggleButtons(toggleTime: bool, toggleStart: bool = false):
 	if toggleStart == true:
-		$Microwave/microwaveStart.disabled = toggleTime
-		$Microwave/microwaveStart.toggle_mode = toggleTime
+		$MicrowaveOptions/microwaveStart.disabled = toggleTime
+		$MicrowaveOptions/microwaveStart.toggle_mode = toggleTime
 	
-	$Microwave/tenSeconds.disabled = toggleTime
-	$Microwave/tenSeconds.toggle_mode = toggleTime
+	$MicrowaveOptions/tenSeconds.disabled = toggleTime
+	$MicrowaveOptions/tenSeconds.toggle_mode = toggleTime
 	
-	$Microwave/fiveSeconds.disabled = toggleTime
-	$Microwave/fiveSeconds.toggle_mode = toggleTime
+	$MicrowaveOptions/fiveSeconds.disabled = toggleTime
+	$MicrowaveOptions/fiveSeconds.toggle_mode = toggleTime
 	
-	$Microwave/oneSecond.disabled = toggleTime
-	$Microwave/oneSecond.toggle_mode = toggleTime
+	$MicrowaveOptions/oneSecond.disabled = toggleTime
+	$MicrowaveOptions/oneSecond.toggle_mode = toggleTime
 
 func menuTriggers(active: bool, message: String = ""):
 	var microwaveOutput = $Popups/TileMapLayer/microwaveResult
@@ -281,16 +347,60 @@ func gameOver():
 func cantAfford(active: bool, message: String = ""):
 	var costOutput = $Popups/TileMapLayer/costInfo
 	
+	#costOutput.get_parent().get_parent().layer = 2
+	
 	(costOutput.get_parent()).visible = active
 	costOutput.visible = active
 	costOutput.text = message
 
-func buyMicrowave():
-	pass
+func buyUpgrades(type: String):
+	
+	match type:
+		"LOW":
+			print("bought low")
+			$MicrowaveOptions/Mid/Microwave2.visible = false
+			$MicrowaveOptions/MicrowaveBackground/midBackground.visible = false
+			$MicrowaveOptions/fiveSeconds.visible = false
+			
+			$MicrowaveOptions/High/Microwave3.visible = false
+			$MicrowaveOptions/MicrowaveBackground/highBackground.visible = false
+			$MicrowaveOptions/oneSecond.visible = false
+			
+			
+			$MicrowaveOptions/Low/Microwave.visible = true
+			$MicrowaveOptions/MicrowaveBackground/lowBackground.visible = true
+			$MicrowaveOptions/tenSeconds.visible = true
+			
+		"MID":
+			print("bought mid")
+			$MicrowaveOptions/Low/Microwave.visible = false
+			$MicrowaveOptions/Low/Microwave/Broken.visible = false
+			$MicrowaveOptions/MicrowaveBackground/lowBackground.visible = false
+			
+			$MicrowaveOptions/High/Microwave3.visible = false
+			$MicrowaveOptions/MicrowaveBackground/highBackground.visible = false
+			$MicrowaveOptions/oneSecond.visible = false
+			
+			
+			$MicrowaveOptions/Mid/Microwave2.visible = true
+			$MicrowaveOptions/fiveSeconds.visible = true
+			$MicrowaveOptions/MicrowaveBackground/midBackground.visible = true
+			
+		"HIGH":
+			print("bought high")
+			$MicrowaveOptions/Low/Microwave.visible = false
+			$MicrowaveOptions/Low/Microwave/Broken.visible = false
+			$MicrowaveOptions/MicrowaveBackground/lowBackground.visible = false
+			
+			$MicrowaveOptions/Mid/Microwave2.visible = false
+			$MicrowaveOptions/MicrowaveBackground/midBackground.visible = false
+			$MicrowaveOptions/fiveSeconds.visible = true
+			
+			
+			$MicrowaveOptions/High/Microwave3.visible = true
+			$MicrowaveOptions/oneSecond.visible = true
+			$MicrowaveOptions/MicrowaveBackground/highBackground.visible = true
 
-func buyUpgrades():
-	if brokenMicrowave == true:
-		pass
 
 #---------------------------------------------------------------------
 
@@ -304,14 +414,16 @@ func _ready() -> void:
 	updateFunds(STARTINGFUNDS, "+")
 	updateViewship(STARTINGVIEWERNUMBERS, "+")
 	
-	$Microwave/LowControlPanel.visible = false
-	$Microwave/tenSeconds.visible = true
+	$MicrowaveOptions/Low/Microwave.visible = true
+	$MicrowaveOptions/tenSeconds.visible = true
 	
-	$Microwave/MidControlPanel.visible = false
-	$Microwave/fiveSeconds.visible = true
+	$MicrowaveOptions/Mid/Microwave2.visible = false
+	$MicrowaveOptions/fiveSeconds.visible = false
 	
-	$Microwave/HighControlPanel.visible = true
-	$Microwave/oneSecond.visible = true
+	$MicrowaveOptions/High/Microwave3.visible = false
+	$MicrowaveOptions/oneSecond.visible = false
+	
+	
 
 # Used for running the money and viewer calc every second in process below
 var mu: float = 0.0
@@ -322,13 +434,13 @@ var reset: float = 0.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
-	if resetScene == true:
-		
-		reset += delta
-		if reset > 5.0:
-			swapMicrowaves("reset")
-			reset = 0.0
-			resetScene == false
+	#if resetScene == true:
+		#
+		#reset += delta
+		#if reset > 5.0:
+			#swapMicrowaves("reset")
+			#reset = 0.0
+			#resetScene == false
 	
 	mu += delta
 	if viewershipDeclineBufferState == true and mu >= 1.0:
@@ -362,9 +474,20 @@ func _on_shopping_button_pressed() -> void:
 func _on_upgrades_button_pressed() -> void:
 	if $InfoNumbers/UpgradesButton/UpgradeMenu.visible == false:
 		$InfoNumbers/UpgradesButton/UpgradeMenu.propagate_call("set_visible", [true])
+		$InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Microwave/Opened.visible = false
+		$InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Microwave/Broken.visible = false
+		
+		$InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Microwave2/Opened.visible = false
+		$InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Microwave2/Broken.visible = false
+		
+		$InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Microwave3/Opened.visible = false
+		$InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Microwave3/Broken.visible = false
 		
 	elif $InfoNumbers/UpgradesButton/UpgradeMenu.visible == true:
 		$InfoNumbers/UpgradesButton/UpgradeMenu.propagate_call("set_visible", [false])
+		
+		
+		
 
 func _on_buy_egg_pressed() -> void:
 	var eggsCost = extractInt($InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels/EggCost.text)
@@ -399,22 +522,22 @@ func _on_buy_pumpkin_pressed() -> void:
 func _on_microwave_start_pressed() -> void:
 	toggleButtons(true, true)
 	
-	$Microwave/microwaveStart/microwaveTimer.start(totalSeconds)
+	$MicrowaveOptions/microwaveStart/microwaveTimer.start(totalSeconds)
 	print("the total seconds: " + str(totalSeconds))
 	print("pausing viewership decline")
 	viewershipDeclineBufferState = true
 	countdownActive = true
 	totalSecondsToPass = totalSeconds
-	if $Microwave/microwaveStart/viewershipBuffer.is_stopped() == false:
-		$Microwave/microwaveStart/viewershipBuffer.stop()
+	if $MicrowaveOptions/microwaveStart/viewershipBuffer.is_stopped() == false:
+		$MicrowaveOptions/microwaveStart/viewershipBuffer.stop()
 
 func _on_microwave_timer_timeout() -> void:
 	print("timer stopped")
 	toggleButtons(false, true)
 	
 	print("about to lose viewers")
-	$Microwave/microwaveStart/viewershipBuffer.start(viewershipDeclineBuffer)
-	$Microwave/microwaveDisplay.text = "0:00"
+	$MicrowaveOptions/microwaveStart/viewershipBuffer.start(viewershipDeclineBuffer)
+	$MicrowaveOptions/microwaveDisplay.text = "0:00"
 	countdownActive = false
 	occupied = false
 	
@@ -450,7 +573,7 @@ func _on_viewership_buffer_timeout() -> void:
 	viewershipDeclineBufferState = false
 
 func _on_one_second_pressed() -> void:
-	var minSecArray = extractInt($Microwave/microwaveDisplay.text)
+	var minSecArray = extractInt($MicrowaveOptions/microwaveDisplay.text)
 	var min = int(minSecArray[0])
 	var sec = int(minSecArray[1])
 	
@@ -462,7 +585,7 @@ func _on_one_second_pressed() -> void:
 	updateMicrowaveDisplay(min, sec)
 
 func _on_five_seconds_pressed() -> void:
-	var minSecArray = extractInt($Microwave/microwaveDisplay.text)
+	var minSecArray = extractInt($MicrowaveOptions/microwaveDisplay.text)
 	var min = int(minSecArray[0])
 	var sec = int(minSecArray[1])
 	
@@ -474,7 +597,7 @@ func _on_five_seconds_pressed() -> void:
 	updateMicrowaveDisplay(min, sec)
 
 func _on_ten_seconds_pressed() -> void:
-	var minSecArray = extractInt($Microwave/microwaveDisplay.text)
+	var minSecArray = extractInt($MicrowaveOptions/microwaveDisplay.text)
 	var min = int(minSecArray[0])
 	var sec = int(minSecArray[1])
 	
@@ -484,3 +607,113 @@ func _on_ten_seconds_pressed() -> void:
 		sec = sec - 60
 	
 	updateMicrowaveDisplay(min, sec)
+
+func _on_buy_low_pressed() -> void:
+	var cost = extractInt($InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels/lowCostMicrowave.text)
+	
+	if brokenMicrowave == true:
+		updateFunds(cost, "-")
+		
+		if canAfford == true:
+			microwaveOwned = "LOW"
+			swapMicrowaves("reset")
+		
+	else:
+		print("nothing low broken")
+		if microwaveOwned == "LOW":
+			print("you've already got low")
+			menuTriggers(true, "You already own this, and it's not broken.")
+			await get_tree().create_timer(2.0).timeout
+			menuTriggers(false)
+			
+		else:
+			print("upgrading low")
+			
+			updateFunds(cost, "-")
+			if canAfford == true:
+				microwaveOwned = "LOW"
+				buyUpgrades(microwaveOwned)
+
+func _on_buy_mid_pressed() -> void:
+	print("trying to buy mid")
+	var cost = extractInt($InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels/midCostMicrowave.text)
+
+	if brokenMicrowave == true:
+		print("replacing mid")
+		
+		updateFunds(cost, "-")
+		
+		if canAfford == true:
+			microwaveOwned = "MID"
+			swapMicrowaves("reset")
+		
+	else:
+		print("nothing mid broken")
+		if microwaveOwned == "MID":
+			print("you've already got mid")
+			menuTriggers(true, "You already own this, and it's not broken.")
+			await get_tree().create_timer(2.0).timeout
+			menuTriggers(false)
+			
+		else:
+			print("upgrading mid")
+			
+			
+			updateFunds(cost, "-")
+			
+			if canAfford == true:
+				microwaveOwned = "MID"
+				buyUpgrades(microwaveOwned)
+
+func _on_buy_high_pressed() -> void:
+	print("trying to buy high")
+	var cost = extractInt($InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels/highCostMicrowave.text)
+	
+	if brokenMicrowave == true:
+		
+		print("this is cost: " + str(cost))
+		
+		updateFunds(cost, "-")
+		
+		if canAfford == true:
+			microwaveOwned = "HIGH"
+			swapMicrowaves("reset")
+		
+	else:
+		print("nothing high broken")
+		if microwaveOwned == "HIGH":
+			print("you've already got high")
+			menuTriggers(true, "You already own this, and it's not broken.")
+			await get_tree().create_timer(2.0).timeout
+			menuTriggers(false)
+			
+		else:
+			print("upgrading high")
+			
+			updateFunds(cost, "-")
+			
+			if canAfford == true:
+				microwaveOwned = "HIGH"
+				buyUpgrades(microwaveOwned)
+
+func _on_buy_viewer_buffer_pressed() -> void:
+	var cost = extractInt($InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels/viewerBuffer.text)
+	
+	updateFunds(cost, "-")
+	
+	if canAfford == true:
+		viewershipDeclineBuffer += 1
+		cost += roundi(cost / 2)
+		
+		$InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels/viewerBuffer.text = str(cost)
+
+func _on_buy_money_gain_pressed() -> void:
+	var cost = extractInt($InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels/returnRate.text)
+	
+	updateFunds(cost, "-")
+	
+	if canAfford == true:
+		revenueMod += 0.01
+		cost += 1
+		
+		$InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels/returnRate.text = str(cost)

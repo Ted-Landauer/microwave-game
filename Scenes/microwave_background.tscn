@@ -1,9 +1,21 @@
 [gd_scene format=3 uid="uid://v5rf3eaopyep"]
 
 [ext_resource type="Texture2D" uid="uid://lh7ln5aet7jt" path="res://Assets/Microwave_Interior.png" id="1_qkhj1"]
+[ext_resource type="Texture2D" uid="uid://dkvuj0lq25ejb" path="res://Assets/Microwave_Interior_Level2.png" id="2_dpl33"]
+[ext_resource type="Texture2D" uid="uid://bjsownlpsbwsv" path="res://Assets/Microwave_Interior_Level3.png" id="3_yks60"]
 
 [node name="MicrowaveBackground" type="Node2D" unique_id=1115907606]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=119488634]
+[node name="lowBackground" type="Sprite2D" parent="." unique_id=119488634]
 texture = ExtResource("1_qkhj1")
+centered = false
+
+[node name="midBackground" type="Sprite2D" parent="." unique_id=1742924019]
+visible = false
+texture = ExtResource("2_dpl33")
+centered = false
+
+[node name="highBackground" type="Sprite2D" parent="." unique_id=1867221742]
+visible = false
+texture = ExtResource("3_yks60")
 centered = false

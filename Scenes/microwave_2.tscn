@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://q7ndv2ck4ca6"]
+
+[ext_resource type="Texture2D" uid="uid://brj4spdwtxvnd" path="res://Assets/Microwave_Closed_Level2.png" id="1_orpen"]
+[ext_resource type="PackedScene" uid="uid://dtpv56ju8dpmk" path="res://Scenes/mid_control_panel.tscn" id="2_cop1v"]
+[ext_resource type="Texture2D" uid="uid://ddeibd2t5t70e" path="res://Assets/Microwave_Open_Level2.png" id="2_y1v1m"]
+[ext_resource type="Texture2D" uid="uid://dmvoyy476fgb3" path="res://Assets/Microwave_Exploded_Level2.png" id="3_cop1v"]
+
+[node name="Microwave" type="Node2D" unique_id=533399915]
+
+[node name="Closed" type="Sprite2D" parent="." unique_id=406331338]
+texture = ExtResource("1_orpen")
+centered = false
+
+[node name="MidControlPanel" parent="Closed" unique_id=51181263 instance=ExtResource("2_cop1v")]
+position = Vector2(992, 128)
+
+[node name="Opened" type="Sprite2D" parent="." unique_id=2020851916]
+visible = false
+texture = ExtResource("2_y1v1m")
+centered = false
+
+[node name="Broken" type="Sprite2D" parent="." unique_id=631521847]
+visible = false
+texture = ExtResource("3_cop1v")
+centered = false

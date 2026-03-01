@@ -1,9 +1,27 @@
 [gd_scene format=3 uid="uid://bp8v51m1wqcyq"]
 
 [ext_resource type="Texture2D" uid="uid://dl855re1uchhn" path="res://Assets/Microwave_Closed.png" id="1_gioc1"]
+[ext_resource type="PackedScene" uid="uid://ba1mjajevgmyv" path="res://Scenes/low_control_panel.tscn" id="2_j328o"]
+[ext_resource type="Texture2D" uid="uid://bxm1blfg627qj" path="res://Assets/Microwave_Open.png" id="2_uir15"]
+[ext_resource type="Texture2D" uid="uid://be6fge6st6vb2" path="res://Assets/Microwave_Exploded.png" id="3_j328o"]
 
 [node name="Microwave" type="Node2D" unique_id=1686776994]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1027592181]
+[node name="Closed" type="Sprite2D" parent="." unique_id=1027592181]
 texture = ExtResource("1_gioc1")
+centered = false
+
+[node name="LowControlPanel" parent="Closed" unique_id=1267437803 instance=ExtResource("2_j328o")]
+position = Vector2(992, 128)
+
+[node name="Opened" type="Sprite2D" parent="." unique_id=782928988]
+visible = false
+z_index = 1
+texture = ExtResource("2_uir15")
+centered = false
+
+[node name="Broken" type="Sprite2D" parent="." unique_id=233533041]
+visible = false
+z_index = 1
+texture = ExtResource("3_j328o")
 centered = false

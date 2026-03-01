@@ -17,26 +17,31 @@
 
 [node name="Egg" type="Sprite2D" parent="Overtime" unique_id=1398199286]
 visible = false
+z_index = 2
 texture = ExtResource("1_47t4k")
 centered = false
 
 [node name="Potato" type="Sprite2D" parent="Overtime" unique_id=1411751459]
 visible = false
+z_index = 2
 texture = ExtResource("2_ccvqc")
 centered = false
 
 [node name="Jam" type="Sprite2D" parent="Overtime" unique_id=1368827504]
 visible = false
+z_index = 2
 texture = ExtResource("3_tcq4r")
 centered = false
 
 [node name="Milk" type="Sprite2D" parent="Overtime" unique_id=1482314252]
 visible = false
+z_index = 2
 texture = ExtResource("4_s5cmn")
 centered = false
 
 [node name="Pumpkin" type="Sprite2D" parent="Overtime" unique_id=1762226044]
 visible = false
+z_index = 2
 texture = ExtResource("5_a5iei")
 centered = false
 
@@ -44,25 +49,30 @@ centered = false
 
 [node name="Egg" type="Sprite2D" parent="Perfect" unique_id=205125224]
 visible = false
+z_index = 2
 texture = ExtResource("6_gngc1")
 centered = false
 
 [node name="Potato" type="Sprite2D" parent="Perfect" unique_id=609143644]
 visible = false
+z_index = 2
 texture = ExtResource("7_acpy8")
 centered = false
 
 [node name="Jam" type="Sprite2D" parent="Perfect" unique_id=606926901]
 visible = false
+z_index = 2
 texture = ExtResource("8_y8mgy")
 centered = false
 
 [node name="Milk" type="Sprite2D" parent="Perfect" unique_id=1002037625]
 visible = false
+z_index = 2
 texture = ExtResource("9_vegie")
 centered = false
 
 [node name="Pumpkin" type="Sprite2D" parent="Perfect" unique_id=1944526182]
 visible = false
+z_index = 2
 texture = ExtResource("10_0cyca")
 centered = false

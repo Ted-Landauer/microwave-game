@@ -5,28 +5,26 @@
 [ext_resource type="PackedScene" uid="uid://bp8v51m1wqcyq" path="res://Scenes/microwave.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://dw28047bcqlkw" path="res://Scenes/Groceries/egg.tscn" id="3_6bp64"]
 [ext_resource type="PackedScene" uid="uid://cydyqf7xaktah" path="res://Scenes/Groceries/jam_jar.tscn" id="4_344ge"]
-[ext_resource type="PackedScene" uid="uid://djyf5k6y2arfc" path="res://Scenes/high_control_panel.tscn" id="4_pdsj5"]
-[ext_resource type="PackedScene" uid="uid://ba1mjajevgmyv" path="res://Scenes/low_control_panel.tscn" id="5_ee4r6"]
 [ext_resource type="PackedScene" uid="uid://qfyc7a2xwlpf" path="res://Scenes/Groceries/milk_jug.tscn" id="5_ynf5e"]
-[ext_resource type="PackedScene" uid="uid://dtpv56ju8dpmk" path="res://Scenes/mid_control_panel.tscn" id="6_gt3je"]
 [ext_resource type="PackedScene" uid="uid://drxl0k60bau2m" path="res://Scenes/Groceries/potato.tscn" id="6_hptm8"]
 [ext_resource type="PackedScene" uid="uid://v5rf3eaopyep" path="res://Scenes/microwave_background.tscn" id="7_3pmx8"]
 [ext_resource type="PackedScene" uid="uid://dlxdgs7vg5f6x" path="res://Scenes/Groceries/pumpkin.tscn" id="7_d1ilt"]
-[ext_resource type="PackedScene" uid="uid://c0br1hoqor1wr" path="res://Scenes/microwave_open.tscn" id="7_gt3je"]
-[ext_resource type="PackedScene" uid="uid://bjplhdnbdipjp" path="res://Scenes/microwave_exploded.tscn" id="8_3pmx8"]
 [ext_resource type="Theme" uid="uid://b1i51vduagitt" path="res://Assets/ShoppingCart.tres" id="8_344ge"]
-[ext_resource type="Texture2D" uid="uid://dnxig5a46hhdd" path="res://Assets/CartButton.png" id="9_ynf5e"]
 [ext_resource type="Texture2D" uid="uid://dppqfuv73bb6c" path="res://Assets/Groceries/Egg.png" id="10_jkdf5"]
 [ext_resource type="Script" uid="uid://bxretkpjon750" path="res://Scripts/shopping_button.gd" id="10_k12tt"]
 [ext_resource type="PackedScene" uid="uid://c1yfpnn3foays" path="res://Scenes/exploded_food.tscn" id="10_u50mg"]
 [ext_resource type="Texture2D" uid="uid://cbcpgkxa71smb" path="res://Assets/Groceries/Potato.png" id="11_wsu2k"]
+[ext_resource type="FontFile" uid="uid://bbpaq6bi2swxx" path="res://Assets/Fonts/lazy_dog.ttf" id="12_6vcvc"]
 [ext_resource type="Texture2D" uid="uid://b213i7v3s3bgn" path="res://Assets/Groceries/JamJar.png" id="12_k12tt"]
 [ext_resource type="Texture2D" uid="uid://d0pnkcestae5n" path="res://Assets/Groceries/MilkJug.png" id="13_h1bgf"]
 [ext_resource type="Texture2D" uid="uid://cbnedcuorsejw" path="res://Assets/Groceries/Pumpkin.png" id="14_b3802"]
 [ext_resource type="Theme" uid="uid://dd7n65w1r7dks" path="res://Assets/BuyButton.tres" id="15_wsu2k"]
 [ext_resource type="PackedScene" uid="uid://b7m71bc2n8ffp" path="res://Scenes/info_numbers.tscn" id="18_b3802"]
+[ext_resource type="FontFile" uid="uid://cthv8eic7ochk" path="res://Assets/Fonts/Cake Mania.ttf" id="20_7k868"]
 [ext_resource type="Texture2D" uid="uid://dnalqc546iku7" path="res://Assets/menuTiles.png" id="20_cbgmd"]
 [ext_resource type="Theme" uid="uid://b4dids3oqafv6" path="res://Assets/UpgradeButton.tres" id="27_1w6v2"]
+[ext_resource type="PackedScene" uid="uid://q7ndv2ck4ca6" path="res://Scenes/microwave_2.tscn" id="30_hpc6h"]
+[ext_resource type="PackedScene" uid="uid://cgxoqixwmpql0" path="res://Scenes/microwave_3.tscn" id="31_kltya"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1w6v2"]
 texture = ExtResource("20_cbgmd")
@@ -1096,87 +1094,98 @@ sources/0 = SubResource("TileSetAtlasSource_6vcvc")
 script = ExtResource("1_h1bgf")
 
 [node name="KitchenBackground" parent="." unique_id=1774034733 instance=ExtResource("1_jjgbg")]
+z_index = -1
 metadata/_edit_lock_ = true
 
-[node name="Microwave" parent="." unique_id=1686776994 instance=ExtResource("2_bo1nx")]
-z_index = 3
+[node name="MicrowaveOptions" type="Node" parent="." unique_id=744987091]
+
+[node name="Low" type="Node" parent="MicrowaveOptions" unique_id=1042554531]
+
+[node name="Microwave" parent="MicrowaveOptions/Low" unique_id=1686776994 instance=ExtResource("2_bo1nx")]
+z_index = 1
+z_as_relative = false
 position = Vector2(0, 2)
-metadata/_edit_lock_ = true
 
-[node name="microwaveStart" type="Button" parent="Microwave" unique_id=1021611930]
+[node name="Mid" type="Node" parent="MicrowaveOptions" unique_id=990568147]
+
+[node name="Microwave2" parent="MicrowaveOptions/Mid" unique_id=533399915 instance=ExtResource("30_hpc6h")]
+visible = false
+z_index = 1
+z_as_relative = false
+position = Vector2(0, 2)
+
+[node name="High" type="Node" parent="MicrowaveOptions" unique_id=1884623767]
+
+[node name="Microwave3" parent="MicrowaveOptions/High" unique_id=149777454 instance=ExtResource("31_kltya")]
+visible = false
+z_index = 1
+z_as_relative = false
+position = Vector2(0, 2)
+
+[node name="MicrowaveBackground" parent="MicrowaveOptions" unique_id=1115907606 instance=ExtResource("7_3pmx8")]
+z_as_relative = false
+position = Vector2(0, 2)
+
+[node name="microwaveStart" type="Button" parent="MicrowaveOptions" unique_id=1021611930]
+z_index = 1
+z_as_relative = false
 offset_left = 975.0
-offset_top = 649.0
+offset_top = 651.0
 offset_right = 1115.0
-offset_bottom = 706.0
+offset_bottom = 708.0
 theme_override_colors/font_color = Color(0, 0.84445447, 3.85046e-07, 1)
 theme_override_font_sizes/font_size = 32
 text = "START"
 
-[node name="microwaveTimer" type="Timer" parent="Microwave/microwaveStart" unique_id=2110800967]
+[node name="microwaveTimer" type="Timer" parent="MicrowaveOptions/microwaveStart" unique_id=2110800967]
 one_shot = true
 
-[node name="viewershipBuffer" type="Timer" parent="Microwave/microwaveStart" unique_id=1866975876]
+[node name="viewershipBuffer" type="Timer" parent="MicrowaveOptions/microwaveStart" unique_id=1866975876]
 one_shot = true
 
-[node name="HighControlPanel" parent="Microwave" unique_id=1048642307 instance=ExtResource("4_pdsj5")]
-position = Vector2(977, 127)
-metadata/_edit_lock_ = true
-
-[node name="LowControlPanel" parent="Microwave" unique_id=1267437803 instance=ExtResource("5_ee4r6")]
-visible = false
-position = Vector2(977, 127)
-metadata/_edit_lock_ = true
-
-[node name="MidControlPanel" parent="Microwave" unique_id=51181263 instance=ExtResource("6_gt3je")]
-visible = false
-position = Vector2(977, 127)
-metadata/_edit_lock_ = true
-
-[node name="microwaveDisplay" type="Label" parent="Microwave" unique_id=272088817]
-offset_left = 984.0
-offset_top = 132.0
-offset_right = 1102.0
-offset_bottom = 227.0
+[node name="microwaveDisplay" type="Label" parent="MicrowaveOptions" unique_id=272088817]
+z_index = 1
+z_as_relative = false
+offset_left = 1000.0
+offset_top = 136.0
+offset_right = 1115.0
+offset_bottom = 230.0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "0:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="oneSecond" type="Button" parent="Microwave" unique_id=1436112767]
-offset_left = 1017.0
-offset_top = 446.0
-offset_right = 1092.0
-offset_bottom = 506.0
-text = "+1 Sec"
-
-[node name="fiveSeconds" type="Button" parent="Microwave" unique_id=1443803365]
-offset_left = 1014.0
-offset_top = 355.0
-offset_right = 1088.0
-offset_bottom = 413.0
-text = "+5 Sec"
-
-[node name="tenSeconds" type="Button" parent="Microwave" unique_id=1294848360]
-offset_left = 1009.0
-offset_top = 267.0
-offset_right = 1086.0
-offset_bottom = 324.0
+[node name="tenSeconds" type="Button" parent="MicrowaveOptions" unique_id=1294848360]
+z_index = 1
+offset_left = 1024.0
+offset_top = 270.0
+offset_right = 1101.0
+offset_bottom = 327.0
 text = "+10 Sec"
 
-[node name="MicrowaveBackground" parent="Microwave" unique_id=1115907606 instance=ExtResource("7_3pmx8")]
-z_as_relative = false
-
-[node name="MicrowaveOpen" parent="." unique_id=530499394 instance=ExtResource("7_gt3je")]
+[node name="fiveSeconds" type="Button" parent="MicrowaveOptions" unique_id=1443803365]
 visible = false
-position = Vector2(0, 2)
+z_index = 1
+offset_left = 1029.0
+offset_top = 357.0
+offset_right = 1103.0
+offset_bottom = 415.0
+text = "+5 Sec"
 
-[node name="MicrowaveExploded" parent="." unique_id=201596221 instance=ExtResource("8_3pmx8")]
+[node name="oneSecond" type="Button" parent="MicrowaveOptions" unique_id=1436112767]
 visible = false
-position = Vector2(0, 2)
+z_index = 1
+offset_left = 1032.0
+offset_top = 448.0
+offset_right = 1107.0
+offset_bottom = 508.0
+text = "+1 Sec"
 
 [node name="ExplodedFood" parent="." unique_id=1328493489 instance=ExtResource("10_u50mg")]
 visible = false
+z_index = 1
+z_as_relative = false
 position = Vector2(0, 2)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=402555768]
@@ -1190,12 +1199,13 @@ position = Vector2(1322, 771)
 metadata/_edit_lock_ = true
 
 [node name="eggCount" type="Label" parent="Groceries/egg" unique_id=127243954]
-offset_left = -36.0
-offset_top = -60.0
-offset_right = 38.0
-offset_bottom = -15.0
+offset_left = -32.0
+offset_top = -53.0
+offset_right = 42.0
+offset_bottom = -4.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 48
 text = "0 "
 horizontal_alignment = 1
 metadata/_edit_lock_ = true
@@ -1210,7 +1220,8 @@ offset_top = -105.0
 offset_right = 56.0
 offset_bottom = -60.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 48
 text = "0 "
 horizontal_alignment = 1
 metadata/_edit_lock_ = true
@@ -1225,7 +1236,8 @@ offset_top = -117.0
 offset_right = 35.0
 offset_bottom = -72.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 48
 text = "0 "
 horizontal_alignment = 1
 metadata/_edit_lock_ = true
@@ -1240,7 +1252,8 @@ offset_top = -87.0
 offset_right = 37.0
 offset_bottom = -42.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 48
 text = "0 "
 horizontal_alignment = 1
 metadata/_edit_lock_ = true
@@ -1255,21 +1268,11 @@ offset_top = -135.0
 offset_right = 44.0
 offset_bottom = -90.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 48
 text = "0 "
 horizontal_alignment = 1
 metadata/_edit_lock_ = true
-
-[node name="ShoppingButton1" type="MenuButton" parent="." unique_id=1136240642]
-visible = false
-offset_left = 146.0
-offset_top = -46.0
-offset_right = 290.0
-offset_bottom = 48.0
-theme = ExtResource("8_344ge")
-icon = ExtResource("9_ynf5e")
-item_count = 1
-popup/item_0/id = 0
 
 [node name="InfoNumbers" parent="." unique_id=537984924 instance=ExtResource("18_b3802")]
 position = Vector2(256, 898.00006)
@@ -1277,43 +1280,49 @@ scale = Vector2(0.75, 0.75)
 
 [node name="viewers" type="Label" parent="InfoNumbers" unique_id=581146940]
 offset_left = 21.333344
-offset_top = 21.333256
-offset_right = 281.33334
-offset_bottom = 109.33325
+offset_top = 5.333252
+offset_right = 388.33334
+offset_bottom = 151.33325
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 64
+theme_override_fonts/font = ExtResource("20_7k868")
+theme_override_font_sizes/font_size = 116
 text = "Viewers:"
+horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="viewerNumbers" type="Label" parent="InfoNumbers" unique_id=743443669]
-offset_left = 288.0
+offset_left = 416.0
 offset_top = 21.333256
-offset_right = 373.0
-offset_bottom = 109.33325
+offset_right = 501.0
+offset_bottom = 150.33325
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 64
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 128
 text = "0"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Funds" type="Label" parent="InfoNumbers" unique_id=1381519146]
-offset_left = 405.33334
-offset_top = 21.333252
-offset_right = 609.3334
-offset_bottom = 109.33325
+offset_left = 672.00006
+offset_top = 5.333252
+offset_right = 959.00006
+offset_bottom = 138.33325
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 64
+theme_override_fonts/font = ExtResource("20_7k868")
+theme_override_font_sizes/font_size = 116
 text = "Funds:"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="FundsValue" type="Label" parent="InfoNumbers" unique_id=1352669543]
-offset_left = 618.6667
-offset_top = 21.33329
-offset_right = 717.6667
-offset_bottom = 109.33329
+offset_left = 992.0
+offset_top = 7.999956
+offset_right = 1119.0
+offset_bottom = 136.99995
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 64
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 128
 text = "$0"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
@@ -1333,7 +1342,7 @@ visible = false
 
 [node name="GroceryBackground" type="TileMapLayer" parent="InfoNumbers/ShoppingButton/GroceryMenu" unique_id=772065110]
 visible = false
-tile_map_data = PackedByteArray("AAAVAAIAAAABAAEAAAAdAAIAAAABAAEAAAAdAAsAAAABAAEAAAAVAAsAAAABAAEAAAAUAAwAAAAAAAIAAAAeAAwAAAACAAIAAAAUAAEAAAAAAAAAAAAeAAEAAAACAAAAAAAVAAEAAAADAAAAAAAWAAEAAAADAAAAAAAXAAEAAAADAAAAAAAYAAEAAAADAAAAAAAdAAEAAAAEAAAAAAAcAAEAAAAEAAAAAAAbAAEAAAAEAAAAAAAaAAEAAAAEAAAAAAAZAAEAAAABAAAAAAAUAAIAAAAAAAEAAAAUAAMAAAAAAAEAAAAUAAQAAAAAAAEAAAAUAAUAAAAAAAEAAAAUAAYAAAAAAAEAAAAUAAcAAAAAAAEAAAAUAAgAAAAAAAEAAAAUAAkAAAAAAAEAAAAUAAoAAAAAAAEAAAAUAAsAAAAAAAEAAAAVAAwAAAABAAIAAAAWAAwAAAABAAIAAAAXAAwAAAABAAIAAAAYAAwAAAABAAIAAAAZAAwAAAABAAIAAAAaAAwAAAABAAIAAAAbAAwAAAABAAIAAAAcAAwAAAABAAIAAAAdAAwAAAABAAIAAAAeAAsAAAACAAEAAAAeAAoAAAACAAEAAAAeAAkAAAACAAEAAAAeAAgAAAACAAEAAAAeAAcAAAACAAEAAAAeAAYAAAACAAEAAAAeAAUAAAACAAEAAAAeAAQAAAACAAEAAAAeAAMAAAACAAEAAAAeAAIAAAACAAEAAAAZAAYAAAABAAEAAAAZAAUAAAABAAEAAAAZAAQAAAABAAEAAAAZAAMAAAABAAEAAAAZAAIAAAABAAEAAAAYAAIAAAABAAEAAAAXAAIAAAABAAEAAAAWAAIAAAABAAEAAAAWAAMAAAABAAEAAAAVAAMAAAABAAEAAAAVAAQAAAABAAEAAAAVAAUAAAABAAEAAAAVAAYAAAABAAEAAAAVAAcAAAABAAEAAAAVAAgAAAABAAEAAAAVAAkAAAABAAEAAAAVAAoAAAABAAEAAAAWAAoAAAABAAEAAAAWAAkAAAABAAEAAAAWAAgAAAABAAEAAAAWAAcAAAABAAEAAAAWAAYAAAABAAEAAAAWAAUAAAABAAEAAAAWAAQAAAABAAEAAAAXAAQAAAABAAEAAAAXAAMAAAABAAEAAAAYAAMAAAABAAEAAAAYAAQAAAABAAEAAAAYAAUAAAABAAEAAAAXAAUAAAABAAEAAAAXAAYAAAABAAEAAAAXAAcAAAABAAEAAAAXAAgAAAABAAEAAAAXAAkAAAABAAEAAAAXAAoAAAABAAEAAAAXAAsAAAABAAEAAAAWAAsAAAABAAEAAAAYAAsAAAABAAEAAAAYAAoAAAABAAEAAAAYAAkAAAABAAEAAAAYAAgAAAABAAEAAAAYAAcAAAABAAEAAAAYAAYAAAABAAEAAAAZAAcAAAABAAEAAAAZAAgAAAABAAEAAAAZAAkAAAABAAEAAAAZAAoAAAABAAEAAAAZAAsAAAABAAEAAAAaAAsAAAABAAEAAAAaAAoAAAABAAEAAAAaAAkAAAABAAEAAAAaAAgAAAABAAEAAAAaAAcAAAABAAEAAAAaAAYAAAABAAEAAAAaAAUAAAABAAEAAAAaAAQAAAABAAEAAAAaAAMAAAABAAEAAAAaAAIAAAABAAEAAAAbAAIAAAABAAEAAAAbAAMAAAABAAEAAAAbAAQAAAABAAEAAAAbAAUAAAABAAEAAAAbAAYAAAABAAEAAAAbAAcAAAABAAEAAAAbAAgAAAABAAEAAAAbAAkAAAABAAEAAAAbAAoAAAABAAEAAAAbAAsAAAABAAEAAAAcAAsAAAABAAEAAAAcAAoAAAABAAEAAAAcAAkAAAABAAEAAAAcAAgAAAABAAEAAAAcAAcAAAABAAEAAAAcAAYAAAABAAEAAAAcAAUAAAABAAEAAAAcAAQAAAABAAEAAAAcAAMAAAABAAEAAAAcAAIAAAABAAEAAAAdAAMAAAABAAEAAAAdAAQAAAABAAEAAAAdAAUAAAABAAEAAAAdAAYAAAABAAEAAAAdAAcAAAABAAEAAAAdAAgAAAABAAEAAAAdAAkAAAABAAEAAAAdAAoAAAABAAEAAAA=")
+tile_map_data = PackedByteArray("AAAVAAIAAAABAAEAAAAdAAIAAAABAAEAAAAdAAsAAAABAAEAAAAVAAsAAAABAAEAAAAUAAwAAAAAAAIAAAAeAAwAAAACAAIAAAAUAAEAAAAAAAAAAAAeAAEAAAACAAAAAAAVAAEAAAADAAAAAAAWAAEAAAADAAAAAAAXAAEAAAABAAAAAAAYAAEAAAABAAAAAAAdAAEAAAAEAAAAAAAcAAEAAAAEAAAAAAAbAAEAAAABAAAAAAAaAAEAAAABAAAAAAAZAAEAAAABAAAAAAAUAAIAAAAAAAEAAAAUAAMAAAAAAAEAAAAUAAQAAAAAAAEAAAAUAAUAAAAAAAEAAAAUAAYAAAAAAAEAAAAUAAcAAAAAAAEAAAAUAAgAAAAAAAEAAAAUAAkAAAAAAAEAAAAUAAoAAAAAAAEAAAAUAAsAAAAAAAEAAAAVAAwAAAABAAIAAAAWAAwAAAABAAIAAAAXAAwAAAABAAIAAAAYAAwAAAABAAIAAAAZAAwAAAABAAIAAAAaAAwAAAABAAIAAAAbAAwAAAABAAIAAAAcAAwAAAABAAIAAAAdAAwAAAABAAIAAAAeAAsAAAACAAEAAAAeAAoAAAACAAEAAAAeAAkAAAACAAEAAAAeAAgAAAACAAEAAAAeAAcAAAACAAEAAAAeAAYAAAACAAEAAAAeAAUAAAACAAEAAAAeAAQAAAACAAEAAAAeAAMAAAACAAEAAAAeAAIAAAACAAEAAAAZAAYAAAABAAEAAAAZAAUAAAABAAEAAAAZAAQAAAABAAEAAAAZAAMAAAABAAEAAAAZAAIAAAABAAEAAAAYAAIAAAABAAEAAAAXAAIAAAABAAEAAAAWAAIAAAABAAEAAAAWAAMAAAABAAEAAAAVAAMAAAABAAEAAAAVAAQAAAABAAEAAAAVAAUAAAABAAEAAAAVAAYAAAABAAEAAAAVAAcAAAABAAEAAAAVAAgAAAABAAEAAAAVAAkAAAABAAEAAAAVAAoAAAABAAEAAAAWAAoAAAABAAEAAAAWAAkAAAABAAEAAAAWAAgAAAABAAEAAAAWAAcAAAABAAEAAAAWAAYAAAABAAEAAAAWAAUAAAABAAEAAAAWAAQAAAABAAEAAAAXAAQAAAABAAEAAAAXAAMAAAABAAEAAAAYAAMAAAABAAEAAAAYAAQAAAABAAEAAAAYAAUAAAABAAEAAAAXAAUAAAABAAEAAAAXAAYAAAABAAEAAAAXAAcAAAABAAEAAAAXAAgAAAABAAEAAAAXAAkAAAABAAEAAAAXAAoAAAABAAEAAAAXAAsAAAABAAEAAAAWAAsAAAABAAEAAAAYAAsAAAABAAEAAAAYAAoAAAABAAEAAAAYAAkAAAABAAEAAAAYAAgAAAABAAEAAAAYAAcAAAABAAEAAAAYAAYAAAABAAEAAAAZAAcAAAABAAEAAAAZAAgAAAABAAEAAAAZAAkAAAABAAEAAAAZAAoAAAABAAEAAAAZAAsAAAABAAEAAAAaAAsAAAABAAEAAAAaAAoAAAABAAEAAAAaAAkAAAABAAEAAAAaAAgAAAABAAEAAAAaAAcAAAABAAEAAAAaAAYAAAABAAEAAAAaAAUAAAABAAEAAAAaAAQAAAABAAEAAAAaAAMAAAABAAEAAAAaAAIAAAABAAEAAAAbAAIAAAABAAEAAAAbAAMAAAABAAEAAAAbAAQAAAABAAEAAAAbAAUAAAABAAEAAAAbAAYAAAABAAEAAAAbAAcAAAABAAEAAAAbAAgAAAABAAEAAAAbAAkAAAABAAEAAAAbAAoAAAABAAEAAAAbAAsAAAABAAEAAAAcAAsAAAABAAEAAAAcAAoAAAABAAEAAAAcAAkAAAABAAEAAAAcAAgAAAABAAEAAAAcAAcAAAABAAEAAAAcAAYAAAABAAEAAAAcAAUAAAABAAEAAAAcAAQAAAABAAEAAAAcAAMAAAABAAEAAAAcAAIAAAABAAEAAAAdAAMAAAABAAEAAAAdAAQAAAABAAEAAAAdAAUAAAABAAEAAAAdAAYAAAABAAEAAAAdAAcAAAABAAEAAAAdAAgAAAABAAEAAAAdAAkAAAABAAEAAAAdAAoAAAABAAEAAAA=")
 tile_set = SubResource("TileSet_ueoa1")
 metadata/_edit_use_anchors_ = true
 
@@ -1373,20 +1382,22 @@ texture = ExtResource("14_b3802")
 visible = false
 offset_left = 1518.0
 offset_top = 129.0
-offset_right = 1536.0
-offset_bottom = 217.0
+offset_right = 1585.0
+offset_bottom = 194.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
-text = ":"
+text = ": $"
 horizontal_alignment = 1
 
 [node name="EggCost" type="Label" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels" unique_id=147881777]
 visible = false
-offset_left = 1552.0
-offset_top = 136.0
-offset_right = 1651.0
-offset_bottom = 224.0
+offset_left = 1594.0
+offset_top = 134.0
+offset_right = 1639.0
+offset_bottom = 199.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
 text = "10"
 horizontal_alignment = 1
@@ -1395,20 +1406,22 @@ horizontal_alignment = 1
 visible = false
 offset_left = 1518.0
 offset_top = 244.0
-offset_right = 1536.0
-offset_bottom = 332.0
+offset_right = 1585.0
+offset_bottom = 309.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
-text = ":"
+text = ": $"
 horizontal_alignment = 1
 
 [node name="PotatoCost" type="Label" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels" unique_id=524864337]
 visible = false
-offset_left = 1552.0
-offset_top = 251.0
-offset_right = 1662.0
-offset_bottom = 339.0
+offset_left = 1594.0
+offset_top = 244.0
+offset_right = 1639.0
+offset_bottom = 309.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
 text = "15"
 horizontal_alignment = 1
@@ -1417,20 +1430,22 @@ horizontal_alignment = 1
 visible = false
 offset_left = 1518.0
 offset_top = 365.0
-offset_right = 1536.0
-offset_bottom = 453.0
+offset_right = 1585.0
+offset_bottom = 430.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
-text = ":"
+text = ": $"
 horizontal_alignment = 1
 
 [node name="JamJarCost" type="Label" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels" unique_id=2100309027]
 visible = false
-offset_left = 1560.0
-offset_top = 379.0
-offset_right = 1650.0
-offset_bottom = 467.0
+offset_left = 1592.0
+offset_top = 368.0
+offset_right = 1652.0
+offset_bottom = 433.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
 text = "20"
 horizontal_alignment = 1
@@ -1439,20 +1454,22 @@ horizontal_alignment = 1
 visible = false
 offset_left = 1518.0
 offset_top = 493.0
-offset_right = 1536.0
-offset_bottom = 581.0
+offset_right = 1585.0
+offset_bottom = 558.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
-text = ":"
+text = ": $"
 horizontal_alignment = 1
 
 [node name="MilkJugCost" type="Label" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels" unique_id=1183829102]
 visible = false
-offset_left = 1544.0
-offset_top = 507.0
-offset_right = 1665.0
-offset_bottom = 595.0
+offset_left = 1592.0
+offset_top = 496.0
+offset_right = 1656.0
+offset_bottom = 561.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
 text = "25"
 horizontal_alignment = 1
@@ -1461,22 +1478,36 @@ horizontal_alignment = 1
 visible = false
 offset_left = 1518.0
 offset_top = 653.0
-offset_right = 1536.0
-offset_bottom = 741.0
+offset_right = 1585.0
+offset_bottom = 718.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
-text = ":"
+text = ": $"
 horizontal_alignment = 1
 
 [node name="PumpkinCost" type="Label" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels" unique_id=854577497]
 visible = false
-offset_left = 1552.0
-offset_top = 659.0
-offset_right = 1657.0
-offset_bottom = 747.0
+offset_left = 1592.0
+offset_top = 653.0
+offset_right = 1651.0
+offset_bottom = 718.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
 text = "30"
+horizontal_alignment = 1
+
+[node name="GroceryTitle" type="Label" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels" unique_id=933042604]
+visible = false
+offset_left = 1472.0
+offset_top = 64.0
+offset_right = 1792.0
+offset_bottom = 101.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 32
+text = "Buy Food, Explode Food"
 horizontal_alignment = 1
 
 [node name="BuyEgg" type="Button" parent="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground" unique_id=407557475]
@@ -1535,6 +1566,7 @@ offset_bottom = 756.0
 theme = ExtResource("15_wsu2k")
 
 [node name="UpgradesButton" type="Button" parent="InfoNumbers" unique_id=577963222]
+z_index = 2
 offset_left = 1622.6667
 offset_top = 15.99988
 offset_right = 1793.3335
@@ -1546,14 +1578,269 @@ visible = false
 
 [node name="UpgradeBackground" type="TileMapLayer" parent="InfoNumbers/UpgradesButton/UpgradeMenu" unique_id=525589647]
 visible = false
-tile_map_data = PackedByteArray("AAAVAAEAAAADAAMAAAAWAAEAAAADAAMAAAAXAAEAAAADAAMAAAAYAAEAAAADAAMAAAAaAAEAAAAEAAMAAAAbAAEAAAAEAAMAAAAcAAEAAAAEAAMAAAAdAAEAAAAEAAMAAAAZAAEAAAABAAMAAAAUAAEAAAAAAAMAAAAeAAEAAAACAAMAAAAeAAwAAAACAAUAAAAUAAwAAAAAAAUAAAAUAAsAAAAAAAQAAAAUAAoAAAAAAAQAAAAUAAkAAAAAAAQAAAAUAAgAAAAAAAQAAAAUAAcAAAAAAAQAAAAUAAYAAAAAAAQAAAAUAAUAAAAAAAQAAAAUAAQAAAAAAAQAAAAUAAMAAAAAAAQAAAAUAAIAAAAAAAQAAAAeAAsAAAACAAQAAAAeAAoAAAACAAQAAAAeAAkAAAACAAQAAAAeAAgAAAACAAQAAAAeAAcAAAACAAQAAAAeAAYAAAACAAQAAAAeAAUAAAACAAQAAAAeAAQAAAACAAQAAAAeAAMAAAACAAQAAAAeAAIAAAACAAQAAAAdAAwAAAABAAUAAAAcAAwAAAABAAUAAAAbAAwAAAABAAUAAAAaAAwAAAABAAUAAAAZAAwAAAABAAUAAAAYAAwAAAABAAUAAAAXAAwAAAABAAUAAAAWAAwAAAABAAUAAAAVAAwAAAABAAUAAAAZAAUAAAABAAQAAAAZAAQAAAABAAQAAAAZAAMAAAABAAQAAAAZAAIAAAABAAQAAAAYAAIAAAABAAQAAAAXAAIAAAABAAQAAAAWAAIAAAABAAQAAAAVAAIAAAABAAQAAAAVAAMAAAABAAQAAAAVAAQAAAABAAQAAAAVAAUAAAABAAQAAAAVAAYAAAABAAQAAAAVAAcAAAABAAQAAAAVAAgAAAABAAQAAAAVAAkAAAABAAQAAAAVAAoAAAABAAQAAAAVAAsAAAABAAQAAAAWAAsAAAABAAQAAAAWAAoAAAABAAQAAAAWAAkAAAABAAQAAAAWAAgAAAABAAQAAAAWAAcAAAABAAQAAAAWAAYAAAABAAQAAAAWAAUAAAABAAQAAAAWAAQAAAABAAQAAAAWAAMAAAABAAQAAAAXAAMAAAABAAQAAAAXAAQAAAABAAQAAAAXAAUAAAABAAQAAAAXAAYAAAABAAQAAAAXAAcAAAABAAQAAAAXAAgAAAABAAQAAAAXAAkAAAABAAQAAAAXAAoAAAABAAQAAAAXAAsAAAABAAQAAAAYAAsAAAABAAQAAAAYAAoAAAABAAQAAAAYAAkAAAABAAQAAAAYAAgAAAABAAQAAAAYAAcAAAABAAQAAAAYAAYAAAABAAQAAAAYAAUAAAABAAQAAAAYAAQAAAABAAQAAAAYAAMAAAABAAQAAAAZAAYAAAABAAQAAAAZAAcAAAABAAQAAAAZAAgAAAABAAQAAAAZAAkAAAABAAQAAAAZAAoAAAABAAQAAAAZAAsAAAABAAQAAAAaAAsAAAABAAQAAAAaAAoAAAABAAQAAAAaAAkAAAABAAQAAAAaAAgAAAABAAQAAAAaAAcAAAABAAQAAAAaAAYAAAABAAQAAAAaAAUAAAABAAQAAAAaAAQAAAABAAQAAAAaAAMAAAABAAQAAAAaAAIAAAABAAQAAAAbAAIAAAABAAQAAAAbAAMAAAABAAQAAAAbAAQAAAABAAQAAAAbAAUAAAABAAQAAAAbAAYAAAABAAQAAAAbAAcAAAABAAQAAAAbAAgAAAABAAQAAAAbAAkAAAABAAQAAAAbAAoAAAABAAQAAAAbAAsAAAABAAQAAAAcAAsAAAABAAQAAAAcAAoAAAABAAQAAAAcAAkAAAABAAQAAAAcAAgAAAABAAQAAAAcAAcAAAABAAQAAAAcAAYAAAABAAQAAAAcAAUAAAABAAQAAAAcAAQAAAABAAQAAAAcAAMAAAABAAQAAAAcAAIAAAABAAQAAAAdAAIAAAABAAQAAAAdAAMAAAABAAQAAAAdAAQAAAABAAQAAAAdAAUAAAABAAQAAAAdAAYAAAABAAQAAAAdAAcAAAABAAQAAAAdAAgAAAABAAQAAAAdAAkAAAABAAQAAAAdAAoAAAABAAQAAAAdAAsAAAABAAQAAAA=")
+visibility_layer = 2
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAAVAAEAAAADAAMAAAAWAAEAAAADAAMAAAAXAAEAAAABAAMAAAAYAAEAAAABAAMAAAAaAAEAAAABAAMAAAAbAAEAAAABAAMAAAAcAAEAAAAEAAMAAAAdAAEAAAAEAAMAAAAZAAEAAAABAAMAAAAUAAEAAAAAAAMAAAAeAAEAAAACAAMAAAAeAAwAAAACAAUAAAAUAAwAAAAAAAUAAAAUAAsAAAAAAAQAAAAUAAoAAAAAAAQAAAAUAAkAAAAAAAQAAAAUAAgAAAAAAAQAAAAUAAcAAAAAAAQAAAAUAAYAAAAAAAQAAAAUAAUAAAAAAAQAAAAUAAQAAAAAAAQAAAAUAAMAAAAAAAQAAAAUAAIAAAAAAAQAAAAeAAsAAAACAAQAAAAeAAoAAAACAAQAAAAeAAkAAAACAAQAAAAeAAgAAAACAAQAAAAeAAcAAAACAAQAAAAeAAYAAAACAAQAAAAeAAUAAAACAAQAAAAeAAQAAAACAAQAAAAeAAMAAAACAAQAAAAeAAIAAAACAAQAAAAdAAwAAAABAAUAAAAcAAwAAAABAAUAAAAbAAwAAAABAAUAAAAaAAwAAAABAAUAAAAZAAwAAAABAAUAAAAYAAwAAAABAAUAAAAXAAwAAAABAAUAAAAWAAwAAAABAAUAAAAVAAwAAAABAAUAAAAZAAUAAAABAAQAAAAZAAQAAAABAAQAAAAZAAMAAAABAAQAAAAZAAIAAAABAAQAAAAYAAIAAAABAAQAAAAXAAIAAAABAAQAAAAWAAIAAAABAAQAAAAVAAIAAAABAAQAAAAVAAMAAAABAAQAAAAVAAQAAAABAAQAAAAVAAUAAAABAAQAAAAVAAYAAAABAAQAAAAVAAcAAAABAAQAAAAVAAgAAAABAAQAAAAVAAkAAAABAAQAAAAVAAoAAAABAAQAAAAVAAsAAAABAAQAAAAWAAsAAAABAAQAAAAWAAoAAAABAAQAAAAWAAkAAAABAAQAAAAWAAgAAAABAAQAAAAWAAcAAAABAAQAAAAWAAYAAAABAAQAAAAWAAUAAAABAAQAAAAWAAQAAAABAAQAAAAWAAMAAAABAAQAAAAXAAMAAAABAAQAAAAXAAQAAAABAAQAAAAXAAUAAAABAAQAAAAXAAYAAAABAAQAAAAXAAcAAAABAAQAAAAXAAgAAAABAAQAAAAXAAkAAAABAAQAAAAXAAoAAAABAAQAAAAXAAsAAAABAAQAAAAYAAsAAAABAAQAAAAYAAoAAAABAAQAAAAYAAkAAAABAAQAAAAYAAgAAAABAAQAAAAYAAcAAAABAAQAAAAYAAYAAAABAAQAAAAYAAUAAAABAAQAAAAYAAQAAAABAAQAAAAYAAMAAAABAAQAAAAZAAYAAAABAAQAAAAZAAcAAAABAAQAAAAZAAgAAAABAAQAAAAZAAkAAAABAAQAAAAZAAoAAAABAAQAAAAZAAsAAAABAAQAAAAaAAsAAAABAAQAAAAaAAoAAAABAAQAAAAaAAkAAAABAAQAAAAaAAgAAAABAAQAAAAaAAcAAAABAAQAAAAaAAYAAAABAAQAAAAaAAUAAAABAAQAAAAaAAQAAAABAAQAAAAaAAMAAAABAAQAAAAaAAIAAAABAAQAAAAbAAIAAAABAAQAAAAbAAMAAAABAAQAAAAbAAQAAAABAAQAAAAbAAUAAAABAAQAAAAbAAYAAAABAAQAAAAbAAcAAAABAAQAAAAbAAgAAAABAAQAAAAbAAkAAAABAAQAAAAbAAoAAAABAAQAAAAbAAsAAAABAAQAAAAcAAsAAAABAAQAAAAcAAoAAAABAAQAAAAcAAkAAAABAAQAAAAcAAgAAAABAAQAAAAcAAcAAAABAAQAAAAcAAYAAAABAAQAAAAcAAUAAAABAAQAAAAcAAQAAAABAAQAAAAcAAMAAAABAAQAAAAcAAIAAAABAAQAAAAdAAIAAAABAAQAAAAdAAMAAAABAAQAAAAdAAQAAAABAAQAAAAdAAUAAAABAAQAAAAdAAYAAAABAAQAAAAdAAcAAAABAAQAAAAdAAgAAAABAAQAAAAdAAkAAAABAAQAAAAdAAoAAAABAAQAAAAdAAsAAAABAAQAAAA=")
 tile_set = SubResource("TileSet_6vcvc")
 
+[node name="MicrowaveBackground" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=1937314263 instance=ExtResource("7_3pmx8")]
+visible = false
+visibility_layer = 2
+z_index = 2
+z_as_relative = false
+position = Vector2(1320, 128)
+scale = Vector2(0.1, 0.1)
+
+[node name="MicrowaveBackground2" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=1895241387 instance=ExtResource("7_3pmx8")]
+visible = false
+visibility_layer = 2
+z_index = 2
+z_as_relative = false
+position = Vector2(1320, 320)
+scale = Vector2(0.1, 0.1)
+
+[node name="MicrowaveBackground3" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=907001119 instance=ExtResource("7_3pmx8")]
+visible = false
+visibility_layer = 2
+z_index = 2
+z_as_relative = false
+position = Vector2(1320, 224)
+scale = Vector2(0.1, 0.1)
+
+[node name="Microwave" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=828639960 instance=ExtResource("2_bo1nx")]
+visible = false
+visibility_layer = 2
+z_index = 2
+z_as_relative = false
+position = Vector2(1320, 128)
+scale = Vector2(0.1, 0.1)
+
+[node name="Microwave2" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=657795127 instance=ExtResource("30_hpc6h")]
+visible = false
+visibility_layer = 2
+z_index = 2
+position = Vector2(1320, 223.99997)
+scale = Vector2(0.1, 0.1)
+
+[node name="Microwave3" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=920087891 instance=ExtResource("31_kltya")]
+visible = false
+visibility_layer = 2
+z_index = 2
+position = Vector2(1320, 320)
+scale = Vector2(0.1, 0.1)
+
+[node name="Labels" type="Node" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=2056430755]
+
+[node name="Separator" type="Label" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels" unique_id=1834582493]
+visible = false
+visibility_layer = 2
+z_index = 2
+offset_left = 1456.0
+offset_top = 144.0
+offset_right = 1465.0
+offset_bottom = 189.0
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 64
+text = ": $"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator2" type="Label" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels" unique_id=1828569560]
+visible = false
+visibility_layer = 2
+z_index = 2
+offset_left = 1456.0
+offset_top = 240.0
+offset_right = 1465.0
+offset_bottom = 285.0
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 64
+text = ": $"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator3" type="Label" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels" unique_id=959845884]
+visible = false
+visibility_layer = 2
+z_index = 2
+offset_left = 1456.0
+offset_top = 336.0
+offset_right = 1465.0
+offset_bottom = 381.0
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 64
+text = ": $"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator4" type="Label" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels" unique_id=1902747247]
+visible = false
+visibility_layer = 2
+z_index = 2
+offset_left = 1481.0
+offset_top = 448.0
+offset_right = 1548.0
+offset_bottom = 513.0
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 64
+text = ": $"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator5" type="Label" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels" unique_id=1545716295]
+visible = false
+visibility_layer = 2
+z_index = 2
+offset_left = 1481.0
+offset_top = 576.0
+offset_right = 1548.0
+offset_bottom = 641.0
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 64
+text = ": $"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradesTitle" type="Label" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels" unique_id=1207765114]
+visible = false
+visibility_layer = 2
+z_index = 2
+offset_left = 1473.0
+offset_top = 58.0
+offset_right = 1792.0
+offset_bottom = 103.0
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 32
+text = "Upgrades, People, Upgrades"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="lowCostMicrowave" type="Label" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels" unique_id=1440064387]
+visible = false
+visibility_layer = 2
+z_index = 2
+offset_left = 1536.0
+offset_top = 141.0
+offset_right = 1613.0
+offset_bottom = 206.0
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 64
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="midCostMicrowave" type="Label" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels" unique_id=1064160720]
+visible = false
+visibility_layer = 2
+z_index = 2
+offset_left = 1536.0
+offset_top = 240.0
+offset_right = 1628.0
+offset_bottom = 305.0
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 64
+text = "200"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="highCostMicrowave" type="Label" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels" unique_id=849020846]
+visible = false
+visibility_layer = 2
+z_index = 2
+offset_left = 1536.0
+offset_top = 336.0
+offset_right = 1627.0
+offset_bottom = 401.0
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 64
+text = "300"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="returnRate" type="Label" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels" unique_id=1254293615]
+visible = false
+visibility_layer = 2
+z_index = 2
+offset_left = 1576.0
+offset_top = 448.0
+offset_right = 1667.0
+offset_bottom = 513.0
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 64
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="viewerBuffer" type="Label" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels" unique_id=63725896]
+visible = false
+visibility_layer = 2
+z_index = 2
+offset_left = 1576.0
+offset_top = 576.0
+offset_right = 1667.0
+offset_bottom = 641.0
+theme_override_fonts/font = ExtResource("12_6vcvc")
+theme_override_font_sizes/font_size = 64
+text = "20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BuyLow" type="Button" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=955356679]
+visible = false
+visibility_layer = 2
+z_index = 2
+offset_left = 1664.0
+offset_top = 128.0
+offset_right = 1792.0
+offset_bottom = 192.0
+theme = ExtResource("15_wsu2k")
+
+[node name="BuyMid" type="Button" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=1315418764]
+visible = false
+visibility_layer = 2
+z_index = 2
+offset_left = 1668.0
+offset_top = 230.0
+offset_right = 1796.0
+offset_bottom = 292.0
+theme = ExtResource("15_wsu2k")
+
+[node name="BuyHigh" type="Button" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=1700495991]
+visible = false
+visibility_layer = 2
+z_index = 2
+offset_left = 1680.0
+offset_top = 333.0
+offset_right = 1808.0
+offset_bottom = 397.0
+theme = ExtResource("15_wsu2k")
+
+[node name="BuyViewerBuffer" type="Button" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=2089808284]
+visible = false
+visibility_layer = 2
+z_index = 2
+offset_left = 1344.0
+offset_top = 576.0
+offset_right = 1472.0
+offset_bottom = 639.0
+theme = ExtResource("15_wsu2k")
+
+[node name="BuyMoneyGain" type="Button" parent="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground" unique_id=310266791]
+visible = false
+visibility_layer = 2
+z_index = 2
+offset_left = 1344.0
+offset_top = 448.0
+offset_right = 1472.0
+offset_bottom = 512.0
+theme = ExtResource("15_wsu2k")
+
 [node name="Popups" type="CanvasLayer" parent="." unique_id=1920987474]
+layer = 0
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Popups" unique_id=1506387560]
 visible = false
-tile_map_data = PackedByteArray("AAAJAAQAAAAAAAAAAAAKAAQAAAABAAAAAAALAAQAAAABAAAAAAAMAAQAAAABAAAAAAANAAQAAAABAAAAAAAOAAQAAAABAAAAAAAPAAQAAAABAAAAAAAQAAQAAAABAAAAAAARAAQAAAABAAAAAAASAAQAAAABAAAAAAATAAQAAAABAAAAAAATAAUAAAABAAEAAAAJAAUAAAAAAAEAAAAKAAUAAAABAAEAAAALAAUAAAABAAEAAAAMAAUAAAABAAEAAAANAAUAAAABAAEAAAAOAAUAAAABAAEAAAAPAAUAAAABAAEAAAAQAAUAAAABAAEAAAARAAUAAAABAAEAAAASAAUAAAABAAEAAAAUAAUAAAABAAEAAAAWAAUAAAACAAEAAAAVAAUAAAABAAEAAAAWAAQAAAACAAAAAAAVAAQAAAABAAAAAAAUAAQAAAABAAAAAAAJAAYAAAAAAAIAAAAKAAYAAAABAAIAAAALAAYAAAABAAIAAAAMAAYAAAABAAIAAAANAAYAAAABAAIAAAAOAAYAAAABAAIAAAAPAAYAAAABAAIAAAAQAAYAAAABAAIAAAARAAYAAAABAAIAAAASAAYAAAABAAIAAAATAAYAAAABAAIAAAAUAAYAAAABAAIAAAAVAAYAAAABAAIAAAAWAAYAAAACAAIAAAA=")
+tile_map_data = PackedByteArray("AAAJAAQAAAAAAAAAAAAKAAQAAAADAAYAAAALAAQAAAADAAYAAAAMAAQAAAADAAYAAAANAAQAAAABAAYAAAAOAAQAAAABAAYAAAAPAAQAAAABAAYAAAAQAAQAAAABAAYAAAARAAQAAAABAAYAAAASAAQAAAABAAYAAAATAAQAAAAEAAYAAAATAAUAAAABAAcAAAAJAAUAAAAAAAcAAAAKAAUAAAABAAcAAAALAAUAAAABAAcAAAAMAAUAAAABAAcAAAANAAUAAAABAAcAAAAOAAUAAAABAAcAAAAPAAUAAAABAAcAAAAQAAUAAAABAAcAAAARAAUAAAABAAcAAAASAAUAAAABAAcAAAAUAAUAAAABAAcAAAAWAAUAAAACAAcAAAAVAAUAAAABAAcAAAAWAAQAAAACAAAAAAAVAAQAAAAEAAYAAAAUAAQAAAAEAAYAAAAJAAYAAAAAAAIAAAAKAAYAAAABAAgAAAALAAYAAAABAAgAAAAMAAYAAAABAAgAAAANAAYAAAABAAgAAAAOAAYAAAABAAgAAAAPAAYAAAABAAgAAAAQAAYAAAABAAgAAAARAAYAAAABAAgAAAASAAYAAAABAAgAAAATAAYAAAABAAgAAAAUAAYAAAABAAgAAAAVAAYAAAABAAgAAAAWAAYAAAACAAIAAAA=")
 tile_set = SubResource("TileSet_7k868")
 
 [node name="microwaveResult" type="Label" parent="Popups/TileMapLayer" unique_id=907718352]
@@ -1562,6 +1849,7 @@ offset_left = 608.0
 offset_top = 288.0
 offset_right = 1440.0
 offset_bottom = 415.0
+theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -1573,17 +1861,18 @@ offset_left = 608.0
 offset_top = 288.0
 offset_right = 1440.0
 offset_bottom = 415.0
+theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[connection signal="pressed" from="Microwave/microwaveStart" to="." method="_on_microwave_start_pressed"]
-[connection signal="timeout" from="Microwave/microwaveStart/microwaveTimer" to="." method="_on_microwave_timer_timeout"]
-[connection signal="timeout" from="Microwave/microwaveStart/viewershipBuffer" to="." method="_on_viewership_buffer_timeout"]
-[connection signal="pressed" from="Microwave/oneSecond" to="." method="_on_one_second_pressed"]
-[connection signal="pressed" from="Microwave/fiveSeconds" to="." method="_on_five_seconds_pressed"]
-[connection signal="pressed" from="Microwave/tenSeconds" to="." method="_on_ten_seconds_pressed"]
+[connection signal="pressed" from="MicrowaveOptions/microwaveStart" to="." method="_on_microwave_start_pressed"]
+[connection signal="timeout" from="MicrowaveOptions/microwaveStart/microwaveTimer" to="." method="_on_microwave_timer_timeout"]
+[connection signal="timeout" from="MicrowaveOptions/microwaveStart/viewershipBuffer" to="." method="_on_viewership_buffer_timeout"]
+[connection signal="pressed" from="MicrowaveOptions/tenSeconds" to="." method="_on_ten_seconds_pressed"]
+[connection signal="pressed" from="MicrowaveOptions/fiveSeconds" to="." method="_on_five_seconds_pressed"]
+[connection signal="pressed" from="MicrowaveOptions/oneSecond" to="." method="_on_one_second_pressed"]
 [connection signal="pressed" from="InfoNumbers/ShoppingButton" to="." method="_on_shopping_button_pressed"]
 [connection signal="pressed" from="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/BuyEgg" to="." method="_on_buy_egg_pressed"]
 [connection signal="pressed" from="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/BuyPotato" to="." method="_on_buy_potato_pressed"]
@@ -1591,3 +1880,8 @@ autowrap_mode = 3
 [connection signal="pressed" from="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/BuyMilk" to="." method="_on_buy_milk_pressed"]
 [connection signal="pressed" from="InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/BuyPumpkin" to="." method="_on_buy_pumpkin_pressed"]
 [connection signal="pressed" from="InfoNumbers/UpgradesButton" to="." method="_on_upgrades_button_pressed"]
+[connection signal="pressed" from="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/BuyLow" to="." method="_on_buy_low_pressed"]
+[connection signal="pressed" from="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/BuyMid" to="." method="_on_buy_mid_pressed"]
+[connection signal="pressed" from="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/BuyHigh" to="." method="_on_buy_high_pressed"]
+[connection signal="pressed" from="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/BuyViewerBuffer" to="." method="_on_buy_viewer_buffer_pressed"]
+[connection signal="pressed" from="InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/BuyMoneyGain" to="." method="_on_buy_money_gain_pressed"]
