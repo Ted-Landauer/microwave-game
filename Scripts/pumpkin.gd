@@ -71,7 +71,7 @@ func _on_pumpkin_control_mouse_exited() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == MOUSE_BUTTON_LEFT and clickable == true:
-			if $"../..".extractInt($pumpkinCount.text) > 0 and occupied == false:
+			if $"../..".extractInt($pumpkinCount.text) > 0 and $"../..".occupied == false:
 				microwaveItem = "pumpkin"
 				microwaveItemRef = $"../..".addToMicrowave("pumpkin")
 				microwaveItemRef.pumpkinLimit = randi_range(15, 28)

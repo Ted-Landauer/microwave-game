@@ -69,7 +69,7 @@ func _on_jam_jar_control_mouse_exited() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == MOUSE_BUTTON_LEFT and clickable == true:
-			if $"../..".extractInt($jamCount.text) > 0 and occupied == false:
+			if $"../..".extractInt($jamCount.text) > 0 and $"../..".occupied == false:
 				microwaveItem = "jam"
 				microwaveItemRef = $"../..".addToMicrowave("jam_jar")
 				microwaveItemRef.jamLimit = randi_range(3, 10)

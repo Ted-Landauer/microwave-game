@@ -75,7 +75,7 @@ func _on_egg_control_mouse_exited() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == MOUSE_BUTTON_LEFT and clickable == true:
-			if $"../..".extractInt($eggCount.text) > 0 and occupied == false:
+			if $"../..".extractInt($eggCount.text) > 0 and $"../..".occupied == false:
 				microwaveItem = "egg"
 				microwaveItemRef = $"../..".addToMicrowave("egg")
 				microwaveItemRef.eggLimit = randi_range(1, 5)

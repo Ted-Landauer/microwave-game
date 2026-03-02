@@ -75,7 +75,7 @@ func _on_potato_control_mouse_exited() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == MOUSE_BUTTON_LEFT and clickable == true:
-			if $"../..".extractInt($potatoCount.text) > 0 and occupied == false:
+			if $"../..".extractInt($potatoCount.text) > 0 and $"../..".occupied == false:
 				microwaveItem = "potato"
 				microwaveItemRef = $"../..".addToMicrowave("potato")
 				microwaveItemRef.potatoLimit = randi_range(5, 12)

@@ -72,7 +72,7 @@ func _on_milk_jug_control_mouse_exited():
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == MOUSE_BUTTON_LEFT and clickable == true:
-			if $"../..".extractInt($milkCount.text) > 0 and occupied == false:
+			if $"../..".extractInt($milkCount.text) > 0 and $"../..".occupied == false:
 				microwaveItem = "milk"
 				microwaveItemRef = $"../..".addToMicrowave("milk_jug")
 				microwaveItemRef.milkLimit = randi_range(10, 18)

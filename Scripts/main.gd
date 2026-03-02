@@ -38,41 +38,67 @@ var escape: bool = false
 # Load the resources in a directory into a dictionary for future use
 func preloadResources(path: String, collection: Dictionary):
 	
-	# Open the requested directory
-	var grocDir = DirAccess.open(path)
+	# Rewrote this to use the ResourceLoader class rather than DirAccess class
+	## DirAccess is nice but has problems when the project is exported
+	## Directly below is the rewritten funcitonality
+	## under that is the old functionality
+	### I'm leaving the old functionality in while commenting it out for reference 
 	
-	# Check that we actually got something or print a statement for temp error handling
+	## New ResourceLoader code
+	var grocDir = ResourceLoader.list_directory(path)
+	
 	if grocDir:
-		
-		# Open a stream to read in the contents of the directory and get the next value
-		grocDir.list_dir_begin()
-		var fileName = grocDir.get_next()
-		
-		# Loop over every item in the open directory
-		while fileName != "":
+		for fileName in grocDir:
 			
-			# Check if we found a directory in our parsing or if we found a scene
-			if grocDir.current_is_dir():
-				print("Found directory: " + fileName)
-				
-			elif fileName.get_extension() == "tscn":
-				# Build the path to the scene we want to load
+			if fileName.get_extension() == "tscn":
 				var fullPath = path + "/" + fileName
-				
-				# Get the name of the resource to use a dictionary key
 				var resourceName = fileName.get_basename()
 				
-				# Build our dictionary of loaded resources
 				collection[resourceName] = load(fullPath).instantiate()
-			
-			# Step forward in the loop
-			fileName = grocDir.get_next()
-		
-		# Close the stream for saftey's sake
-		grocDir.list_dir_end()
-	
+				
 	else:
 		print("An error was encountered when opening the requested path")
+		
+	# ---------------------------------------------------------------------
+	## Old DirAccess code
+		
+	# Open the requested directory
+	#var grocDir = DirAccess.open(path)
+	
+	# Check that we actually got something or print a statement for temp error handling
+	#if grocDir:
+		
+		# Open a stream to read in the contents of the directory and get the next value
+		#grocDir.list_dir_begin()
+		#var fileName = grocDir.get_next()
+		#print("this is filename")
+		#print(fileName)
+		
+		# Loop over every item in the open directory
+		#while fileName != "":
+			#
+			## Check if we found a directory in our parsing or if we found a scene
+			#if grocDir.current_is_dir():
+				#print("Found directory: " + fileName)
+				#
+			#elif fileName.get_extension() == "tscn":
+				## Build the path to the scene we want to load
+				#var fullPath = path + "/" + fileName
+				#
+				## Get the name of the resource to use a dictionary key
+				#var resourceName = fileName.get_basename()
+				#
+				## Build our dictionary of loaded resources
+				#collection[resourceName] = load(fullPath).instantiate()
+			#
+			## Step forward in the loop
+			#fileName = grocDir.get_next()
+		
+		# Close the stream for saftey's sake
+		#grocDir.list_dir_end()
+	
+	#else:
+		#print("An error was encountered when opening the requested path")
 
 func countdownMicrowaveTimer():
 	var maxTimeArr = extractInt($MicrowaveOptions/microwaveDisplay.text)
@@ -426,7 +452,15 @@ func buyUpgrades(type: String):
 #---------------------------------------------------------------------
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:	
+func _ready() -> void:
+	# Manual preload section
+	## Doing this here despite the function because I believe that 
+	### it's causing issues with the game running on web
+	
+	
+	
+	
+	
 	preloadResources(GROCPATH, groceries)
 	
 	$InfoNumbers/ShoppingButton/GroceryMenu.propagate_call("set_visible", [false])
@@ -556,14 +590,16 @@ func _on_buy_pumpkin_pressed() -> void:
 func _on_microwave_start_pressed() -> void:
 	toggleButtons(true, true)
 	
-	$MicrowaveOptions/microwaveStart/microwaveTimer.start(totalSeconds)
-	print("the total seconds: " + str(totalSeconds))
-	print("pausing viewership decline")
-	viewershipDeclineBufferState = true
-	countdownActive = true
-	totalSecondsToPass = totalSeconds
-	if $MicrowaveOptions/microwaveStart/viewershipBuffer.is_stopped() == false:
-		$MicrowaveOptions/microwaveStart/viewershipBuffer.stop()
+	if $MicrowaveOptions/microwaveDisplay.text == "0:00":
+		$MicrowaveOptions/microwaveStart/microwaveTimer.start(totalSeconds)
+		print("the total seconds: " + str(totalSeconds))
+		print("pausing viewership decline")
+		viewershipDeclineBufferState = true
+		countdownActive = true
+		totalSecondsToPass = totalSeconds
+		if $MicrowaveOptions/microwaveStart/viewershipBuffer.is_stopped() == false:
+			$MicrowaveOptions/microwaveStart/viewershipBuffer.stop()
+	
 
 func _on_microwave_timer_timeout() -> void:
 	print("timer stopped")
