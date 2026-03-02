@@ -588,9 +588,9 @@ func _on_buy_pumpkin_pressed() -> void:
 	updateFunds(pumpkinCost, "-")
 
 func _on_microwave_start_pressed() -> void:
-	toggleButtons(true, true)
+	if $MicrowaveOptions/microwaveDisplay.text != "0:00":
+		toggleButtons(true, true)
 	
-	if $MicrowaveOptions/microwaveDisplay.text == "0:00":
 		$MicrowaveOptions/microwaveStart/microwaveTimer.start(totalSeconds)
 		print("the total seconds: " + str(totalSeconds))
 		print("pausing viewership decline")
