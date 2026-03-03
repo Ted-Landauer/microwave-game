@@ -2,7 +2,7 @@ extends Node2D
 
 # Initialize the funds and viewership numbers
 var funds: int = 0
-const STARTINGFUNDS: int = 100000
+const STARTINGFUNDS: int = 100
 
 var viewerNumbers: int = 0
 const STARTINGVIEWERNUMBERS: int = 10
@@ -20,7 +20,7 @@ var midCostMicroOwned: bool = false
 var highCostMicroOwned: bool = false
 var totalSeconds: int = 0
 var totalSecondsToPass: int = 0
-var countdownActive = false
+var countdownActive: bool = false
 
 var microwavedItem: String
 
@@ -553,36 +553,40 @@ func _on_upgrades_button_pressed() -> void:
 		
 	elif $InfoNumbers/UpgradesButton/UpgradeMenu.visible == true:
 		$InfoNumbers/UpgradesButton/UpgradeMenu.propagate_call("set_visible", [false])
-		
-		
-		
+
+
 
 func _on_buy_egg_pressed() -> void:
 	var eggsCost = extractInt($InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels/EggCost.text)
+	$InfoNumbers/kachingAudio.play()
 	
 	changeInventory("egg", "+")
 	updateFunds(eggsCost, "-")
 
 func _on_buy_potato_pressed() -> void:
 	var potatoCost = extractInt($InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels/PotatoCost.text)
+	$InfoNumbers/kachingAudio.play()
 	
 	changeInventory("potato", "+")
 	updateFunds(potatoCost, "-")
 
 func _on_buy_jam_jar_pressed() -> void:
 	var jamCost = extractInt($InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels/JamJarCost.text)
+	$InfoNumbers/kachingAudio.play()
 	
 	changeInventory("jam", "+")
 	updateFunds(jamCost, "-")
 
 func _on_buy_milk_pressed() -> void:
 	var milkCost = extractInt($InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels/MilkJugCost.text)
+	$InfoNumbers/kachingAudio.play()
 	
 	changeInventory("milk", "+")
 	updateFunds(milkCost, "-")
 
 func _on_buy_pumpkin_pressed() -> void:
 	var pumpkinCost = extractInt($InfoNumbers/ShoppingButton/GroceryMenu/GroceryBackground/Labels/PumpkinCost.text)
+	$InfoNumbers/kachingAudio.play()
 	
 	changeInventory("pumpkin", "+")
 	updateFunds(pumpkinCost, "-")
@@ -597,8 +601,12 @@ func _on_microwave_start_pressed() -> void:
 		viewershipDeclineBufferState = true
 		countdownActive = true
 		totalSecondsToPass = totalSeconds
+		
+		$MicrowaveOptions/microwaveStart/microwaveRunningAudio.play()
+		
 		if $MicrowaveOptions/microwaveStart/viewershipBuffer.is_stopped() == false:
 			$MicrowaveOptions/microwaveStart/viewershipBuffer.stop()
+			
 	
 
 func _on_microwave_timer_timeout() -> void:
@@ -610,6 +618,8 @@ func _on_microwave_timer_timeout() -> void:
 	$MicrowaveOptions/microwaveDisplay.text = "0:00"
 	countdownActive = false
 	occupied = false
+	
+	$MicrowaveOptions/microwaveStart/microwaveRunningAudio.stop()
 	
 	match microwavedItem:
 		"egg":
@@ -688,6 +698,7 @@ func _on_buy_low_pressed() -> void:
 			swapMicrowaves("reset")
 			microwaveOwned = "LOW"
 			buyUpgrades(microwaveOwned)
+			$InfoNumbers/kachingAudio.play()
 		
 	else:
 		print("nothing low broken")
@@ -704,6 +715,7 @@ func _on_buy_low_pressed() -> void:
 			if canAfford == true:
 				microwaveOwned = "LOW"
 				buyUpgrades(microwaveOwned)
+				$InfoNumbers/kachingAudio.play()
 
 func _on_buy_mid_pressed() -> void:
 	print("trying to buy mid")
@@ -718,6 +730,7 @@ func _on_buy_mid_pressed() -> void:
 			swapMicrowaves("reset")
 			microwaveOwned = "MID"
 			buyUpgrades(microwaveOwned)
+			$InfoNumbers/kachingAudio.play()
 		
 	else:
 		print("nothing mid broken")
@@ -736,6 +749,7 @@ func _on_buy_mid_pressed() -> void:
 			if canAfford == true:
 				microwaveOwned = "MID"
 				buyUpgrades(microwaveOwned)
+				$InfoNumbers/kachingAudio.play()
 
 func _on_buy_high_pressed() -> void:
 	print("trying to buy high")
@@ -751,6 +765,7 @@ func _on_buy_high_pressed() -> void:
 			swapMicrowaves("reset")
 			microwaveOwned = "HIGH"
 			buyUpgrades(microwaveOwned)
+			$InfoNumbers/kachingAudio.play()
 		
 	else:
 		print("nothing high broken")
@@ -768,6 +783,7 @@ func _on_buy_high_pressed() -> void:
 			if canAfford == true:
 				microwaveOwned = "HIGH"
 				buyUpgrades(microwaveOwned)
+				$InfoNumbers/kachingAudio.play()
 
 func _on_buy_viewer_buffer_pressed() -> void:
 	var cost = extractInt($InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels/viewerBuffer.text)
@@ -777,6 +793,7 @@ func _on_buy_viewer_buffer_pressed() -> void:
 	if canAfford == true:
 		viewershipDeclineBuffer += 1
 		cost += roundi(cost / 2)
+		$InfoNumbers/kachingAudio.play()
 		
 		$InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels/viewerBuffer.text = str(cost)
 
@@ -788,5 +805,6 @@ func _on_buy_money_gain_pressed() -> void:
 	if canAfford == true:
 		revenueMod += 0.01
 		cost += 1
+		$InfoNumbers/kachingAudio.play()
 		
 		$InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels/returnRate.text = str(cost)

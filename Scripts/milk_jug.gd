@@ -26,6 +26,7 @@ func foodLimit():
 	if time < limit:
 		temp = limit + time
 		$"../..".updateViewship(temp , "+")
+		$"../../Audio/dingAudio".play()
 		
 		print("time: " + str(time))
 		print("limit: "+ str(limit))
@@ -35,9 +36,11 @@ func foodLimit():
 		$"../..".menuTriggers(false)
 		#$"../..".resetScene = true
 		
+		
 	elif time > limit:
 		temp = (2 * limit) + time
 		$"../..".updateViewship(temp , "+")
+		$"../../Audio/popAudio".play()
 	
 		print("time: " + str(time))
 		print("limit: "+ str(limit))
@@ -49,6 +52,7 @@ func foodLimit():
 	elif time == limit:
 		temp = (2 * limit) + (2 * time)
 		$"../..".updateViewship(temp , "+")
+		$"../../Audio/juggsecutionerAudio".play()
 		
 		print("time: " + str(time))
 		print("limit: "+ str(limit))
