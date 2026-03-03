@@ -47,11 +47,12 @@ func foodLimit():
 		print("limit: "+ str(limit))
 		print("OVER POTATO LIMIT")
 		$"../..".swapMicrowaves("destroyed", "potato")
-		$"../..".menuTriggers(true, "You cooked the potato too hard. Time to buy a new microwave! Viewers gained: " + str(temp))
+		$"../..".menuTriggers(true, "You cooked the potato too hard and it exploded at " + str(limit) + " seconds. Time to buy a new microwave! Viewers gained: " + str(temp))
 		$"../..".brokenMicrowave = true
 		
 	elif time == limit:
-		temp = (2 * limit) + (2 * time)
+		temp = (3 * limit)
+		#+ time
 		$"../..".updateViewship(temp , "+")
 		$"../../Audio/goldStarchAudio".play()
 		
@@ -82,7 +83,8 @@ func _input(event: InputEvent) -> void:
 			if $"../..".extractInt($potatoCount.text) > 0 and $"../..".occupied == false:
 				microwaveItem = "potato"
 				microwaveItemRef = $"../..".addToMicrowave("potato")
-				microwaveItemRef.potatoLimit = randi_range(5, 12)
+				microwaveItemRef.potatoLimit = randi_range(19, 22) # 19 to 22
+				$"../..".foodLimit = microwaveItemRef.potatoLimit
 				occupied = microwaveItemRef.occupied
 				
 				print("microwave item ref values:")

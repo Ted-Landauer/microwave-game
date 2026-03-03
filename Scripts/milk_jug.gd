@@ -38,7 +38,8 @@ func foodLimit():
 		
 		
 	elif time > limit:
-		temp = (2 * limit) + time
+		temp = (3 * limit)
+		#+ time
 		$"../..".updateViewship(temp , "+")
 		$"../../Audio/popAudio".play()
 	
@@ -46,7 +47,7 @@ func foodLimit():
 		print("limit: "+ str(limit))
 		print("OVER MILK LIMIT")
 		$"../..".swapMicrowaves("destroyed", "milk")
-		$"../..".menuTriggers(true, "You cooked the milk too hard. Time to buy a new microwave! Viewers gained: " + str(temp))
+		$"../..".menuTriggers(true, "You cooked the milk too hard and it exploded at " + str(limit) + " seconds. Time to buy a new microwave! Viewers gained: " + str(temp))
 		$"../..".brokenMicrowave = true
 		
 	elif time == limit:
@@ -79,7 +80,8 @@ func _input(event: InputEvent) -> void:
 			if $"../..".extractInt($milkCount.text) > 0 and $"../..".occupied == false:
 				microwaveItem = "milk"
 				microwaveItemRef = $"../..".addToMicrowave("milk_jug")
-				microwaveItemRef.milkLimit = randi_range(10, 18)
+				microwaveItemRef.milkLimit = randi_range(32, 37) # 32 to 37?
+				$"../..".foodLimit = microwaveItemRef.milkLimit
 				occupied = microwaveItemRef.occupied
 				
 				print("microwave item ref values:")

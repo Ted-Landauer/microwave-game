@@ -45,11 +45,12 @@ func foodLimit():
 		print("limit: "+ str(limit))
 		print("OVER PUMPKIN LIMIT")
 		$"../..".swapMicrowaves("destroyed", "pumpkin")
-		$"../..".menuTriggers(true, "You cooked the pumpkin too hard. Time to buy a new microwave! Viewers gained: " + str(temp))
+		$"../..".menuTriggers(true, "You cooked the pumpkin too hard and it exploded at " + str(limit) + " seconds. Time to buy a new microwave! Viewers gained: " + str(temp))
 		$"../..".brokenMicrowave = true
 		
 	elif time == limit:
-		temp = (2 * limit) + (2 * time)
+		temp = (3 * limit)
+		#+ time
 		$"../..".updateViewship(temp , "+")
 		$"../../Audio/squastasticAudio".play()
 		
@@ -78,7 +79,8 @@ func _input(event: InputEvent) -> void:
 			if $"../..".extractInt($pumpkinCount.text) > 0 and $"../..".occupied == false:
 				microwaveItem = "pumpkin"
 				microwaveItemRef = $"../..".addToMicrowave("pumpkin")
-				microwaveItemRef.pumpkinLimit = randi_range(15, 28)
+				microwaveItemRef.pumpkinLimit = randi_range(37, 39) # 37 to 39
+				$"../..".foodLimit = microwaveItemRef.pumpkinLimit
 				occupied = microwaveItemRef.occupied
 				
 				print("microwave item ref values:")

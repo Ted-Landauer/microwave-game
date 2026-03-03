@@ -2,14 +2,14 @@ extends Node2D
 
 # Initialize the funds and viewership numbers
 var funds: int = 0
-const STARTINGFUNDS: int = 100
+const STARTINGFUNDS: int = 150
 
 var viewerNumbers: int = 0
-const STARTINGVIEWERNUMBERS: int = 10
+const STARTINGVIEWERNUMBERS: int = 0
 
 var viewershipDeclineBufferState: bool = true
 var viewershipDeclineBuffer: int = 10
-var revenueMod: float = .01
+var revenueMod: float = .02
 
 const GROCPATH: String = "res://Scenes/Groceries"
 var groceries: Dictionary = {}
@@ -22,7 +22,9 @@ var totalSeconds: int = 0
 var totalSecondsToPass: int = 0
 var countdownActive: bool = false
 
-var microwavedItem: String
+var microwavedItem: String = ""
+var foodLimit: int = 0
+var inputTime: int = 0
 
 var resetScene: bool = false
 var brokenMicrowave: bool = false
@@ -389,7 +391,11 @@ func menuTriggers(active: bool, message: String = ""):
 	microwaveOutput.text = message
 
 func gameOver():
-	pass
+	if viewerNumbers == 0:
+		if brokenMicrowave == true and funds < 50:
+			print("GAME OVER")
+		elif funds < 10:
+			print("GAME OVER")
 
 func cantAfford(active: bool, message: String = ""):
 	var costOutput = $Popups/TileMapLayer/costInfo
@@ -448,18 +454,20 @@ func buyUpgrades(type: String):
 			$MicrowaveOptions/oneSecond.visible = true
 			$MicrowaveOptions/MicrowaveBackground/highBackground.visible = true
 
+func checkOvertime():
+	
+	if totalSeconds > foodLimit:
+		$MicrowaveOptions/microwaveStart/microwaveTimer.start(foodLimit)
+		
+	else:
+		$MicrowaveOptions/microwaveStart/microwaveTimer.start(totalSeconds)
+
+
 
 #---------------------------------------------------------------------
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Manual preload section
-	## Doing this here despite the function because I believe that 
-	### it's causing issues with the game running on web
-	
-	
-	
-	
 	
 	preloadResources(GROCPATH, groceries)
 	
@@ -478,7 +486,7 @@ func _ready() -> void:
 	$MicrowaveOptions/High/Microwave3.visible = false
 	$MicrowaveOptions/oneSecond.visible = false
 	
-	
+
 
 # Used for running the money and viewer calc every second in process below
 var mu: float = 0.0
@@ -489,6 +497,8 @@ var reset: float = 0.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
+	#gameOver()
+	
 	#if resetScene == true:
 		#
 		#reset += delta
@@ -498,7 +508,7 @@ func _process(delta: float) -> void:
 			#resetScene == false
 	
 	mu += delta
-	if viewershipDeclineBufferState == true and mu >= 1.0:
+	if mu >= 1.0:
 		updateFunds(calculateRevenue(viewerNumbers, revenueMod), "+")
 		mu = 0.0
 	
@@ -530,6 +540,8 @@ func _input(event: InputEvent) -> void:
 			elif escape == true:
 				escape = false
 				$Popups/TutorialPopup.visible = false
+				
+		#if event.keycode == 
 
 # Functions to open the grocery shopping and Upgrades menus
 func _on_shopping_button_pressed() -> void:
@@ -595,7 +607,8 @@ func _on_microwave_start_pressed() -> void:
 	if $MicrowaveOptions/microwaveDisplay.text != "0:00":
 		toggleButtons(true, true)
 	
-		$MicrowaveOptions/microwaveStart/microwaveTimer.start(totalSeconds)
+		#$MicrowaveOptions/microwaveStart/microwaveTimer.start(totalSeconds)
+		checkOvertime()
 		print("the total seconds: " + str(totalSeconds))
 		print("pausing viewership decline")
 		viewershipDeclineBufferState = true
@@ -606,8 +619,6 @@ func _on_microwave_start_pressed() -> void:
 		
 		if $MicrowaveOptions/microwaveStart/viewershipBuffer.is_stopped() == false:
 			$MicrowaveOptions/microwaveStart/viewershipBuffer.stop()
-			
-	
 
 func _on_microwave_timer_timeout() -> void:
 	print("timer stopped")
@@ -647,6 +658,10 @@ func _on_microwave_timer_timeout() -> void:
 			
 			remove_child($Groceries/pumpkin.microwaveItemRef)
 			print("removed pumpkin")
+			
+	microwavedItem = ""
+	foodLimit = 0
+	totalSeconds = 0
 
 func _on_viewership_buffer_timeout() -> void:
 	print("losing viewers")

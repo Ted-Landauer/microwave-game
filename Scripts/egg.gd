@@ -40,7 +40,8 @@ func foodLimit():
 		
 		
 	elif time > limit:
-		temp = (2 * limit) + time
+		temp = (3 * limit)
+		#+ time
 		$"../..".updateViewship(temp , "+")
 		$"../../Audio/crackAudio".play()
 		
@@ -49,7 +50,7 @@ func foodLimit():
 		print("OVER EGG LIMIT")
 		$"../..".brokenMicrowave = true
 		$"../..".swapMicrowaves("destroyed", "egg")
-		$"../..".menuTriggers(true, "You cooked the egg too hard. Time to buy a new microwave! Viewers gained: " + str(temp))
+		$"../..".menuTriggers(true, "You cooked the egg too hard and it exploded at " + str(limit) + " seconds. Time to buy a new microwave! Viewers gained: " + str(temp))
 		
 	elif time == limit:
 		temp = (2 * limit) + (2 * time)
@@ -82,7 +83,8 @@ func _input(event: InputEvent) -> void:
 			if $"../..".extractInt($eggCount.text) > 0 and $"../..".occupied == false:
 				microwaveItem = "egg"
 				microwaveItemRef = $"../..".addToMicrowave("egg")
-				microwaveItemRef.eggLimit = randi_range(1, 5)
+				microwaveItemRef.eggLimit = randi_range(9, 11) # 9 to 11?
+				$"../..".foodLimit = microwaveItemRef.eggLimit
 				occupied = microwaveItemRef.occupied
 				
 				print("microwave item ref values:")

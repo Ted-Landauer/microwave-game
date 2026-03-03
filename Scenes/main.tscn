@@ -2291,7 +2291,7 @@ offset_right = 764.9999
 offset_bottom = 207.0
 theme_override_fonts/font = ExtResource("12_6vcvc")
 theme_override_font_sizes/font_size = 64
-text = "100"
+text = "50"
 horizontal_alignment = 1
 vertical_alignment = 1
 
