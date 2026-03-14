@@ -35,6 +35,14 @@ var canAfford: bool = true
 
 var escape: bool = false
 
+var foodInventory: Dictionary = {
+	"egg": 0,
+	"potato": 0,
+	"jam": 0,
+	"milk": 0,
+	"pumpkin": 0
+	}
+
 
 
 # Load the resources in a directory into a dictionary for future use
@@ -220,6 +228,8 @@ func swapMicrowaves(state: String, food: String = ""):
 			if microwaveOwned == "LOW":
 				$MicrowaveOptions/Low/Microwave/Closed.visible = true
 				$MicrowaveOptions/MicrowaveBackground/lowBackground.visible = true
+				$MicrowaveOptions/MicrowaveBackground/highBackground.visible = false
+				$MicrowaveOptions/MicrowaveBackground/midBackground.visible = false
 				$MicrowaveOptions/Low/Microwave/Broken.visible = false
 				$MicrowaveOptions/Low/Microwave/Opened.visible = false
 				$MicrowaveOptions/tenSeconds.visible = true
@@ -237,6 +247,8 @@ func swapMicrowaves(state: String, food: String = ""):
 			elif microwaveOwned == "MID":
 				$MicrowaveOptions/Mid/Microwave2/Closed.visible = true
 				$MicrowaveOptions/MicrowaveBackground/midBackground.visible = true
+				$MicrowaveOptions/MicrowaveBackground/lowBackground.visible = false
+				$MicrowaveOptions/MicrowaveBackground/highBackground.visible = false
 				$MicrowaveOptions/Mid/Microwave2/Broken.visible = false
 				$MicrowaveOptions/Mid/Microwave2/Opened.visible = false
 				$MicrowaveOptions/tenSeconds.visible = true
@@ -245,6 +257,8 @@ func swapMicrowaves(state: String, food: String = ""):
 			elif microwaveOwned == "HIGH":
 				$MicrowaveOptions/High/Microwave3/Closed.visible = true
 				$MicrowaveOptions/MicrowaveBackground/highBackground.visible = true
+				$MicrowaveOptions/MicrowaveBackground/midBackground.visible = false
+				$MicrowaveOptions/MicrowaveBackground/lowBackground.visible = false
 				$MicrowaveOptions/High/Microwave3/Broken.visible = false
 				$MicrowaveOptions/High/Microwave3/Opened.visible = false
 				$MicrowaveOptions/tenSeconds.visible = true
@@ -268,11 +282,19 @@ func swapMicrowaves(state: String, food: String = ""):
 			$MicrowaveOptions/microwaveDisplay.visible = true
 			$MicrowaveOptions/microwaveStart.visible = true
 			
+			brokenMicrowave = false
+			
 			menuTriggers(false)
 
-func changeInventory(food: String, direction: String):
+func changeInventory(food: String, direction: String, reset: bool = false):
 	var foodReference = get_node("Groceries/" + food + "/" + food + "Count")
 	var foodBought = extractInt(foodReference.text)
+	
+	if reset == true:
+		foodReference.text = "0"
+		foodBought = 0
+		print("resetting food")
+		print(foodReference.text)
 	
 	if direction == "+" and foodBought >= 0:
 		foodBought += 1
@@ -280,6 +302,12 @@ func changeInventory(food: String, direction: String):
 		foodBought -= 1
 	
 	foodReference.text = str(foodBought)
+
+func getInventory(food: String):
+	var foodReference = get_node("Groceries/" + food + "/" + food + "Count")
+	var foodBought = extractInt(foodReference.text)
+	
+	return foodBought
 
 # Return the value of money gained per second
 func calculateRevenue(view: int, modifier: float):
@@ -349,6 +377,7 @@ func addToMicrowave(item: String):
 	print("add test")
 	if occupied == false:
 		var newItem = groceries[item]
+		var itemSlice = item.get_slice("_", 0)
 		
 		print("this is the item: " + item)
 		
@@ -363,7 +392,8 @@ func addToMicrowave(item: String):
 		print(microwavedItem)
 		print(typeof(microwavedItem))
 		
-		changeInventory(item.get_slice("_", 0), "-")
+		changeInventory(itemSlice, "-")
+		foodInventoryUpdater(itemSlice)
 		occupied = true
 		newItem.occupied = occupied
 		
@@ -390,12 +420,41 @@ func menuTriggers(active: bool, message: String = ""):
 	microwaveOutput.visible = active
 	microwaveOutput.text = message
 
+func foodInventoryUpdater(food: String):
+	foodInventory[food] = getInventory(food)
+	
+	print("this is the food inventory:")
+	print(foodInventory)
+	
+
 func gameOver():
+	var zeroCount = 0
+	
 	if viewerNumbers == 0:
 		if brokenMicrowave == true and funds < 50:
 			print("GAME OVER")
+			$Popups/GameOver.visible = true
+			if $InfoNumbers/ShoppingButton/GroceryMenu.visible == true:
+				$InfoNumbers/ShoppingButton/GroceryMenu.propagate_call("set_visible", [false])
+				
+			if $InfoNumbers/UpgradesButton/UpgradeMenu.visible == true:
+				$InfoNumbers/UpgradesButton/UpgradeMenu.propagate_call("set_visible", [false])
+			
 		elif funds < 10:
-			print("GAME OVER")
+			
+			for food in foodInventory:
+				var amount = foodInventory[food]
+				if amount == 0:
+					zeroCount += 1
+			
+			if zeroCount == 5 and occupied == false:
+				$Popups/GameOver.visible = true
+				if $InfoNumbers/ShoppingButton/GroceryMenu.visible == true:
+					$InfoNumbers/ShoppingButton/GroceryMenu.propagate_call("set_visible", [false])
+				
+				if $InfoNumbers/UpgradesButton/UpgradeMenu.visible == true:
+					$InfoNumbers/UpgradesButton/UpgradeMenu.propagate_call("set_visible", [false])
+				print("GAME OVER")
 
 func cantAfford(active: bool, message: String = ""):
 	var costOutput = $Popups/TileMapLayer/costInfo
@@ -494,8 +553,11 @@ var vd: float = 0.0
 var cd: float = 0.0
 var reset: float = 0.0
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
+	gameOver()
 	
 	#gameOver()
 	
@@ -541,12 +603,17 @@ func _input(event: InputEvent) -> void:
 				escape = false
 				$Popups/TutorialPopup.visible = false
 				
-		#if event.keycode == 
+		if event.keycode == KEY_R:
+			viewerNumbers = 0
+			funds = 0
+			gameOver()
+			
 
 # Functions to open the grocery shopping and Upgrades menus
 func _on_shopping_button_pressed() -> void:
 	if $InfoNumbers/ShoppingButton/GroceryMenu.visible == false:
 		$InfoNumbers/ShoppingButton/GroceryMenu.propagate_call("set_visible", [true])
+		$InfoNumbers/UpgradesButton/UpgradeMenu.propagate_call("set_visible", [false])
 		
 	elif $InfoNumbers/ShoppingButton/GroceryMenu.visible == true:
 		$InfoNumbers/ShoppingButton/GroceryMenu.propagate_call("set_visible", [false])
@@ -563,6 +630,8 @@ func _on_upgrades_button_pressed() -> void:
 		$InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Microwave3/Opened.visible = false
 		$InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Microwave3/Broken.visible = false
 		
+		$InfoNumbers/ShoppingButton/GroceryMenu.propagate_call("set_visible", [false])
+		
 	elif $InfoNumbers/UpgradesButton/UpgradeMenu.visible == true:
 		$InfoNumbers/UpgradesButton/UpgradeMenu.propagate_call("set_visible", [false])
 
@@ -573,6 +642,7 @@ func _on_buy_egg_pressed() -> void:
 	$InfoNumbers/kachingAudio.play()
 	
 	changeInventory("egg", "+")
+	foodInventoryUpdater("egg")
 	updateFunds(eggsCost, "-")
 
 func _on_buy_potato_pressed() -> void:
@@ -580,6 +650,7 @@ func _on_buy_potato_pressed() -> void:
 	$InfoNumbers/kachingAudio.play()
 	
 	changeInventory("potato", "+")
+	foodInventoryUpdater("potato")
 	updateFunds(potatoCost, "-")
 
 func _on_buy_jam_jar_pressed() -> void:
@@ -587,6 +658,7 @@ func _on_buy_jam_jar_pressed() -> void:
 	$InfoNumbers/kachingAudio.play()
 	
 	changeInventory("jam", "+")
+	foodInventoryUpdater("jam")
 	updateFunds(jamCost, "-")
 
 func _on_buy_milk_pressed() -> void:
@@ -594,6 +666,7 @@ func _on_buy_milk_pressed() -> void:
 	$InfoNumbers/kachingAudio.play()
 	
 	changeInventory("milk", "+")
+	foodInventoryUpdater("milk")
 	updateFunds(milkCost, "-")
 
 func _on_buy_pumpkin_pressed() -> void:
@@ -601,10 +674,11 @@ func _on_buy_pumpkin_pressed() -> void:
 	$InfoNumbers/kachingAudio.play()
 	
 	changeInventory("pumpkin", "+")
+	foodInventoryUpdater("pumpkin")
 	updateFunds(pumpkinCost, "-")
 
 func _on_microwave_start_pressed() -> void:
-	if $MicrowaveOptions/microwaveDisplay.text != "0:00":
+	if $MicrowaveOptions/microwaveDisplay.text != "0:00" and occupied == true:
 		toggleButtons(true, true)
 	
 		#$MicrowaveOptions/microwaveStart/microwaveTimer.start(totalSeconds)
@@ -823,3 +897,56 @@ func _on_buy_money_gain_pressed() -> void:
 		$InfoNumbers/kachingAudio.play()
 		
 		$InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels/returnRate.text = str(cost)
+
+func _on_new_game_pressed() -> void:
+	$Popups/GameOver.visible = false
+	
+	funds = 0
+
+	viewerNumbers = 0
+
+	viewershipDeclineBufferState = true
+	viewershipDeclineBuffer = 10
+	revenueMod = .02
+	$InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels/returnRate.text = "10"
+	$InfoNumbers/UpgradesButton/UpgradeMenu/UpgradeBackground/Labels/viewerBuffer.text = "10"
+	groceries = {}
+
+	occupied = false
+	lowCostMicroOwned = true
+	midCostMicroOwned = false
+	highCostMicroOwned = false
+	totalSeconds = 0
+	totalSecondsToPass = 0
+	countdownActive = false
+
+	microwavedItem = ""
+	foodLimit = 0
+	inputTime = 0
+
+	resetScene = false
+	brokenMicrowave = false
+	microwaveOwned = "LOW"
+	
+	canAfford = true
+	escape = false
+	foodInventory = {
+		"egg": 0,
+		"potato": 0,
+		"jam": 0,
+		"milk": 0,
+		"pumpkin": 0
+		}
+	
+	changeInventory("egg", "-", true)
+	changeInventory("potato", "-", true)
+	changeInventory("jam", "-", true)
+	changeInventory("milk", "-", true)
+	changeInventory("pumpkin", "-", true)
+	
+	swapMicrowaves("reset")
+	
+	_ready()
+
+func _on_exit_game_pressed() -> void:
+	get_tree().quit()
