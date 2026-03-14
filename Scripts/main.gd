@@ -605,6 +605,8 @@ func _input(event: InputEvent) -> void:
 				
 		if event.keycode == KEY_R:
 			viewerNumbers = 0
+			$InfoNumbers/viewerNumbers.text = "0"
+			
 			funds = 0
 			gameOver()
 			
