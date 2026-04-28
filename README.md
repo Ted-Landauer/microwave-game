@@ -4,6 +4,16 @@ A game for the 2026 PIG Squad Game Jam
 
 Purpose: See how long it takes for certain foods to blow up in a microwave
 
+Game can be played on Itch.io
+https://relevanttuna6.itch.io/chicken-with-egg
+
+Retrospective:
+Acting as a Product Manager and Dev at the same time on a short time frame is very hard. Even more so when trying to do a project in free time rather than as a full time job, lol.
+
+Unfortunatly following the Agile process fell by the wayside after the first couple sprints. Luckily though, the first couple plannings covered the majority of the required tasks to make a functional game!
+
+--------------------------------------------
+
 Sprint Planning:
 - Sprint 3: Feb 
 -- Duration 2 days
